@@ -56,6 +56,3 @@ dkms.conf
 # vscode
 .vscode/
 .dccache
-
-# compile script
-compile.sh
