@@ -23,18 +23,13 @@ int main()
             printf("out of memory\n");
             exit(1);
         }
-        prime[0] = 1;
+        prime[0] = 2;
     }
 
-    if (amount > 1)
-    {
-        prime[1] = 2;
-    }
-
-    for (uint32_t i = 2; i < amount; i++)
+    for (uint32_t i = 1; i < amount; i++)
     {
         int8_t is_prime = 0;
-        for (uint32_t j = 2; j < i; j++)
+        for (uint32_t j = 1; j < i; j++)
         {
             if (current / prime[j] < prime[j])
             {
