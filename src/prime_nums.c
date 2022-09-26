@@ -10,6 +10,11 @@ int main()
     printf("quanti numeri primi vuoi elencare?\n");
     scanf("%u", &amount);
 
+    if (amount == 0)
+    {
+        return 0;
+    }
+
     if (amount > 0)
     {
         prime = (uint64_t *) malloc(sizeof(uint64_t) * amount);
