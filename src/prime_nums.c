@@ -2,13 +2,10 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-int main()
+int main(int argc, char *argv[])
 {
-    uint32_t amount;
+    uint32_t amount = atoi(argv[1]);
     uint64_t current = 3, *prime;
-
-    printf("quanti numeri primi vuoi elencare?\n");
-    scanf("%u", &amount);
 
     if (amount == 0)
     {
