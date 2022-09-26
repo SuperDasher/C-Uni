@@ -64,6 +64,7 @@ int main()
         printf("%lu, ", prime[i]);
     }
     printf("%lu\n", prime[amount - 1]);
+    free(prime);
 
     return 0;
 }
