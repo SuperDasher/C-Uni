@@ -1,13 +1,14 @@
 #include <stdio.h>
+#include <stdint.h>
 
-void convert(int, int);
+void convert(uint16_t, uint8_t);
 
 int main()
 {
-	int number;
+	uint16_t number;
 
 	printf("inserisci un numero\n");
-	scanf("%d", &number);
+	scanf("%hu", &number);
 
 	convert(number, 2);
 	convert(number, 8);
@@ -15,21 +16,21 @@ int main()
 	return 0;
 }
 
-void convert(int number, int base)
+void convert(uint16_t number, uint8_t base)
 {
 	if (base > 10)
 	{
 		printf("non posso convertire in base %d\n", base);
 		return;
 	}
-	int n = number;
-	long long int result = 0;
-	long long int power = 1;
+	uint16_t n = number;
+	uint64_t result = 0;
+	uint64_t power = 1;
 	while (n > 0)
 	{
 		result += power * (n % base);
 		n /= base;
 		power *= 10;
 	}
-	printf("%d in base %d e' %lld\n", number, base, result);
+	printf("%hu in base %hhu e' %lu\n", number, base, result);
 }
