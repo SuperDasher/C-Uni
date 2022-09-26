@@ -27,7 +27,7 @@ int main()
 	}
 	if (count == 0)
 	{
-		printf("no numbers\n");
+		printf("nessun numero inserito\n");
 		return 0;
 	}
 	// deepcode ignore DivisionByZero: guard clause already checks if count is 0 and ends the program prematurely
