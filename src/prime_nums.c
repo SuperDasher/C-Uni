@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 int main(int argc, char *argv[])
 {
@@ -33,7 +34,7 @@ int main(int argc, char *argv[])
 
     for (uint32_t i = 1; i < amount; i++)
     {
-        int8_t is_prime = 0;
+        int8_t is_prime = true;
         for (uint32_t j = 1; j < i; j++)
         {
             if (current / prime[j] < prime[j])
@@ -42,12 +43,12 @@ int main(int argc, char *argv[])
             }
             if (current % prime[j] == 0)
             {
-                is_prime = -1;
+                is_prime = false;
                 break;
             }
         }
         current += 2;
-        if (is_prime == -1)
+        if (!is_prime)
         {
             i--;
             continue;
