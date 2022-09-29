@@ -4,7 +4,15 @@
 
 int main(int argc, char *argv[])
 {
-    uint32_t amount = atoi(argv[1]);
+    uint32_t amount;
+    if (argc < 2)
+    {
+        printf("argomento non inserito,\nmostro i primi 50 numeri primi per default");
+        amount = 50;
+    } else {
+        amount = atoi(argv[1]);
+    }
+
     uint64_t current = 3, *prime;
 
     if (amount == 0)
