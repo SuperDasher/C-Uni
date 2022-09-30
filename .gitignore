@@ -56,3 +56,6 @@ dkms.conf
 # vscode
 .vscode/
 .dccache
+
+# test code
+test.c
