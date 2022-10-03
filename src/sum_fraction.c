@@ -13,11 +13,17 @@ int main()
 
     int result_num, result_den, result_mcd;
 
-    printf("inserisci numeratore e denominatore della prima frazione:\n");
-    scanf("%d%d", &numeratore1, &denominatore1);
-
-    printf("inserisci numeratore e denominatore della seconda frazione:\n");
-    scanf("%d%d", &numeratore2, &denominatore2);
+    do
+    {
+        printf("inserisci numeratore e denominatore della prima frazione (con denominatore diverso da 0):\n");
+        scanf("%d%d", &numeratore1, &denominatore1);
+    } while (denominatore1 == 0);
+    
+    do
+    {
+        printf("inserisci numeratore e denominatore della seconda frazione (con denominatore diverso da 0):\n");
+        scanf("%d%d", &numeratore2, &denominatore2);
+    } while (denominatore2 == 0);
 
     result_den = mcm(denominatore1, denominatore2);
     numeratore1 *= result_den / denominatore1;
