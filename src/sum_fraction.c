@@ -19,11 +19,11 @@ int main()
     printf("inserisci numeratore e denominatore della seconda frazione:\n");
     scanf("%d%d", &numeratore2, &denominatore2);
 
-    result_den = mcm(abs(denominatore1), abs(denominatore2));
+    result_den = mcm(denominatore1, denominatore2);
     numeratore1 *= result_den / denominatore1;
     numeratore2 *= result_den / denominatore2;
     result_num = numeratore1 + numeratore2;
-    result_mcd = mcd(abs(result_num), abs(result_den));
+    result_mcd = mcd(result_num, result_den);
 
     printf("la somma fra le due frazioni e' %d", result_num / result_mcd);
     if (result_den != result_mcd)
@@ -37,6 +37,8 @@ int main()
 
 int mcd(int a, int b)
 {
+    a = abs(a);
+    b = abs(b);
     while (a != b)
     {
         (a > b) ? (a -= b) : (b -= a);
@@ -46,5 +48,7 @@ int mcd(int a, int b)
 
 int mcm(int a, int b)
 {
+    a = abs(a);
+    b = abs(b);
     return a * b / mcd(a, b);
 }
