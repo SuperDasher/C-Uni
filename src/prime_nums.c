@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 
     for (uint32_t i = 1; i < amount; i++)
     {
-        int8_t is_prime = true;
+        bool is_prime = true;
         for (uint32_t j = 1; j < i; j++)
         {
             if (current / prime[j] < prime[j])
