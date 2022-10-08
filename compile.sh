@@ -16,8 +16,8 @@ fi
 #compile every .c file in src as .o extension and every .cpp file as .opp extension and put them in out
 for file in src/*; do
     if [[ "${file##*.}" == c ]]; then
-        gcc "$file" -o "out/$(basename -- "$file" .c).o"
+        gcc -fdiagnostics-color=always -g "$file" -o "out/$(basename -- "$file" .c).o"
     elif [[ "${file##*.}" == cpp ]]; then
-        g++ "$file" -o "out/$(basename -- "$file" .cpp).opp"
+        g++ -fdiagnostics-color=always -g "$file" -o "out/$(basename -- "$file" .cpp).opp"
     fi
 done
