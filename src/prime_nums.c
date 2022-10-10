@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
+#include <inttypes.h>
 #include <stdbool.h>
 
 int main(int argc, char *argv[])
@@ -62,9 +62,9 @@ int main(int argc, char *argv[])
         {
             printf("\n");
         }
-        printf("%lu\t\t\t", prime[i]);
+        printf("%" PRIu64 "\t\t\t", prime[i]);
     }
-    printf("%lu\n", prime[amount - 1]);
+    printf("%" PRIu64 "\n", prime[amount - 1]);
     free(prime);
 
     return 0;
