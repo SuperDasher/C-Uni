@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void quick_sort(int *array, int left, int right);
-int partition(int *array, int left, int right);
-void swap(int *a, int *b);
+void quick_sort(int *, int, int);
+int partition(int *, int, int);
+void swap(int *, int *);
 
 int main(int argc, char *argv[])
 {
