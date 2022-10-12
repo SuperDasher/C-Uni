@@ -2,6 +2,7 @@
 # expenses
 
 ## subscriptions
+
 - 34.69€ per month:
     1. 19.99€ [7th] (Lupos tier 3 sub)
     2. 10.71€ [23rd] (Github Copilot sub)
@@ -14,18 +15,19 @@
 
 ---
 
-#### october 2022
+### october 2022
+
 1. started with 1918.78€
-2. money spent so far: 159.88€
+2. money spent so far: 149.89€
     1. subscriptions:
         - [x] 19.99€
         - [x] 20.35€
         - [ ] 10.71€
         - [ ] 4.99€
-    2. extras for myself: 52.34€
+    2. extras for myself: 62.33€
     3. extras for Uni: 67.20€
-3. balance: 1758.90€
-4. gain: -37.38€
-5. start next month: 1881.40€
+3. balance: 1748.91€
+4. gain: -47.37€
+5. start next month: 1871.41€
 
 ---
