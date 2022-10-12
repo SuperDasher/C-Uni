@@ -1,3 +1,4 @@
+<!-- TODO: completely re-do this file to be more organized and consistent -->
 # money spent
 
 ## subscriptions will cost me 34.69€ per month and 20.35€ every 6 months (55.04€ october and april) and I receive 70€ per month from my parents
