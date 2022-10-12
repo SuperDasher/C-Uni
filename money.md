@@ -14,15 +14,15 @@
 
 #### october 2022
 1. started with 1918.78€
-2. money spent so far: 154.88€
+2. money spent so far: 159.88€
     1. subscriptions:
         - [x] 19.99€
         - [x] 20.35€
         - [ ] 10.71€
         - [ ] 4.99€
     2. extras for myself: 52.34€
-    3. extras for Uni: 62.20€
-3. balance: 1763.90€
+    3. extras for Uni: 67.20€
+3. balance: 1758.90€
 4. gain: -37.38€
 
 ---
