@@ -9,6 +9,8 @@
 - 20.35€ every 6 months [9th] (Kenshi tier 1 sub)
 - (55.04€ october and april)
 - +70€ per month
+- 35.31€ max gain per month
+- 14.96€ max gain evety 6 october & aprile
 
 ---
 
@@ -24,5 +26,6 @@
     3. extras for Uni: 67.20€
 3. balance: 1758.90€
 4. gain: -37.38€
+5. start next month: 1881.40€
 
 ---
