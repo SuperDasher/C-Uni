@@ -10,7 +10,7 @@
 - (55.04€ october and april)
 - +70€ per month
 - 35.31€ max gain per month
-- 14.96€ max gain evety 6 october & aprile
+- 14.96€ max gain evety 6 october & april
 
 ---
 
