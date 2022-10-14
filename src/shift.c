@@ -24,7 +24,7 @@ int main()
 	scanf("%d", &c);
 
 	// Adesso faccio lo shift
-    temp = b;
+	temp = b;
 	b = a;
 	a = c;
 	c = temp;

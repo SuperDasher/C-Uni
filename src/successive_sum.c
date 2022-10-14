@@ -2,25 +2,25 @@
 
 int main()
 {
-    int number, times;
+	int number, times;
 
-    printf("inserisci due numeri\n");
-    scanf("%d%d", &number, &times);
+	printf("inserisci due numeri\n");
+	scanf("%d%d", &number, &times);
 
-    if (times < 0)
-    {
-        number = -number;
-        times = -times;
-    }
+	if (times < 0)
+	{
+		number = -number;
+		times = -times;
+	}
 
-    int result = 0;
+	int result = 0;
 
-    for (int i = 0; i < times; i++)
-    {
-        result += number;
-    }
+	for (int i = 0; i < times; i++)
+	{
+		result += number;
+	}
 
-    printf("il prodotto e' %d\n", result);
+	printf("il prodotto e' %d\n", result);
 
-    return 0;
+	return 0;
 }
