@@ -3,10 +3,7 @@
 #include <stdbool.h>
 #include <errno.h>
 #include <time.h>
-
-bool malloc_m(int ***, int, int);
-void free_m(int ***, int);
-void print_m(int **, int, int);
+#include "../headers/matrix.h"
 
 int main()
 {
@@ -49,39 +46,4 @@ int main()
 	free_m(&result, n);
 
 	return 0;
-}
-
-bool malloc_m(int ***mat, int rows, int columns)
-{
-	*mat = (int **)malloc(rows * sizeof(int *));
-	if (*mat == NULL)
-		return false;
-	for (int i = 0; i < rows; i++)
-	{
-		*(*mat + i) = (int *)malloc(columns * sizeof(int));
-		if (*(*mat + i) == NULL)
-			return false;
-	}
-	return true;
-}
-
-void free_m(int ***mat, int rows)
-{
-	for (int i = 0; i < rows; i++)
-	{
-		free(*(*mat + i));
-	}
-	free(*mat);
-}
-
-void print_m(int **mat, int rows, int columns)
-{
-	for (int i = 0; i < rows; i++)
-	{
-		for (int j = 0; j < columns; j++)
-		{
-			printf("%d\t", mat[i][j]);
-		}
-		printf("\n");
-	}
 }

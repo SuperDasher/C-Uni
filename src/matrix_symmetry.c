@@ -1,19 +1,13 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include "../headers/matrix.h"
 
 #define DIM 5
 
 int main()
 {
 	int m[DIM][DIM];
-	for (int i = 0; i < DIM; i++)
-	{
-		printf("inserisci i valori della riga %d:\n", i + 1);
-		for (int j = 0; j < DIM; j++)
-		{
-			scanf("%d", &m[i][j]);
-		}
-	}
+	scan_m(m, DIM, DIM, "inserisci i valori della riga %d:");
 
 	for (int i = 0; i < DIM - 1; i++)
 	{
