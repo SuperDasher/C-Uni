@@ -4,18 +4,24 @@
 #include <errno.h>
 #include <time.h>
 
-bool m_malloc(int **, int, int);
+bool malloc_m(int ***, int, int);
+void free_m(int ***, int);
 void print_m(int **, int, int);
 
 int main()
 {
-    srandom(time(NULL));
+    srand(time(NULL));
     int **a, **b, **result;
     unsigned int n, m;
     printf("quali dimensioni vuoi per le matrici?\n");
-    scanf("%u%u", &n, &m);
+    printf("righe: ");
+    scanf("%u", &n);
+    printf("colonne: ");
+    scanf("%u", &m);
 
-    if (!m_malloc(a, n, m) || !m_malloc(b, n, m) || !m_malloc(result, n, m))
+    if (!malloc_m(&a, n, m) ||
+        !malloc_m(&b, n, m) ||
+        !malloc_m(&result, n, m))
     {
         printf("out of memory\n");
         exit(errno);
@@ -23,11 +29,11 @@ int main()
 
     for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (int j = 0; j < m; j++)
         {
-            a[i][j] = random() % 41 - 20;
-            b[i][j] = random() % 41 - 20;
-            result[i][j] = a[i][j];
+            a[i][j] = rand() % 41 - 20;
+            b[i][j] = rand() % 41 - 20;
+            result[i][j] = a[i][j] + b[i][j];
         }
     }
 
@@ -38,21 +44,34 @@ int main()
     printf("somma:\n");
     print_m(result, n, m);
 
+    free_m(&a, n);
+    free_m(&b, n);
+    free_m(&result, n);
+
     return 0;
 }
 
-bool m_malloc(int **mat, int rows, int columns)
+bool malloc_m(int ***mat, int rows, int columns)
 {
-    mat = (int **)malloc(rows * sizeof(int *));
-    if (mat == NULL)
+    *mat = (int **)malloc(rows * sizeof(int *));
+    if (*mat == NULL)
         return false;
     for (int i = 0; i < rows; i++)
     {
-        mat[i] = (int *)malloc(columns * sizeof(int));
-        if (mat[i] == NULL)
+        *(*mat + i) = (int *)malloc(columns * sizeof(int));
+        if (*(*mat + i) == NULL)
             return false;
     }
     return true;
+}
+
+void free_m(int ***mat, int rows)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        free(*(*mat + i));
+    }
+    free(*mat);
 }
 
 void print_m(int **mat, int rows, int columns)
