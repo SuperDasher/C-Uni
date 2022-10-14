@@ -26,8 +26,8 @@
         - [ ] 4.99€
     2. extras for myself: 62.33€
     3. extras for Uni: 82.64€
-       - 38€ refunded
-       - 44.64€ not refunded
+        - 38€ refunded
+        - 44.64€ not refunded
 3. balance: 1733.47€
 4. gain: -48.37€
 5. start next month: 1832.41€

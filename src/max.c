@@ -2,15 +2,15 @@
 
 int main()
 {
-    int a, b;
-    printf("inserisci due valori:\n");
-    scanf("%d%d", &a, &b);
+	int a, b;
+	printf("inserisci due valori:\n");
+	scanf("%d%d", &a, &b);
 
-    if (a > b)
-        printf("%d", a);
-    else
-        printf("%d", b);
-    printf(" e' il valore piu' grande\n");
+	if (a > b)
+		printf("%d", a);
+	else
+		printf("%d", b);
+	printf(" e' il valore piu' grande\n");
 
-    return 0;
+	return 0;
 }
