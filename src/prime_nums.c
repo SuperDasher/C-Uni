@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <inttypes.h>
 #include <stdbool.h>
+#include <errno.h>
 
 int main(int argc, char *argv[])
 {
@@ -27,7 +28,7 @@ int main(int argc, char *argv[])
         if (prime == NULL)
         {
             printf("out of memory\n");
-            exit(1);
+            exit(errno);
         }
         prime[0] = 2;
     }

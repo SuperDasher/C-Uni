@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
 
 void quick_sort(int *, int, int);
 int partition(int *, int, int);
@@ -17,6 +18,11 @@ int main(int argc, char *argv[])
 	}
 
 	int *numbers = malloc(argc * sizeof(int));
+	if (numbers == NULL)
+	{
+		printf("out of memory\n");
+		exit(errno);
+	}
 	printf("array di parametri prima del sort:\n{");
 	for (int i = 0; i < argc - 1; i++)
 	{
