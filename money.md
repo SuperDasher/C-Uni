@@ -1,22 +1,22 @@
 
-# expenses
+# Expenses
 
-## subscriptions
+## Subscriptions
 
 - 122.30€ every 6 months:
-    1. 101.95€ [7th] (Lupos tier 3 sub) (november and may)
-    2. 20.35€ [9th] (Kenshi tier 1 sub) (october and april)
+    1. 101.95€ [7th] (Lupos tier 3 sub) (November and May)
+    2. 20.35€ [9th] (Kenshi tier 1 sub) (October and April)
 - 4.99€ per month [24th] (Flame tier 1 sub)
 - +70€ per month
 - max gain:
     1. 65.01€ per month
-    2. 17.70€ on october + november & april + may:
-        - 49.65€ october & april
-        - -31.95 november & may
+    2. 17.70€ on October + November & April + May:
+        - 49.65€ October & April
+        - -31.95 November & May
 
 ---
 
-### october 2022
+### October 2022
 
 1. started with 1880.78€
 2. money spent so far: 185.31€
