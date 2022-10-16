@@ -3,7 +3,6 @@
 #include <math.h>
 
 int mcd(int, int);
-
 int mcm(int, int);
 
 int main()
