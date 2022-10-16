@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <errno.h>
 #include <time.h>
-#include "../headers/matrix.h"
+#include "../headers/dmatrix.h"
 
 int main()
 {
@@ -35,11 +35,11 @@ int main()
 	}
 
 	printf("prima matrice:\n");
-	print_m(a, n, m);
+	print_dm(a, n, m);
 	printf("prima matrice:\n");
-	print_m(b, n, m);
+	print_dm(b, n, m);
 	printf("somma:\n");
-	print_m(result, n, m);
+	print_dm(result, n, m);
 
 	free_m(&a, n);
 	free_m(&b, n);
