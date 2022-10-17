@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
 	printf("%d]\n", numbers[argc - 1]);
 
 	quick_sort(numbers, 0, argc - 1);
+
 	print_a(numbers, argc, "\narray di parametri dopo il sort:\n");
 	free(numbers);
 

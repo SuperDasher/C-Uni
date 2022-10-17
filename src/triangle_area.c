@@ -9,12 +9,12 @@ int main()
 
 	if (base <= 0 || height <= 0)
 	{
-		printf("errore:\n");
+		fprintf(stderr, "errore:\n");
 		if (base <= 0)
-			printf("base negativa\n");
+			fprintf(stderr, "base negativa\n");
 		if (height <= 0)
-			printf("altezza negativa\n");
-		exit(1);
+			fprintf(stderr, "altezza negativa\n");
+		exit(EXIT_FAILURE);
 	}
 
 	printf("l'area del triangolo e' %.1f\n", (float)base * height / 2);
