@@ -36,7 +36,7 @@ int main()
 
 	printf("prima matrice:\n");
 	print_dm(a, n, m);
-	printf("prima matrice:\n");
+	printf("seconda matrice:\n");
 	print_dm(b, n, m);
 	printf("somma:\n");
 	print_dm(result, n, m);
