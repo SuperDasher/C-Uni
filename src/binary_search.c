@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "../headers/sort.h"
+#include "../headers/array.h"
 
 #define ARRAY_LEN 10
 
@@ -10,11 +11,7 @@ int main()
 	int low = 0, high = ARRAY_LEN;
 	int number;
 
-	printf("popola l'array con 10 elementi\n");
-	for (int i = 0; i < ARRAY_LEN; i++)
-	{
-		scanf("%d", &v[i]);
-	}
+	scan_a(v, ARRAY_LEN, "popola l'array con 10 elementi\n");
 	printf("che valore vuoi trovare nell'array?\n");
 	scanf("%d", &number);
 	quick_sort(v, 0, ARRAY_LEN - 1);
