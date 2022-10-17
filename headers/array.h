@@ -1,6 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void init_a(int **array, int *size, char *prompt)
+{
+	printf("%s", prompt);
+	scanf("%d", size);
+	*array = (int *)malloc(*size * sizeof(int));
+	if (*array == NULL)
+	{
+		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		exit(errno);
+	}
+}
+
 void scan_a(int *array, int dim, char *prompt)
 {
 	printf("%s", prompt);

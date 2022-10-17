@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include <errno.h>
 
 bool malloc_m(int ***mat, int rows, int columns)
@@ -15,6 +16,20 @@ bool malloc_m(int ***mat, int rows, int columns)
 			return false;
 	}
 	return true;
+}
+
+void init_m(int ***mat, int *rows, int *columns, char *prompt, char *row_prompt, char *column_prompt)
+{
+	printf("%s\n", prompt);
+	printf("%s", row_prompt);
+	scanf("%d", rows);
+	printf("%s", column_prompt);
+	scanf("%d", columns);
+	if (!malloc_m(mat, *rows, *columns))
+	{
+		fprintf(stderr, "malloc_m() failed: %s\n", strerror(errno));
+		exit(errno);
+	}
 }
 
 void free_m(int ***mat, int rows)
