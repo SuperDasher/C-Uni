@@ -53,7 +53,7 @@ void print_dm(int **mat, int rows, int columns)
 	}
 }
 
-void scan_dm(int **mat, int rows, int columns, char row_prompt[])
+void scan_dm(int **mat, int rows, int columns, char *row_prompt)
 {
 	char *row_prompt_end = (char *)malloc((strlen(row_prompt) + 2) * sizeof(char));
 	if (row_prompt_end == NULL)
