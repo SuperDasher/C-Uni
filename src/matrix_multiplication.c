@@ -5,7 +5,7 @@ int main()
 {
 	int **a, **b, **result;
 	int rows_a, cols_a, rows_b, cols_b;
-	init_m(&a, &rows_a, &cols_a, "Inserisci i valori della prima matrice:", "Riga: ", "Colonna: ");
+	init_m(&a, &rows_a, &cols_a, "Inserisci i valori della prima matrice:", "Righe: ", "Colonne: ");
 
 	printf("La seconda matrice sara' di %d righe:\n", cols_a);
 	rows_b = cols_a;
