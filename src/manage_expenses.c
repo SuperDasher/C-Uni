@@ -4,7 +4,7 @@
 #include <time.h>
 #include <errno.h>
 
-#define MIN_CHARS_BACK 300
+#define MIN_CHARS_BACK 353
 #define STEP_BACK 4
 #define MONTH_CHARS 10
 #define YEAR_CHARS 5

@@ -31,6 +31,8 @@
         - 51.64€ not refunded
 3. balance: 1726.47€
 4. gain: -37.66€
+    - -37.66€ from normal gain
+    - 0€ from extra gain
 5. start next month: 1843.12€
 
 ---
