@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
+#include "../headers/array.h"
 
 void quick_sort(int *, int, int);
 int partition(int *, int, int);
