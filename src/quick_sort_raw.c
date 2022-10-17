@@ -24,23 +24,17 @@ int main(int argc, char *argv[])
 		printf("out of memory\n");
 		exit(errno);
 	}
-	printf("array di parametri prima del sort:\n{");
+	printf("array di parametri prima del sort:\n[");
 	for (int i = 0; i < argc - 1; i++)
 	{
 		numbers[i] = atoi(argv[i]);
 		printf("%d, ", numbers[i]);
 	}
 	numbers[argc - 1] = atoi(argv[argc - 1]);
-	printf("%d}\n", numbers[argc - 1]);
+	printf("%d]\n", numbers[argc - 1]);
 
 	quick_sort(numbers, 0, argc - 1);
-
-	printf("\narray di parametri dopo il sort:\n{");
-	for (int i = 0; i < argc - 1; i++)
-	{
-		printf("%d, ", numbers[i]);
-	}
-	printf("%d}\n", numbers[argc - 1]);
+	print_a(numbers, argc, "\narray di parametri dopo il sort:\n");
 	free(numbers);
 
 	return 0;
