@@ -10,8 +10,9 @@ void scan_a(int *array, int dim, char *prompt)
 	}
 }
 
-void print_a(int *array, int dim)
+void print_a(int *array, int dim, char *prompt)
 {
+	printf("%s", prompt);
 	if (dim < 2)
 	{
 		printf("[%d]", array[0]);
