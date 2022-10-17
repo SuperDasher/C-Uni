@@ -34,7 +34,8 @@ int main(int argc, char *argv[])
 
 	qsort((void *)numbers, (size_t)argc, sizeof(int), compare);
 
-	print_a(numbers, argc, "\narray di parametri dopo il sort:\n");
+	printf("\narray di parametri dopo il sort:\n");
+	print_a(numbers, argc);
 	free(numbers);
 
 	return 0;

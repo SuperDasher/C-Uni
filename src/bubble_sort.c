@@ -12,12 +12,14 @@ int main()
 
 	scan_a(array, N, "Inserisci i valori dell'array:");
 
-	print_a(array, N, "array prima:\n");
+	printf("array prima:\n");
+	print_a(array, N);
 
 	bubble_sort(array, N);
 
-	print_a(array, N, "array dopo:\n");
-	
+	printf("array dopo:\n");
+	print_a(array, N);
+
 	return 0;
 }
 
