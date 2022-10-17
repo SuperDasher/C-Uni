@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <inttypes.h>
 #include <stdbool.h>
 #include <errno.h>
@@ -29,8 +30,7 @@ int main(int argc, char *argv[])
 		prime = (uint64_t *)malloc(sizeof(uint64_t) * amount);
 		if (prime == NULL)
 		{
-			// FIXME: add error message for negative numbers
-			printf("out of memory\n");
+			fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
 			exit(errno);
 		}
 		prime[0] = 2;

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <errno.h>
 #include "../headers/array.h"
 
@@ -21,8 +22,7 @@ int main(int argc, char *argv[])
 	int *numbers = malloc(argc * sizeof(int));
 	if (numbers == NULL)
 	{
-		// FIXME: add error message for negative numbers
-		printf("out of memory\n");
+		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
 		exit(errno);
 	}
 	printf("array di parametri prima del sort:\n[");

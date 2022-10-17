@@ -20,8 +20,7 @@ int main()
 		!malloc_m(&b, n, m) ||
 		!malloc_m(&result, n, m))
 	{
-		// FIXME: add error message for negative numbers
-		printf("out of memory\n");
+		fprintf(stderr, "malloc_m() failed: %s\n", strerror(errno));
 		exit(errno);
 	}
 
