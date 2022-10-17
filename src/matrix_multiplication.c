@@ -44,7 +44,6 @@ int main()
 		}
 		printf("\n");
 	}
-	print_dm(result, rows_a, cols_b);
 
 	return 0;
 }
