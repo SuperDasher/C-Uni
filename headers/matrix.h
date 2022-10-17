@@ -50,6 +50,17 @@ void scan_m(int (*mat)[], int rows, int columns, char row_prompt[])
 	free(row_prompt_end);
 }
 
+void empty_dm(int (*mat)[], int rows, int columns)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			*(*mat + i * columns + j) = 0;
+		}
+	}
+}
+
 void fill_dm(int (*mat)[], int rows, int columns, int value)
 {
 	for (int i = 0; i < rows; i++)
