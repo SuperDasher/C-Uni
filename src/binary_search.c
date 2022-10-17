@@ -11,7 +11,7 @@ int main()
 	int low = 0, high = ARRAY_LEN;
 	int number;
 
-	scan_a(v, ARRAY_LEN, "popola l'array con 10 elementi\n");
+	scan_a(v, ARRAY_LEN, "popola l'array con 10 elementi");
 	printf("che valore vuoi trovare nell'array?\n");
 	scanf("%d", &number);
 	quick_sort(v, 0, ARRAY_LEN - 1);

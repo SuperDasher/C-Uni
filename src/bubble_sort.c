@@ -10,7 +10,7 @@ int main()
 {
 	int array[N];
 
-	scan_a(array, N, "Inserisci i valori dell'array:\n");
+	scan_a(array, N, "Inserisci i valori dell'array:");
 
 	print_a(array, N, "array prima:\n");
 

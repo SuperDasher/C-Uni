@@ -16,7 +16,7 @@ void init_a(int **array, int *size, char *prompt)
 
 void scan_a(int *array, int dim, char *prompt)
 {
-	printf("%s", prompt);
+	printf("%s\n", prompt);
 	for (int i = 0; i < dim; i++)
 	{
 		scanf("%d", &array[i]);
