@@ -1,10 +1,8 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdbool.h>
+#include "../headers/sort.h"
 
 #define ARRAY_LEN 10
-
-int compare(const void *, const void *);
 
 int main()
 {
@@ -19,7 +17,7 @@ int main()
 	}
 	printf("che valore vuoi trovare nell'array?\n");
 	scanf("%d", &number);
-	qsort((void *)v, (size_t)ARRAY_LEN, sizeof(int), compare);
+	quick_sort(v, 0, ARRAY_LEN - 1);
 
 	while (low <= high)
 	{
@@ -39,9 +37,4 @@ int main()
 	printf("il valore non e' presente nell'array\n");
 
 	return 0;
-}
-
-int compare(const void *arg1, const void *arg2)
-{
-	return *(int *)arg1 - *(int *)arg2;
 }
