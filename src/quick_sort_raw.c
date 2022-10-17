@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 	int *numbers = malloc(argc * sizeof(int));
 	if (numbers == NULL)
 	{
+		// FIXME: add error message for negative numbers
 		printf("out of memory\n");
 		exit(errno);
 	}

@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
 		prime = (uint64_t *)malloc(sizeof(uint64_t) * amount);
 		if (prime == NULL)
 		{
+			// FIXME: add error message for negative numbers
 			printf("out of memory\n");
 			exit(errno);
 		}

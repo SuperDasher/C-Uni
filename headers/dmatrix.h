@@ -43,6 +43,7 @@ void scan_dm(int **mat, int rows, int columns, char row_prompt[])
 	char *row_prompt_end = (char *)malloc((strlen(row_prompt) + 2) * sizeof(char));
 	if (row_prompt_end == NULL)
 	{
+		// FIXME: add error message for negative numbers
 		printf("out of memory\n");
 		exit(errno);
 	}
