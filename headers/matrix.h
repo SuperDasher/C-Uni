@@ -81,3 +81,6 @@ void randfill_dm(int (*mat)[], int rows, int columns, int min, int max)
 		}
 	}
 }
+
+// TODO: convert all these functions to be able to get any type
+// TODO: create reduce, map and filter functions

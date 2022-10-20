@@ -61,3 +61,6 @@ void randfill_a(int *array, int dim, int min, int max)
 		array[i] = rand() % (max - min + 1) + min;
 	}
 }
+
+// TODO: convert all these functions to be able to get any type
+// TODO: create reduce, map and filter functions
