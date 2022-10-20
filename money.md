@@ -20,7 +20,7 @@
 ### October 2022
 
 1. started with 1880.78€
-2. money spent so far: 194.98€
+2. money spent so far: 225.24€
     1. subscriptions: 40.34€ (45.33€ total)
         - [x] 19.99€
         - [x] 20.35€
