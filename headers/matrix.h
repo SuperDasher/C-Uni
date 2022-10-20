@@ -82,5 +82,69 @@ void randfill_dm(int (*mat)[], int rows, int columns, int min, int max)
 	}
 }
 
-// TODO: convert all these functions to be able to get any type
-// TODO: create reduce, map and filter functions
+typedef (*reduce_func)(int, int);
+typedef (*map_func)(int);
+typedef (*filter_func)(int);
+
+int reduce(int (*mat)[], int rows, int columns, reduce_func func)
+{
+	int result = *(*mat + 0 * columns + 0);
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			result = func(result, *(*mat + i * columns + j));
+		}
+	}
+	return result;
+}
+
+int *map(int (*mat)[], int rows, int columns, map_func func)
+{
+	int *result = (int *)malloc(rows * columns * sizeof(int));
+	if (result == NULL)
+	{
+		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		exit(errno);
+	}
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			*(result + i * columns + j) = func(*(*mat + i * columns + j));
+		}
+	}
+	return result;
+}
+
+struct filter_result
+{
+	int *result;
+	int size;
+};
+
+struct filter_result filter(int (*mat)[], int rows, int columns, filter_func func)
+{
+	struct filter_result result;
+	result.result = (int *)malloc(rows * columns * sizeof(int));
+	if (result.result == NULL)
+	{
+		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		exit(errno);
+	}
+	result.size = 0;
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			if (func(*(*mat + i * columns + j)))
+			{
+				*(result.result + result.size) = *(*mat + i * columns + j);
+				result.size++;
+			}
+		}
+	}
+	return result;
+}
+
+// TODO: convert all these functions to be able to get any type of static matrix

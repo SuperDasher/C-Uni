@@ -62,5 +62,60 @@ void randfill_a(int *array, int dim, int min, int max)
 	}
 }
 
-// TODO: convert all these functions to be able to get any type
-// TODO: create reduce, map and filter functions
+typedef (*reduce_func)(int, int);
+typedef (*map_func)(int);
+typedef (*filter_func)(int);
+
+int reduce(reduce_func func, int *array, int dim)
+{
+	int result = array[0];
+	for (int i = 1; i < dim; i++)
+	{
+		result = func(result, array[i]);
+	}
+	return result;
+}
+
+int *map(map_func func, int *array, int dim)
+{
+	int *result = (int *)malloc(dim * sizeof(int));
+	if (result == NULL)
+	{
+		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		exit(errno);
+	}
+	for (int i = 0; i < dim; i++)
+	{
+		result[i] = func(array[i]);
+	}
+	return result;
+}
+
+struct filter_result
+{
+	int *array;
+	int dim;
+};
+
+struct filter_result filter(filter_func func, int *array, int dim)
+{
+	struct filter_result result;
+	result.array = (int *)malloc(dim * sizeof(int));
+	if (result.array == NULL)
+	{
+		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		exit(errno);
+	}
+	result.dim = 0;
+	for (int i = 0; i < dim; i++)
+	{
+		if (func(array[i]))
+		{
+			result.array[result.dim] = array[i];
+			result.dim++;
+		}
+	}
+	return result;
+}
+
+// TODO: convert all these functions to be able to get any type of array

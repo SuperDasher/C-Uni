@@ -120,5 +120,69 @@ void randfill_m(int **mat, int rows, int columns, int min, int max)
 	}
 }
 
-// TODO: convert all these functions to be able to get any type
-// TODO: create reduce, map and filter functions
+typedef (*reduce_func)(int, int);
+typedef (*map_func)(int);
+typedef (*filter_func)(int);
+
+int reduce_dm(reduce_func func, int **mat, int rows, int columns)
+{
+	int result = 0;
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			result = func(result, mat[i][j]);
+		}
+	}
+	return result;
+}
+
+int *map_dm(map_func func, int **mat, int rows, int columns)
+{
+	int *result = (int *)malloc(rows * columns * sizeof(int));
+	if (result == NULL)
+	{
+		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		exit(errno);
+	}
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			result[i * columns + j] = func(mat[i][j]);
+		}
+	}
+	return result;
+}
+
+struct filter_result
+{
+	int *result;
+	int size;
+};
+
+struct filter_result filter_dm(filter_func func, int **mat, int rows, int columns)
+{
+	struct filter_result result;
+	result.result = (int *)malloc(rows * columns * sizeof(int));
+	if (result.result == NULL)
+	{
+		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		exit(errno);
+	}
+	result.size = 0;
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			if (func(mat[i][j]))
+			{
+				result.result[result.size] = mat[i][j];
+				result.size++;
+			}
+		}
+	}
+	return result;
+}
+
+// TODO: convert all these functions to be able to get any type of matrix
