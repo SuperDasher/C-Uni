@@ -78,32 +78,45 @@ int reduce_a(reduce_func_a func, int *array, int dim)
 	return result;
 }
 
-void map_a(map_func_a func, int **target, int *array, int dim)
+void map_a(map_func_a func, int *target, int *array, int dim)
 {
 	for (int i = 0; i < dim; i++)
 	{
-		*target[i] = func(array[i]);
+		target[i] = func(array[i]);
 	}
 }
 
-// FIXME: segmentation fault
 int filter_a(filter_func_a func, int **target, int *array, int dim)
 {
-	*target = (int *)malloc(dim * sizeof(int));
+	int *target_full = (int *)malloc(dim * sizeof(int));
+	if (target_full == NULL)
+	{
+		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		exit(errno);
+	}
 	int target_dim = 0;
 	for (int i = 0; i < dim; i++)
 	{
 		if (func(array[i]))
 		{
-			*target[target_dim] = array[i];
+			target_full[target_dim] = array[i];
 			target_dim++;
 		}
+		printf("cur dimension: %d\n", target_dim);
 	}
-	for (int i = target_dim; i < dim; i++)
+	*target = (int *)malloc(target_dim * sizeof(int));
+	if (*target == NULL)
 	{
-		*target[i] = 0;
+		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		exit(errno);
 	}
-	*target = (int *)realloc(*target, target_dim * sizeof(int));
+	printf("dimension: %d\n", target_dim);
+	for (int i = 0; i < target_dim; i++)
+	{
+		printf("start %d\n", i);
+		(*target)[i] = target_full[i];
+	}
+	free(target_full);
 	return target_dim;
 }
 
