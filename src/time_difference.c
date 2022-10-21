@@ -13,7 +13,16 @@ struct date
 	int hours;
 	int minutes;
 };
+struct date_minutes
+{
+	int value;
+	int leap_amount;
+	bool includes_skipped_days;
+};
 bool valid_date(char *, struct date *);
+bool is_number(char *, size_t);
+struct date_minutes date_to_minutes(struct date);
+struct date minutes_to_date(int);
 
 int main()
 {
@@ -33,7 +42,7 @@ int main()
 	}
 
 	printf("inserisci una seconda data in formato DD-MM-YYYY hh:mm :\n");
-	fgets(date_s1, DATE_LEN, stdin);
+	fgets(date_s2, DATE_LEN, stdin);
 
 	while (!valid_date(date_s2, &date2))
 	{
@@ -45,7 +54,7 @@ int main()
 
 	return 0;
 }
-// 1582 5-15 october did not exist
+
 bool valid_date(char *date_s, struct date *date)
 {
 	if (date_s[2] != '-' || date_s[5] != '-' || date_s[10] != ' ' || date_s[13] != ':' || date_s[16] != '\n')
@@ -68,6 +77,10 @@ bool valid_date(char *date_s, struct date *date)
 
 	dt.day = atoi(day_s);
 	dt.month = atoi(month_s);
+	if (!is_number(year_s) || !is_number(hours_s) || !is_number(minutes_s))
+	{
+		return false;
+	}
 	dt.year = atoi(year_s);
 	dt.hours = atoi(hours_s);
 	dt.minutes = atoi(minutes_s);
@@ -131,4 +144,38 @@ bool valid_date(char *date_s, struct date *date)
 			*date = dt;
 			return true;
 	}
+}
+
+bool is_number(char * str, size_t len)
+{
+	if (len == 1)
+	{
+		return str[0] >= '0' && str[0] <= '9'
+	}
+	if (str[0] < '0' || str[0] > '9' || str[0] != '-')
+	{
+		return false;
+	}
+	for (int i = 1; i < len; i++)
+	{
+		if (str[0] < '0' || str[0])
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+struct date_minutes date_to_minutes(struct date date)
+{
+	struct date_minutes result = { date.minutes, 0, false };
+	result.value += date.hour * 60;
+	result.value += date.day * 60 * 24;
+	// TODO: finish function
+	if ()
+}
+
+struct date minutes_to_date(int minutes)
+{
+
 }
