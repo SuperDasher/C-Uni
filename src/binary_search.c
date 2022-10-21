@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <errno.h>
 #include "../headers/sort.h"
 #include "../headers/array.h"
 
