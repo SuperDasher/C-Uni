@@ -102,7 +102,6 @@ int filter_a(filter_func_a func, int **target, int *array, int dim)
 			target_full[target_dim] = array[i];
 			target_dim++;
 		}
-		printf("cur dimension: %d\n", target_dim);
 	}
 	*target = (int *)malloc(target_dim * sizeof(int));
 	if (*target == NULL)
@@ -110,10 +109,8 @@ int filter_a(filter_func_a func, int **target, int *array, int dim)
 		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
 		exit(errno);
 	}
-	printf("dimension: %d\n", target_dim);
 	for (int i = 0; i < target_dim; i++)
 	{
-		printf("start %d\n", i);
 		(*target)[i] = target_full[i];
 	}
 	free(target_full);
