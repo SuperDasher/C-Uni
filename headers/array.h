@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
+#include <errno.h>
 
 void init_a(int **array, int *size, char *prompt)
 {
@@ -62,11 +64,11 @@ void randfill_a(int *array, int dim, int min, int max)
 	}
 }
 
-typedef (*reduce_func)(int, int);
-typedef (*map_func)(int);
-typedef (*filter_func)(int);
+typedef int (*reduce_func_a)(int, int);
+typedef int (*map_func_a)(int);
+typedef bool (*filter_func_a)(int);
 
-int reduce(reduce_func func, int *array, int dim)
+int reduce_a(reduce_func_a func, int *array, int dim)
 {
 	int result = array[0];
 	for (int i = 1; i < dim; i++)
@@ -76,46 +78,30 @@ int reduce(reduce_func func, int *array, int dim)
 	return result;
 }
 
-int *map(map_func func, int *array, int dim)
+void map_a(map_func_a func, int **target, int *array, int dim)
 {
-	int *result = (int *)malloc(dim * sizeof(int));
-	if (result == NULL)
-	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
-		exit(errno);
-	}
 	for (int i = 0; i < dim; i++)
 	{
-		result[i] = func(array[i]);
+		*target[i] = func(array[i]);
 	}
-	return result;
 }
 
-struct filter_result
+int filter_a(filter_func_a func, int **target, int *array, int dim)
 {
-	int *array;
-	int dim;
-};
-
-struct filter_result filter(filter_func func, int *array, int dim)
-{
-	struct filter_result result;
-	result.array = (int *)malloc(dim * sizeof(int));
-	if (result.array == NULL)
-	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
-		exit(errno);
-	}
-	result.dim = 0;
+	int target_dim = 0;
 	for (int i = 0; i < dim; i++)
 	{
 		if (func(array[i]))
 		{
-			result.array[result.dim] = array[i];
-			result.dim++;
+			*target[target_dim] = array[i];
+			target_dim++;
 		}
 	}
-	return result;
+	for (int i = target_dim; i < dim; i++)
+	{
+		*target[i] = 0;
+	}
+	return target_dim;
 }
 
 // TODO: convert all these functions to be able to get any type of array

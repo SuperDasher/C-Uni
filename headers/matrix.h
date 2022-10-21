@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include <errno.h>
 
 void print_m(int (*mat)[], int rows, int columns)
@@ -14,6 +15,8 @@ void print_m(int (*mat)[], int rows, int columns)
 		printf("\n");
 	}
 }
+
+// TODO: create function to print first n elements of matrix
 
 void scan_m(int (*mat)[], int rows, int columns, char *row_prompt)
 {
@@ -82,11 +85,11 @@ void randfill_dm(int (*mat)[], int rows, int columns, int min, int max)
 	}
 }
 
-typedef (*reduce_func)(int, int);
-typedef (*map_func)(int);
-typedef (*filter_func)(int);
+typedef int (*reduce_func_m)(int, int);
+typedef int (*map_func_m)(int);
+typedef bool (*filter_func_m)(int);
 
-int reduce(int (*mat)[], int rows, int columns, reduce_func func)
+int reduce_m(reduce_func_m func, int (*mat)[], int rows, int columns)
 {
 	int result = *(*mat + 0 * columns + 0);
 	for (int i = 0; i < rows; i++)
@@ -99,52 +102,36 @@ int reduce(int (*mat)[], int rows, int columns, reduce_func func)
 	return result;
 }
 
-int *map(int (*mat)[], int rows, int columns, map_func func)
+void map_m(map_func_m func, int (*target)[], int (*mat)[], int rows, int columns)
 {
-	int *result = (int *)malloc(rows * columns * sizeof(int));
-	if (result == NULL)
-	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
-		exit(errno);
-	}
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			*(result + i * columns + j) = func(*(*mat + i * columns + j));
+			*(*target + i * columns + j) = func(*(*mat + i * columns + j));
 		}
 	}
-	return result;
 }
 
-struct filter_result
+int filter_m(filter_func_m func, int (*target)[], int (*mat)[], int rows, int columns)
 {
-	int *result;
-	int size;
-};
-
-struct filter_result filter(int (*mat)[], int rows, int columns, filter_func func)
-{
-	struct filter_result result;
-	result.result = (int *)malloc(rows * columns * sizeof(int));
-	if (result.result == NULL)
-	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
-		exit(errno);
-	}
-	result.size = 0;
+	int target_dim = 0;
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
 		{
 			if (func(*(*mat + i * columns + j)))
 			{
-				*(result.result + result.size) = *(*mat + i * columns + j);
-				result.size++;
+				*(*target + target_dim) = *(*mat + i * columns + j);
+				target_dim++;
 			}
 		}
 	}
-	return result;
+	for (int i = target_dim; i < rows * columns; i++)
+	{
+		*(*target + i) = 0;
+	}
+	return target_dim;
 }
 
 // TODO: convert all these functions to be able to get any type of static matrix

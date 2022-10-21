@@ -53,6 +53,8 @@ void print_dm(int **mat, int rows, int columns)
 	}
 }
 
+// TODO: create function to print first n elements of matrix
+
 void scan_dm(int **mat, int rows, int columns, char *row_prompt)
 {
 	char *row_prompt_end = (char *)malloc((strlen(row_prompt) + 2) * sizeof(char));
@@ -120,11 +122,11 @@ void randfill_m(int **mat, int rows, int columns, int min, int max)
 	}
 }
 
-typedef (*reduce_func)(int, int);
-typedef (*map_func)(int);
-typedef (*filter_func)(int);
+typedef int (*reduce_func_dm)(int, int);
+typedef int (*map_func_dm)(int);
+typedef bool (*filter_func_dm)(int);
 
-int reduce_dm(reduce_func func, int **mat, int rows, int columns)
+int reduce_dm(reduce_func_dm func, int **mat, int rows, int columns)
 {
 	int result = 0;
 	for (int i = 0; i < rows; i++)
@@ -137,52 +139,36 @@ int reduce_dm(reduce_func func, int **mat, int rows, int columns)
 	return result;
 }
 
-int *map_dm(map_func func, int **mat, int rows, int columns)
+void map_dm(map_func_dm func, int ***target, int **mat, int rows, int columns)
 {
-	int *result = (int *)malloc(rows * columns * sizeof(int));
-	if (result == NULL)
-	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
-		exit(errno);
-	}
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			result[i * columns + j] = func(mat[i][j]);
+			*target[i][j] = func(mat[i][j]);
 		}
 	}
-	return result;
 }
 
-struct filter_result
+int filter_dm(filter_func_dm func, int ***target, int **mat, int rows, int columns)
 {
-	int *result;
-	int size;
-};
-
-struct filter_result filter_dm(filter_func func, int **mat, int rows, int columns)
-{
-	struct filter_result result;
-	result.result = (int *)malloc(rows * columns * sizeof(int));
-	if (result.result == NULL)
-	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
-		exit(errno);
-	}
-	result.size = 0;
+	int target_dim = 0;
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
 		{
 			if (func(mat[i][j]))
 			{
-				result.result[result.size] = mat[i][j];
-				result.size++;
+				*target[target_dim / rows][target_dim % rows] = mat[i][j];
+				target_dim++;
 			}
 		}
 	}
-	return result;
+	for (int i = target_dim; i < rows * columns; i++)
+	{
+		*target[i / rows][i % rows] = 0;
+	}
+	return target_dim;
 }
 
 // TODO: convert all these functions to be able to get any type of matrix
