@@ -86,8 +86,10 @@ void map_a(map_func_a func, int **target, int *array, int dim)
 	}
 }
 
+// FIXME: segmentation fault
 int filter_a(filter_func_a func, int **target, int *array, int dim)
 {
+	*target = (int *)malloc(dim * sizeof(int));
 	int target_dim = 0;
 	for (int i = 0; i < dim; i++)
 	{
@@ -101,6 +103,7 @@ int filter_a(filter_func_a func, int **target, int *array, int dim)
 	{
 		*target[i] = 0;
 	}
+	*target = (int *)realloc(*target, target_dim * sizeof(int));
 	return target_dim;
 }
 

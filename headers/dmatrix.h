@@ -141,6 +141,11 @@ int reduce_dm(reduce_func_dm func, int **mat, int rows, int columns)
 
 void map_dm(map_func_dm func, int ***target, int **mat, int rows, int columns)
 {
+	if (!malloc_m(target, rows, columns))
+	{
+		fprintf(stderr, "malloc_m() failed: %s\n", strerror(errno));
+		exit(errno);
+	}
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
@@ -152,6 +157,11 @@ void map_dm(map_func_dm func, int ***target, int **mat, int rows, int columns)
 
 int filter_dm(filter_func_dm func, int ***target, int **mat, int rows, int columns)
 {
+	if (!malloc_m(target, rows, columns))
+	{
+		fprintf(stderr, "malloc_m() failed: %s\n", strerror(errno));
+		exit(errno);
+	}
 	int target_dim = 0;
 	for (int i = 0; i < rows; i++)
 	{
