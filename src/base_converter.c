@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdint.h>
+#include <inttypes.h>
 
 void convert(uint16_t, uint8_t);
 
@@ -8,7 +8,7 @@ int main()
 	uint16_t number;
 
 	printf("inserisci un numero\n");
-	scanf("%hu", &number);
+	scanf("%" SCNu16, &number);
 
 	convert(number, 2);
 	convert(number, 8);
@@ -32,5 +32,5 @@ void convert(uint16_t number, uint8_t base)
 		n /= base;
 		power *= 10;
 	}
-	printf("%hu in base %hhu e' %lu\n", number, base, result);
+	printf("%" PRIu16 " in base %" PRIu8 " e' %" PRIu64 "\n", number, base, result);
 }
