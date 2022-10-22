@@ -18,6 +18,6 @@ for file in src/*; do
 	if [[ "${file##*.}" == c ]]; then
 		gcc -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" -o "out/$(basename -- "$file" .c).o"
 	elif [[ "${file##*.}" == cpp ]]; then
-		g++ -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" -o "out/$(basename -- "$file" .cpp).opp"
+		g++ -std=c++23 -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" -o "out/$(basename -- "$file" .cpp).opp"
 	fi
 done
