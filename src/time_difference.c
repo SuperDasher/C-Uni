@@ -13,59 +13,76 @@ struct date
 	int hours;
 	int minutes;
 };
-struct date_minutes
-{
-	int value;
-	int leap_amount;
-	bool includes_skipped_days;
-};
-bool valid_date(char *, struct date *);
-bool is_number(char *, size_t);
-struct date_minutes date_to_minutes(struct date);
-struct date minutes_to_date(int);
+void ask_date(struct date *date, char *prompt, char *invalid_prompt);
+bool is_valid_date(char *, struct date *);
+bool is_number(char *);
+bool is_leap_year(int);
+bool are_equal_dates(struct date, struct date);
+bool are_sorted_dates(struct date, struct date);
+void sort_dates(struct date *, struct date *);
+void swap_date(struct date *, struct date *);
+struct date date_difference(struct date, struct date);
 
 int main()
 {
-	char date_s1[DATE_LEN] = { 0 };
-	char date_s2[DATE_LEN] = { 0 };
-	
 	struct date date1;
 	struct date date2;
-	
-	printf("inserisci una prima data in formato DD-MM-YYYY hh:mm :\n");
-	fgets(date_s1, DATE_LEN, stdin);
+	struct date difference;
 
-	while (!valid_date(date_s1, &date1))
+	ask_date(&date1, "inserisci la data di partenza in formato [DD-MM-YYYY hh:mm]\n", "formato errato, reinserire con formato [DD-MM-YYYY hh:mm]\n");
+	ask_date(&date2, "inserisci la data di arrivo in formato [DD-MM-YYYY hh:mm]\n", "formato errato, reinserire con formato [DD-MM-YYYY hh:mm]\n");
+
+	if (are_equal_dates(date1, date2))
 	{
-		printf("formato errato, reinserire con formato DD-MM-YYYY hh:mm :\n");
-		fgets(date_s1, DATE_LEN, stdin);
+		printf("Non hai viaggiato nel tempo...\n");
+		return 0;
 	}
 
-	printf("inserisci una seconda data in formato DD-MM-YYYY hh:mm :\n");
-	fgets(date_s2, DATE_LEN, stdin);
+	difference = date_difference(date1, date2);
 
-	while (!valid_date(date_s2, &date2))
-	{
-		printf("formato errato, reinserire con formato DD-MM-YYYY hh:mm :\n");
-		fgets(date_s2, DATE_LEN, stdin);
-	}
+	char *time_direction = are_sorted_dates(date1, date2) ? "futuro" : "passato";
+	char *year = difference.year == 1 ? "anno" : "anni";
+	char *month = difference.month == 1 ? "mese" : "mesi";
+	char *day = difference.day == 1 ? "giorno" : "giorni";
+	char *hours = difference.hours == 1 ? "ora" : "ore";
+	char *minutes = difference.minutes == 1 ? "minuto" : "minuti";
 
-	// TODO: calculate the time difference
+	printf("Grande Giove! Hai viaggiato nel %s di %d %s, %d %s, %d %s, %d %s e %d %s!\n",
+		time_direction,
+		difference.year, year,
+		difference.month, month,
+		difference.day, day,
+		difference.hours, hours,
+		difference.minutes, minutes);
 
 	return 0;
 }
 
-bool valid_date(char *date_s, struct date *date)
+void ask_date(struct date *date, char *prompt, char *invalid_prompt)
+{
+	char date_s[DATE_LEN] = {0};
+
+	printf("%s", prompt);
+	fgets(date_s, DATE_LEN, stdin);
+
+	while (!is_valid_date(date_s, date))
+	{
+		printf("%s", invalid_prompt);
+		fgets(date_s, DATE_LEN, stdin);
+	}
+}
+
+bool is_valid_date(char *date_s, struct date *date)
 {
 	if (date_s[2] != '-' || date_s[5] != '-' || date_s[10] != ' ' || date_s[13] != ':' || date_s[16] != '\n')
 	{
 		return false;
 	}
-	char day_s[3];
-	char month_s[3];
-	char year_s[5];
-	char hours_s[3];
-	char minutes_s[3];
+	char day_s[3] = {0};
+	char month_s[3] = {0};
+	char year_s[5] = {0};
+	char hours_s[3] = {0};
+	char minutes_s[3] = {0};
 
 	strncpy(day_s, date_s, 2);
 	strncpy(month_s, date_s + 3, 2);
@@ -82,10 +99,10 @@ bool valid_date(char *date_s, struct date *date)
 		return false;
 	}
 	dt.year = atoi(year_s);
-	dt.hours = atoi(hours_s);
+	dt.hours = strcmp(hours_s, "24") == 0 ? 0 : atoi(hours_s);
 	dt.minutes = atoi(minutes_s);
 
-	if (dt.year < 0 || dt.month < 1 || dt.month > 12  || dt.day < 1)
+	if (dt.year < 1888 || dt.year > 2100 || dt.month < 1 || dt.month > 12 || dt.day < 1)
 	{
 		return false;
 	}
@@ -95,23 +112,13 @@ bool valid_date(char *date_s, struct date *date)
 		return false;
 	}
 
-	if (dt.year == 1582 && dt.month == 10)
-	{
-		if ((dt.day > 4 && dt.day < 16) || dt.day > 30)
-		{
-			return false;
-		}
-		*date = dt;
-		return true;
-	}
-	
 	if (dt.month == 2)
 	{
 		if (dt.day > 29)
 		{
 			return false;
 		}
-		if (dt.year % 4 != 0 || dt.year % 100 == 0)
+		if (!is_leap_year(dt.year))
 		{
 			if (dt.day > 28)
 			{
@@ -123,42 +130,43 @@ bool valid_date(char *date_s, struct date *date)
 	}
 	switch (dt.month)
 	{
-		case 1:
-		case 3:
-		case 5:
-		case 7:
-		case 8:
-		case 10:
-		case 12:
-			if (dt.day > 31)
-			{
-				return false;
-			}
-			*date = dt;
-			return true;
-		default:
-			if (dt.day > 30)
-			{
-				return false;
-			}
-			*date = dt;
-			return true;
+	case 1:
+	case 3:
+	case 5:
+	case 7:
+	case 8:
+	case 10:
+	case 12:
+		if (dt.day > 31)
+		{
+			return false;
+		}
+		*date = dt;
+		return true;
+	default:
+		if (dt.day > 30)
+		{
+			return false;
+		}
+		*date = dt;
+		return true;
 	}
 }
 
-bool is_number(char * str, size_t len)
+bool is_number(char *str)
 {
+	int len = strlen(str);
 	if (len == 1)
 	{
-		return str[0] >= '0' && str[0] <= '9'
+		return str[0] >= '0' && str[0] <= '9';
 	}
-	if (str[0] < '0' || str[0] > '9' || str[0] != '-')
+	if ((str[0] < '0' || str[0] > '9') && str[0] != '-')
 	{
 		return false;
 	}
 	for (int i = 1; i < len; i++)
 	{
-		if (str[0] < '0' || str[0])
+		if (str[0] < '0' || str[0] > '9')
 		{
 			return false;
 		}
@@ -166,16 +174,140 @@ bool is_number(char * str, size_t len)
 	return true;
 }
 
-struct date_minutes date_to_minutes(struct date date)
+bool is_leap_year(int year)
 {
-	struct date_minutes result = { date.minutes, 0, false };
-	result.value += date.hour * 60;
-	result.value += date.day * 60 * 24;
-	// TODO: finish function
-	if ()
+	return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 }
 
-struct date minutes_to_date(int minutes)
+bool are_equal_dates(struct date date1, struct date date2)
 {
+	return date1.year == date2.year &&
+		date1.month == date2.month &&
+		date1.day == date2.day &&
+		date1.hours == date2.hours &&
+		date1.minutes == date2.minutes;
+}
 
+bool are_sorted_dates(struct date date1, struct date date2)
+{
+	if (date1.year > date2.year)
+	{
+		return false;
+	}
+	if (date1.year == date2.year &&
+		date1.month > date2.month)
+	{
+		return false;
+	}
+	if (date1.year == date2.year &&
+		date1.month == date2.month &&
+		date1.day > date2.day)
+	{
+		return false;
+	}
+	if (date1.year == date2.year &&
+		date1.month == date2.month &&
+		date1.day == date2.day &&
+		date1.hours > date2.hours)
+	{
+		return false;
+	}
+	if (date1.year == date2.year &&
+		date1.month == date2.month &&
+		date1.day == date2.day &&
+		date1.hours == date2.hours &&
+		date1.minutes > date2.minutes)
+	{
+		return false;
+	}
+	return true;
+}
+
+void sort_date(struct date *date1, struct date *date2)
+{
+	if (!are_sorted_dates(*date1, *date2))
+	{
+		swap_date(date1, date2);
+	}
+}
+
+void swap_date(struct date *date1, struct date *date2)
+{
+	struct date temp = *date1;
+	*date1 = *date2;
+	*date2 = temp;
+}
+struct date date_difference(struct date date_minuend, struct date date_subtrahend)
+{
+	sort_date(&date_subtrahend, &date_minuend);
+	bool day_borrowed = false;
+	bool month_borrowed = false;
+	struct date difference = {0};
+	if (date_subtrahend.minutes > date_minuend.minutes)
+	{
+		date_minuend.minutes += 60;
+		date_minuend.hours--;
+	}
+	difference.minutes = date_minuend.minutes - date_subtrahend.minutes;
+	if (date_subtrahend.hours > date_minuend.hours)
+	{
+		day_borrowed = true;
+		date_minuend.hours += 24;
+		date_minuend.day--;
+	}
+	difference.hours = date_minuend.hours - date_subtrahend.hours;
+	if (date_subtrahend.day > date_minuend.day)
+	{
+		month_borrowed = true;
+		if (date_minuend.month == 3)
+		{
+			if (is_leap_year(date_minuend.year))
+			{
+				date_minuend.day += 29;
+			}
+			else
+			{
+				date_minuend.day += 28;
+			}
+		}
+		else
+		{
+			switch (date_minuend.month)
+			{
+			case 1:
+			case 2:
+			case 4:
+			case 6:
+			case 8:
+			case 9:
+			case 11:
+				date_minuend.day += 31;
+				break;
+			default:
+				date_minuend.day += 30;
+				break;
+			}
+		}
+		date_minuend.month--;
+	}
+	difference.day = date_minuend.day - date_subtrahend.day;
+	if (difference.day <= 0 && month_borrowed)
+	{
+		if (day_borrowed)
+		{
+			difference.day = 0;
+		}
+		else
+		{
+			difference.day = 1;
+		}
+	}
+	if (date_subtrahend.month > date_minuend.month)
+	{
+		date_minuend.month += 12;
+		date_minuend.year--;
+	}
+	difference.month = date_minuend.month - date_subtrahend.month;
+	difference.year = date_minuend.year - date_subtrahend.year;
+	return difference;
 }
