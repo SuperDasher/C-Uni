@@ -55,7 +55,7 @@ void draw_histogram(float *temperature, int days)
 	printf("GIORNO\tVALORE\tISTOGRAMMA\n");
 	for (int i = 0; i < days; i++)
 	{
-		printf("     %d\t  %.1f\t", i + 1, temperature[i]);
+		printf("%6d\t%6.1f\t", i + 1, temperature[i]);
 		for (int j = TEMPERATURE_LOW_LIMIT; j <= temperature[i]; j++)
 		{
 			printf("*");
