@@ -63,6 +63,8 @@ void empty_dm(int (*mat)[], int rows, int columns)
 	}
 }
 
+// TODO: bool is_empty()
+
 void fill_dm(int (*mat)[], int rows, int columns, int value)
 {
 	for (int i = 0; i < rows; i++)

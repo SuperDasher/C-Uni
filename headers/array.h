@@ -48,6 +48,8 @@ void empty_a(int *array, int dim)
 	}
 }
 
+// TODO: bool is_empty()
+
 void fill_a(int *array, int dim, int value)
 {
 	for (int i = 0; i < dim; i++)
