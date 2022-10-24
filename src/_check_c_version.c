@@ -17,7 +17,7 @@ int main()
 		printf("C90\n");
 		break;
 	default:
-		printf("C version not recognized\n");
+		printf("Pre-standard C\n");
 		break;
 	}
 }
