@@ -20,7 +20,7 @@ struct move
 
 int main()
 {
-	struct move a[K];
+	// struct move a[K];
 	// TODO: finish this
 	return 0;
 }
