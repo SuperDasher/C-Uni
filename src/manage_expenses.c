@@ -45,17 +45,7 @@ void check_file(FILE *file)
 {
 	if (file == NULL)
 	{
-		if (errno == ENOENT)
-		{
-			printf("File money.md does not exist\n");
-			exit(errno);
-		}
-		if (errno == EACCES)
-		{
-			printf("File money.md is not accessible\n");
-			exit(errno);
-		}
-		printf("Error opening file money.md\n");
+		fprintf(stderr, "fopen() failed: %s\n", strerror(errno));
 		exit(errno);
 	}
 }
