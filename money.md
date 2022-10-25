@@ -17,7 +17,7 @@
 ---
 ---
 
-### October 2022
+## October 2022
 
 1. started with 1880.78€
 2. money spent so far: 268.87€ [111.41€ not refunded]
