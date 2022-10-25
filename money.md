@@ -9,10 +9,10 @@
 - 3.99€ per month [24th] (Flame tier 1 sub)
 - +70€ per month
 - max gain:
-    1. 65.01€ per month
-    2. 17.70€ on October + November & April + May:
-        - 49.65€ October & April
-        - -31.95 November & May
+    1. 66.01€ per month
+    2. 9.72€ on October + November & April + May:
+        - 45.66€ October & April
+        - -35.94€ November & May
 
 ---
 ---
@@ -35,9 +35,9 @@
         - 15.13€ not refunded
             1. 15.13€ F24
 3. balance: 1668.90€
-4. gain: -49.59€
+4. gain: -34.46€
     - -36.66€ from normal gain
     - 2.20€ from other gain
-5. start next month: 1831.19€
+5. start next month: 1846.32€
 
 ---
