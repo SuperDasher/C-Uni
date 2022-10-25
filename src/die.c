@@ -1,19 +1,29 @@
-// TODO: make count array dynamic
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
 #define RESULTS 11
 #define DICE_SIDES 6
-#define THROWS 36000
 
-int main()
+int main(int argc, char *argv[])
 {
 	srand(time(NULL));
 
+	if (argc != 2)
+	{
+		fprintf(stderr, "usage: %s <number of throws>\n", argv[0]);
+		exit(EXIT_FAILURE);
+	}
+
+	int throws = atoi(argv[1]);
+	if (throws < 1)
+	{
+		fprintf(stderr, "number of throws must be a valid number greater than 0\n");
+		exit(EXIT_FAILURE);
+	}
+
 	int count[RESULTS] = {0};
-	for(int i = 0; i < THROWS; i++)
+	for(int i = 0; i < throws; i++)
 	{
 		int dice1 = rand() % DICE_SIDES + 1;
 		int dice2 = rand() % DICE_SIDES + 1;
@@ -31,7 +41,7 @@ int main()
 	printf("\nsomma\toccorrenze\t%% aspettativa\t%% effettiva\n");
 	for (int i = 0; i < RESULTS; i++)
 	{
-		printf("%5d\t%10d\t%10.2f%%\t%8.2f%%\n", i + 2, count[i], (float)expected[i] * 100 / (DICE_SIDES * DICE_SIDES), (float)count[i] * 100 / THROWS);
+		printf("%5d\t%10d\t%10.2f%%\t%8.2f%%\n", i + 2, count[i], (float)expected[i] * 100 / (DICE_SIDES * DICE_SIDES), (float)count[i] * 100 / throws);
 	}
 
 	return 0;
