@@ -19,7 +19,26 @@ void print_m(int (*mat)[], int rows, int columns)
 	}
 }
 
-// TODO: create function to print first n elements of matrix
+void print_m_n(int (*mat)[], int rows, int columns, int n)
+{
+	if (n > rows * columns)
+	{
+		fprintf(stderr, "n is greater than the number of elements in the matrix\n");
+		exit(EXIT_FAILURE);
+	}
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			printf("%d\t", *(*mat + i * columns + j));
+			if (i * columns + j == n - 1)
+			{
+				return;
+			}
+		}
+		printf("\n");
+	}
+}
 
 void scan_m(int (*mat)[], int rows, int columns, char *row_prompt)
 {
@@ -66,7 +85,20 @@ void empty_dm(int (*mat)[], int rows, int columns)
 	}
 }
 
-// TODO: bool is_empty()
+bool is_empty(int (*mat)[], int rows, int columns)
+{
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			if (*(*mat + i * columns + j) != 0)
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
 
 void fill_dm(int (*mat)[], int rows, int columns, int value)
 {

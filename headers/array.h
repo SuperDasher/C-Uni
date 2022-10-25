@@ -51,7 +51,17 @@ void empty_a(int *array, int dim)
 	}
 }
 
-// TODO: bool is_empty()
+bool is_empty(int *array, int dim)
+{
+	for (int i = 0; i < dim; i++)
+	{
+		if (array[i] != 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
 
 void fill_a(int *array, int dim, int value)
 {
