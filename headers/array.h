@@ -4,6 +4,9 @@
 #include <stdbool.h>
 #include <errno.h>
 
+// TODO: make functions not pass dim as parameter
+// TODO: convert all these functions to be able to get any type of array
+
 void init_a(int **array, int *size, char *prompt)
 {
 	printf("%s", prompt);
@@ -118,5 +121,3 @@ int filter_a(filter_func_a func, int **target, int *array, int dim)
 	free(target_full);
 	return target_dim;
 }
-
-// TODO: convert all these functions to be able to get any type of array

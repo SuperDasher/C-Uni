@@ -4,6 +4,9 @@
 #include <stdbool.h>
 #include <errno.h>
 
+// TODO: make function not pass rows and columns as parameters
+// TODO: convert all these functions to be able to get any type of static matrix
+
 void print_m(int (*mat)[], int rows, int columns)
 {
 	for (int i = 0; i < rows; i++)
@@ -135,5 +138,3 @@ int filter_m(filter_func_m func, int (*target)[], int (*mat)[], int rows, int co
 	}
 	return target_dim;
 }
-
-// TODO: convert all these functions to be able to get any type of static matrix
