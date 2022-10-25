@@ -6,7 +6,7 @@
 #define N 4
 #define K 7
 
-enum move_flag
+enum movement
 {
 	BEHIND = -1,
 	NONE,
@@ -14,8 +14,8 @@ enum move_flag
 };
 struct move
 {
-	enum move_flag row;
-	enum move_flag col;
+	enum movement row;
+	enum movement col;
 };
 
 int main()
