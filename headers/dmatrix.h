@@ -160,6 +160,7 @@ void map_dm(map_func_dm func, int ***target, int **mat, int rows, int columns)
 	}
 }
 
+// TODO: make filter function not waste space
 int filter_dm(filter_func_dm func, int ***target, int **mat, int rows, int columns)
 {
 	if (!malloc_m(target, rows, columns))
@@ -174,14 +175,14 @@ int filter_dm(filter_func_dm func, int ***target, int **mat, int rows, int colum
 		{
 			if (func(mat[i][j]))
 			{
-				*target[target_dim / rows][target_dim % rows] = mat[i][j];
+				(*target)[target_dim / rows][target_dim % rows] = mat[i][j];
 				target_dim++;
 			}
 		}
 	}
 	for (int i = target_dim; i < rows * columns; i++)
 	{
-		*target[i / rows][i % rows] = 0;
+		(*target)[i / rows][i % rows] = 0;
 	}
 	return target_dim;
 }
