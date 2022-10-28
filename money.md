@@ -20,12 +20,12 @@
 ## October 2022
 
 1. started with 1880.78€
-2. money spent so far: 275.87€ [118.41€ not refunded]
+2. money spent so far: 307.87€ [118.41€ not refunded]
     1. subscriptions: 44.33€ (44.33€ total)
         - [x] 19.99€
         - [x] 20.35€
         - [x] 3.99€
-    2. extras for myself: 62.33€
+    2. extras for myself: 94.33€
     3. extras for Uni: 141.28€
         - 38€ refunded
         - 103.28€ not refunded
@@ -34,10 +34,10 @@
             1. 12.80€ train ticket (15€ back)
         - 15.13€ not refunded
             1. 15.13€ F24
-3. balance: 1657.91€
-4. gain: -34.46€
-    - -36.66€ from normal gain
+3. balance: 1625.91€
+4. gain: -66.46€
+    - -68.66€ from normal gain
     - 2.20€ from other gain
-5. start next month: 1846.32€
+5. start next month: 1814.32€
 
 ---
