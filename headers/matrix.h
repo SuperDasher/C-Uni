@@ -13,7 +13,7 @@ void print_m(int (*mat)[], int rows, int columns)
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			printf("%d\t", *(*(mat + i) + j));
+			printf("%d\t", *(*mat + i * columns + j));
 		}
 		printf("\n");
 	}
@@ -30,7 +30,7 @@ void print_m_n(int (*mat)[], int rows, int columns, int n)
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			printf("%d\t", *(*(mat + i) + j));
+			printf("%d\t", *(*mat + i * columns + j));
 			if (i * columns + j == n - 1)
 			{
 				return;
@@ -57,7 +57,7 @@ void scan_m(int (*mat)[], int rows, int columns, char *row_prompt)
 			printf(row_prompt_end, i + 1);
 			for (int j = 0; j < columns; j++)
 			{
-				scanf("%d", *(mat + i) + j);
+				scanf("%d", *mat + i * columns + j);
 			}
 		}
 		free(row_prompt_end);
@@ -68,7 +68,7 @@ void scan_m(int (*mat)[], int rows, int columns, char *row_prompt)
 		printf("%s", row_prompt_end);
 		for (int j = 0; j < columns; j++)
 		{
-			scanf("%d", *(mat + i) + j);
+			scanf("%d", *mat + i * columns + j);
 		}
 	}
 	free(row_prompt_end);
@@ -80,7 +80,7 @@ void empty_dm(int (*mat)[], int rows, int columns)
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			*(*(mat + i) + j) = 0;
+			*(*mat + i * columns + j) = 0;
 		}
 	}
 }
@@ -91,7 +91,7 @@ bool is_empty(int (*mat)[], int rows, int columns)
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			if (*(*(mat + i) + j) != 0)
+			if (*(*mat + i * columns + j) != 0)
 			{
 				return false;
 			}
@@ -106,7 +106,7 @@ void fill_dm(int (*mat)[], int rows, int columns, int value)
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			*(*(mat + i) + j) = value;
+			*(*mat + i * columns + j) = value;
 		}
 	}
 }
@@ -117,7 +117,7 @@ void randfill_dm(int (*mat)[], int rows, int columns, int min, int max)
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			*(*(mat + i) + j) = rand() % (max - min + 1) + min;
+			*(*mat + i * columns + j) = rand() % (max - min + 1) + min;
 		}
 	}
 }
@@ -133,7 +133,7 @@ int reduce_m(reduce_func_m func, int (*mat)[], int rows, int columns)
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			result = func(result, *(*(mat + i) + j));
+			result = func(result, *(*mat + i * columns + j));
 		}
 	}
 	return result;
@@ -145,7 +145,7 @@ void map_m(map_func_m func, int (*target)[], int (*mat)[], int rows, int columns
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			*(*(target + i) + j) = func(*(*(mat + i) + j));
+			*(*target + i * columns + j) = func(*(*mat + i * columns + j));
 		}
 	}
 }
@@ -157,9 +157,9 @@ int filter_m(filter_func_m func, int (*target)[], int (*mat)[], int rows, int co
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			if (func(*(*(mat + i) + j)))
+			if (func(*(*mat + i * columns + j)))
 			{
-				*(*target + target_dim) = *(*(mat + i) + j);
+				*(*target + target_dim) = *(*mat + i * columns + j);
 				target_dim++;
 			}
 		}
