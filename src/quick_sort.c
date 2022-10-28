@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#include "../headers/array.h"
+#include <array.h>
 
 int compare(const void *, const void *);
 

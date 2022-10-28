@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <errno.h>
 #include <time.h>
-#include "../headers/dmatrix.h"
+#include <dmatrix.h>
 
 int main()
 {

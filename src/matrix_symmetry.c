@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include "../headers/matrix.h"
+#include <matrix.h>
 
 #define DIM 5
 

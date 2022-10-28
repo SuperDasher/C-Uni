@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../headers/dmatrix.h"
+#include <dmatrix.h>
 
 int main()
 {

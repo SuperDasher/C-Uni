@@ -13,6 +13,15 @@ else
 	mkdir out
 fi
 
+#set the c/c++ include path to the directory headers/ if it's not already set
+if [ -z "$C_INCLUDE_PATH" ]; then
+	export C_INCLUDE_PATH=headers/
+	export CPLUS_INCLUDE_PATH=headers/
+else
+	export C_INCLUDE_PATH=$C_INCLUDE_PATH:headers/
+	export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:headers/
+fi
+
 #compile every .c file in src as .o extension and every .cpp file as .opp extension and put them in out
 for file in src/*; do
 	if [[ "${file##*.}" == c ]]; then

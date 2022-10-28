@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../headers/array.h"
+#include <array.h>
 
 #define N 10
 
