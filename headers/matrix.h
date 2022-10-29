@@ -85,7 +85,7 @@ void empty_dm(int (*mat)[], int rows, int columns)
 	}
 }
 
-bool is_empty(int (*mat)[], int rows, int columns)
+bool is_empty_m(int (*mat)[], int rows, int columns)
 {
 	for (int i = 0; i < rows; i++)
 	{

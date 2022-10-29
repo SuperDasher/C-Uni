@@ -51,7 +51,7 @@ void empty_a(int *array, int dim)
 	}
 }
 
-bool is_empty(int *array, int dim)
+bool is_empty_a(int *array, int dim)
 {
 	for (int i = 0; i < dim; i++)
 	{

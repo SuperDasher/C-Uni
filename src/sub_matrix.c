@@ -34,7 +34,7 @@ int main()
 					submatrix[k][l] = matrix[i + k][j + l];
 				}
 			}
-			if (is_empty(submatrix, SUBMATRIX_SIZE, SUBMATRIX_SIZE))
+			if (is_empty_dm(submatrix, SUBMATRIX_SIZE, SUBMATRIX_SIZE))
 			{
 				printf("Sotto-matrice vuota trovata in posizione (%d, %d)\n", i + 1, j + 1);
 				return 0;
