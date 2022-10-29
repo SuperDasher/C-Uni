@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <errno.h>
-#include <array.h>
+#include <string.h>
 
 int main()
 {
