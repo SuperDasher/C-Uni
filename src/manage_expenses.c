@@ -38,8 +38,8 @@ int main(int argc, char *argv[])
 
 /**
  * @brief Check if there are errors trying to open the file
- * 
- * @param file 
+ *
+ * @param file
  */
 void check_file(FILE *file)
 {
@@ -52,8 +52,8 @@ void check_file(FILE *file)
 
 /**
  * @brief Puts the cursor in front of the last month in money.md
- * 
- * @param file 
+ *
+ * @param file
  */
 void seek_last_month(FILE *file)
 {
@@ -87,9 +87,9 @@ void get_month_year(char month_year[MONTH_YEAR_CHARS])
 
 /**
  * @brief Get the month year string from the file
- * 
+ *
  * @param file
- * @param month_year 
+ * @param month_year
  */
 void get_file_month_year(FILE *file, char month_year[MONTH_YEAR_CHARS])
 {
