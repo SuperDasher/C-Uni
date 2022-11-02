@@ -7,12 +7,12 @@
     1. 101.95€ [7th] (Lupos tier 3 sub) (November and May)
     2. 20.35€ [9th] (Kenshi tier 1 sub) (October and April)
 - 3.99€ per month [24th] (Flame tier 1 sub)
-- +70€ per month
+- +90€ per month
 - max gain:
-    1. 66.01€ per month
-    2. 9.72€ on October + November & April + May:
-        - 45.66€ October & April
-        - -35.94€ November & May
+    1. 86.01€ per month
+    2. 49.72€ on October + November & April + May:
+        - 65.66€ October & April
+        - -15.94€ November & May
 
 ---
 ---
@@ -35,9 +35,9 @@
         - 15.13€ not refunded
             1. 15.13€ F24
 3. balance: 1621.92€
-4. gain: -70.45€
-    - -72.65€ from normal gain
+4. gain: -50.45€
+    - -52.65€ from normal gain
     - 2.20€ from other gain
-5. start next month: 1810.33€
+5. start next month: 1830.33€
 
 ---
