@@ -4,8 +4,8 @@
 #include <time.h>
 #include <errno.h>
 
-#define MIN_CHARS_BACK 445
-#define STEP_BACK 4
+#define MIN_CHARS_BACK 479
+#define STEP_BACK 3
 #define MONTH_CHARS 10
 #define YEAR_CHARS 5
 #define MONTH_YEAR_CHARS 16
@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 {
 	FILE *file = fopen("money.md", "r+");
 	check_file(file);
-	
+
 	char cur_month_year[MONTH_YEAR_CHARS];
 	get_month_year(cur_month_year);
 

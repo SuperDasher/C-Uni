@@ -38,6 +38,30 @@
 4. gain: -50.45€
     - -52.65€ from normal gain
     - 2.20€ from other gain
+    - 0€ from gift/extra gain
 5. start next month: 1830.33€
+
+---
+
+## September 2022
+
+1. started with 1830.33€
+2. money spent so far: 38€ [0€ not refunded]
+    1. subscriptions: 0€ (105.94€ total)
+        - [ ] 101.95€
+        - [ ] 3.99€
+    2. extras for myself: 0€
+    3. extras for Uni: 38€
+        - 38€ refunded
+        - 0€ not refunded
+    4. on others behalf: 0€
+        - 0€ refunded
+        - 0€ not refunded
+3. balance: 1833.92€
+4. gain: -12.35€
+    - -15.94€ from normal gain
+    - 0€ from other gain
+    - 3.59€ from gifts/extra gain
+5. start next month: 1817.98€
 
 ---
