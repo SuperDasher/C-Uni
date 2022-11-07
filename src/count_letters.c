@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <string.h>
+#include <utils/string.h>
 
 #define STR_LEN 101
 #define ALPHABET_LETTERS 26
@@ -7,8 +7,8 @@
 int main()
 {
 	char string[STR_LEN];
-	printf("inserisci una stringa con lunghezza massima 100 (newline incluso):\n");
-	fgets(string, STR_LEN - 1, stdin);
+	printf("inserisci una stringa con lunghezza massima 100:\n");
+	getstring(string, STR_LEN);
 
 	int count[ALPHABET_LETTERS] = {0};
 

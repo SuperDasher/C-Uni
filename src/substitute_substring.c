@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <string.h>
+#include <utils/string.h>
 #include <stdbool.h>
 
 #define STR_LEN 101
@@ -10,12 +10,9 @@ int main()
 	char substring[STR_LEN];
 
 	printf("Inserisci la stringa:\n");
-	fgets(string, STR_LEN, stdin);
+	getstring(string, STR_LEN);
 	printf("Inserisci la sottostringa da sostituire:\n");
-	fgets(substring, STR_LEN, stdin);
-
-	string[strlen(string) - 1] = '\0';
-	substring[strlen(substring) - 1] = '\0';
+	getstring(substring, STR_LEN);
 
 	for (int i = 0; string[i]; i++)
 	{

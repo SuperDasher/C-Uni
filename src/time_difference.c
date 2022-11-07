@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
+#include <utils/string.h>
 
 #define DATE_LEN 20
 
@@ -60,21 +60,21 @@ int main()
 
 void ask_date(struct date *date, char *prompt, char *invalid_prompt)
 {
-	char date_s[DATE_LEN] = {0};
+	char date_s[DATE_LEN] = {1};
 
 	printf("%s", prompt);
-	fgets(date_s, DATE_LEN, stdin);
+	getstring(date_s, DATE_LEN);
 
 	while (!is_valid_date(date_s, date))
 	{
 		printf("%s", invalid_prompt);
-		fgets(date_s, DATE_LEN, stdin);
+		getstring(date_s, DATE_LEN);
 	}
 }
 
 bool is_valid_date(char *date_s, struct date *date)
 {
-	if (date_s[2] != '-' || date_s[5] != '-' || date_s[10] != ' ' || date_s[13] != ':' || date_s[16] != '\n')
+	if (date_s[2] != '-' || date_s[5] != '-' || date_s[10] != ' ' || date_s[13] != ':' || date_s[16] != '\0')
 	{
 		return false;
 	}
