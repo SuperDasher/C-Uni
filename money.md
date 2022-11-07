@@ -4,8 +4,8 @@
 ## Subscriptions
 
 - 122.30€ every 6 months:
-    1. 101.95€ [7th] (Lupos tier 3 sub) (November and May)
-    2. 20.35€ [9th] (Kenshi tier 1 sub) (October and April)
+    1. 20.35€ [9th] (Kenshi tier 1 sub) (October and April)
+    2. 101.95€ [10th] (Lupos tier 3 sub) (November and May)
 - 3.99€ per month [24th] (Flame tier 1 sub)
 - +90€ per month
 - max gain:
