@@ -8,7 +8,7 @@ int main()
 {
 	char string[STR_LEN];
 	printf("inserisci una stringa con lunghezza massima 100:\n");
-	getstring(string, STR_LEN);
+	inputstring(string, STR_LEN);
 
 	int count[ALPHABET_LETTERS] = {0};
 

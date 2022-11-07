@@ -48,12 +48,12 @@ int main()
 	char *minutes = difference.minutes == 1 ? "minuto" : "minuti";
 
 	printf("Grande Giove! Hai viaggiato nel %s di %d %s, %d %s, %d %s, %d %s e %d %s!\n",
-		time_direction,
-		difference.year, year,
-		difference.month, month,
-		difference.day, day,
-		difference.hours, hours,
-		difference.minutes, minutes);
+		   time_direction,
+		   difference.year, year,
+		   difference.month, month,
+		   difference.day, day,
+		   difference.hours, hours,
+		   difference.minutes, minutes);
 
 	return 0;
 }
@@ -63,12 +63,12 @@ void ask_date(struct date *date, char *prompt, char *invalid_prompt)
 	char date_s[DATE_LEN] = {1};
 
 	printf("%s", prompt);
-	getstring(date_s, DATE_LEN);
+	inputstring(date_s, DATE_LEN);
 
 	while (!is_valid_date(date_s, date))
 	{
 		printf("%s", invalid_prompt);
-		getstring(date_s, DATE_LEN);
+		inputstring(date_s, DATE_LEN);
 	}
 }
 
@@ -182,10 +182,10 @@ bool is_leap_year(int year)
 bool are_equal_dates(struct date date1, struct date date2)
 {
 	return date1.year == date2.year &&
-		date1.month == date2.month &&
-		date1.day == date2.day &&
-		date1.hours == date2.hours &&
-		date1.minutes == date2.minutes;
+		   date1.month == date2.month &&
+		   date1.day == date2.day &&
+		   date1.hours == date2.hours &&
+		   date1.minutes == date2.minutes;
 }
 
 bool are_sorted_dates(struct date date1, struct date date2)

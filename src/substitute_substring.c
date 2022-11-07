@@ -10,9 +10,9 @@ int main()
 	char substring[STR_LEN];
 
 	printf("Inserisci la stringa:\n");
-	getstring(string, STR_LEN);
+	inputstring(string, STR_LEN);
 	printf("Inserisci la sottostringa da sostituire:\n");
-	getstring(substring, STR_LEN);
+	inputstring(substring, STR_LEN);
 
 	for (int i = 0; string[i]; i++)
 	{

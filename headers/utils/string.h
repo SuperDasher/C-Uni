@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void getstring(char str[], int len)
+void inputstring(char str[], int len)
 {
 	fflush(stdin);
 	fgets(str, len, stdin);
@@ -11,7 +11,7 @@ void getstring(char str[], int len)
 		str[strlen(str) - 1] = '\0';
 }
 
-void getstring_dynamic(char **str, int len)
+void inputstring_dynamic(char **str, int len)
 {
 	fflush(stdin);
 	*str = (char *)malloc(len * sizeof(char));
