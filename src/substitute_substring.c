@@ -16,23 +16,22 @@ int main()
 
 	for (int i = 0; string[i]; i++)
 	{
-		if (string[i] == substring[0])
+		if (string[i] != substring[0])
+			continue;
+		bool found = true;
+		for (int j = 0; substring[j]; j++)
 		{
-			bool found = true;
-			for (int j = 0; substring[j] != '\0'; j++)
+			if (string[i + j] != substring[j])
 			{
-				if (string[i + j] != substring[j])
-				{
-					found = false;
-					break;
-				}
+				found = false;
+				break;
 			}
-			if (found)
+		}
+		if (found)
+		{
+			for (int j = 0; substring[j]; j++)
 			{
-				for (int j = 0; substring[j]; j++)
-				{
-					string[i + j] = '*';
-				}
+				string[i + j] = '*';
 			}
 		}
 	}
