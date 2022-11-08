@@ -4,9 +4,6 @@
 #include <stdbool.h>
 #include <errno.h>
 
-// TODO: make functions not pass rows and columns as parameters & deal with matrices with different amount of columns per row
-// TODO: convert all these functions to be able to get any type of matrix
-
 bool malloc_m(int ***mat, int rows, int columns)
 {
 	*mat = (int **)malloc(rows * sizeof(int *));
@@ -188,7 +185,6 @@ void map_dm(map_func_dm func, int ***target, int **mat, int rows, int columns)
 	}
 }
 
-// TODO: make filter function not waste space
 int filter_dm(filter_func_dm func, int ***target, int **mat, int rows, int columns)
 {
 	if (!malloc_m(target, rows, columns))
