@@ -1,5 +1,5 @@
 /* TODO: reminder: finish all the assignments on WeBeep
-	remaining ones: 4 - 5 - 6 (this one) - 7
+	remaining ones: 5 - 6 (this one) - 7
 */
 #include <stdio.h>
 
