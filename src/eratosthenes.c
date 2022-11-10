@@ -2,13 +2,11 @@
 #include <stdbool.h>
 #include <math.h>
 
-#define N 100
+#define N 1000000
 
 int main()
 {
-	bool prime[N + 1];
-	for (int i = 0; i <= N; i++)
-		prime[i] = true;
+	bool prime[N + 1] = {true};
 
 	for (int i = 2; i <= sqrt(N); i++)
 	{
