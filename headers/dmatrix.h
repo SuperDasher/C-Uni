@@ -106,7 +106,7 @@ void scan_dm(int **mat, int rows, int columns, char *row_prompt)
 	free(row_prompt_end);
 }
 
-void empty_m(int **mat, int rows, int columns)
+void empty_dm(int **mat, int rows, int columns)
 {
 	for (int i = 0; i < rows; i++)
 	{
@@ -130,7 +130,7 @@ bool is_empty_dm(int **mat, int rows, int columns)
 	return true;
 }
 
-void fill_m(int **mat, int rows, int columns, int value)
+void fill_dm(int **mat, int rows, int columns, int value)
 {
 	for (int i = 0; i < rows; i++)
 	{
@@ -141,7 +141,7 @@ void fill_m(int **mat, int rows, int columns, int value)
 	}
 }
 
-void randfill_m(int **mat, int rows, int columns, int min, int max)
+void randfill_dm(int **mat, int rows, int columns, int min, int max)
 {
 	for (int i = 0; i < rows; i++)
 	{
