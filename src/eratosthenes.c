@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <math.h>
 
-#define N 100
+#define N 1000000
 
 int main()
 {
