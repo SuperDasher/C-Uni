@@ -15,7 +15,6 @@ struct date
 };
 void ask_date(struct date *date, char *prompt, char *invalid_prompt);
 bool is_valid_date(char *, struct date *);
-bool is_number(char *);
 bool is_leap_year(int);
 bool are_equal_dates(struct date, struct date);
 bool are_sorted_dates(struct date, struct date);
@@ -94,7 +93,7 @@ bool is_valid_date(char *date_s, struct date *date)
 
 	dt.day = atoi(day_s);
 	dt.month = atoi(month_s);
-	if (!is_number(year_s) || !is_number(hours_s) || !is_number(minutes_s))
+	if (!str_isuint(year_s) || !str_isuint(hours_s) || !str_isuint(minutes_s))
 	{
 		return false;
 	}
@@ -151,27 +150,6 @@ bool is_valid_date(char *date_s, struct date *date)
 		*date = dt;
 		return true;
 	}
-}
-
-bool is_number(char *str)
-{
-	int len = strlen(str);
-	if (len == 1)
-	{
-		return str[0] >= '0' && str[0] <= '9';
-	}
-	if ((str[0] < '0' || str[0] > '9') && str[0] != '-')
-	{
-		return false;
-	}
-	for (int i = 1; i < len; i++)
-	{
-		if (str[0] < '0' || str[0] > '9')
-		{
-			return false;
-		}
-	}
-	return true;
 }
 
 bool is_leap_year(int year)
