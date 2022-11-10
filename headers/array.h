@@ -76,6 +76,14 @@ void randfill_a(int *array, int dim, int min, int max)
 	}
 }
 
+void succfill_a(int *array, int dim)
+{
+	for (int i = 0; i < dim; i++)
+	{
+		array[i] = i + 1;
+	}
+}
+
 typedef int (*reduce_func_a)(int, int);
 typedef int (*map_func_a)(int);
 typedef bool (*filter_func_a)(int);

@@ -119,6 +119,18 @@ void randfill_m(int (*mat)[], int rows, int columns, int min, int max)
 	}
 }
 
+void succfill_m(int (*mat)[], int rows, int columns)
+{
+	int value = 1;
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			*(*mat + i * columns + j) = value++;
+		}
+	}
+}
+
 typedef int (*reduce_func_m)(int, int);
 typedef int (*map_func_m)(int);
 typedef bool (*filter_func_m)(int);
