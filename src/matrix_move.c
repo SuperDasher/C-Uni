@@ -1,6 +1,3 @@
-/* TODO: reminder: finish all the assignments on WeBeep
-	remaining ones: 6 (this one) - 7
-*/
 #include <stdio.h>
 #include <matrix.h>
 
