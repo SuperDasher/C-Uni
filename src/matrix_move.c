@@ -18,16 +18,16 @@ struct move
 
 int main()
 {
-	int matrix[N][N] = { 0 };
-	succfill_m(matrix, N, N);
+	int m[N][N] = { 0 };
+	succfill_m(m, N, N);
 	struct move a[K];
 
-	print_m(matrix, N, N);
+	print_m(m, N, N);
 	printf("\n");
 	printf("parti dalla cella con indici (0, 0)\nalla fine verra' calcola la somma di tutti i numeri incontrati\nle mosse da fare sono %d:\ninserisci -1 per un movimento all'indietro, 0 per non muoversi, 1 per andare avanti, rispettivamente per riga e colonna\n\n", K);
 
 	int row = 0, col = 0;
-	int sum = matrix[row][col];
+	int sum = m[row][col];
 
 	for (int i = 0; i < K; i++)
 	{
@@ -46,7 +46,7 @@ int main()
 			fprintf(stderr, "errore: movimento non valido\n");
 			exit(EXIT_FAILURE);
 		}
-		sum += matrix[row][col];
+		sum += m[row][col];
 	}
 
 	printf("la somma degli indici visitati e' %d\n", sum);
