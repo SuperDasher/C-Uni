@@ -13,7 +13,7 @@ struct date
 	int hours;
 	int minutes;
 };
-void ask_date(struct date *date, char *prompt, char *invalid_prompt);
+void ask_date(struct date *, char *, char *);
 bool is_valid_date(char *, struct date *);
 bool is_leap_year(int);
 bool are_equal_dates(struct date, struct date);
