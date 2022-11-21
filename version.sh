@@ -81,3 +81,6 @@ case $cpp_version in
 	fi
 	;;
 esac
+
+read -p "Press any key to continue..."
+clear

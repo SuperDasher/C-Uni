@@ -13,11 +13,18 @@ else
 	mkdir out
 fi
 
+c_version=${1:+-std=c$1}
+cpp_version=${2:+-std=c++$2}
+
 #compile every .c file in src as .o extension and every .cpp file as .opp extension and put them in out
 for file in src/*; do
 	if [[ "${file##*.}" == c ]]; then
-		gcc -Iheaders/ -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" -o "out/$(basename -- "$file" .c).o"
+		gcc -Iheaders/ $c_version -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" -o "out/$(basename -- "$file" .c).o"
 	elif [[ "${file##*.}" == cpp ]]; then
-		g++ -Iheaders/ -std=c++2a -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" -o "out/$(basename -- "$file" .cpp).opp"
+		g++ -Iheaders/ $cpp_version -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" -o "out/$(basename -- "$file" .cpp).opp"
 	fi
 done
+
+echo "Compilation finished"
+read -p "Press any key to continue..."
+clear
