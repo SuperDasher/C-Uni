@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <utils/string.h>
 #include <time.h>
 
 #define RESULTS 11
@@ -16,14 +17,14 @@ int main(int argc, char *argv[])
 	}
 
 	int throws = atoi(argv[1]);
-	if (throws < 1)
+	if (throws < 1 || !str_isuint(argv[1]))
 	{
 		fprintf(stderr, "number of throws must be a valid number greater than 0\n");
 		exit(EXIT_FAILURE);
 	}
 
 	int count[RESULTS] = {0};
-	for(int i = 0; i < throws; i++)
+	for (int i = 0; i < (throws > 0 && str_isuint(argv[1])) ? throws : 0; i++)
 	{
 		int dice1 = rand() % DICE_SIDES + 1;
 		int dice2 = rand() % DICE_SIDES + 1;
