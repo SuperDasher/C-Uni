@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 	printf("\nsomma\toccorrenze\t%% aspettativa\t%% effettiva\n");
 	for (int i = 0; i < RESULTS; i++)
 	{
-		printf("%5d\t%10d\t%10.2f%%\t%8.2f%%\n", i + 2, count[i], (float)expected[i] * 100 / (DICE_SIDES * DICE_SIDES), (float)count[i] * 100 / throws);
+		printf("%5d\t%10d\t%10.2f%%\t%8.2f%%\n", i + 2, count[i], (float)expected[i] * 100 / (DICE_SIDES * DICE_SIDES), (float)count[i] * 100 / (throws == 0) ? 1 : throws);
 	}
 
 	return 0;
