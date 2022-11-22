@@ -25,6 +25,6 @@ for file in src/*; do
 	fi
 done
 
-echo "Compilation finished"
-read -p "Press any key to continue..."
+printf "\nall files compiled.\n"
+read -n 1 -s -r -p "Press any key to continue..."
 clear

@@ -82,5 +82,5 @@ case $cpp_version in
 	;;
 esac
 
-read -p "Press any key to continue..."
+read -n 1 -s -r -p "Press any key to continue..."
 clear
