@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <dmatrix.h>
+#include <custom/datastruct.h>
 
 #define SUBMATRIX_SIZE 3
 

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <utils/string.h>
+#include <custom/string.h>
 #include <time.h>
 
 #define RESULTS 11

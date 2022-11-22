@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <array.h>
+#include <custom/datastruct.h>
 
 #define N 10
 

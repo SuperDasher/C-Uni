@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#include <array.h>
+#include <custom/datastruct.h>
 
 void quick_sort(int *, int, int);
 int partition(int *, int, int);

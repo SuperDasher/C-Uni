@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <utils/string.h>
+#include <custom/string.h>
 
 #define STR_LEN 100
 

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <utils/string.h>
+#include <custom/string.h>
 
 #define DATE_LEN 20
 
@@ -47,12 +47,12 @@ int main()
 	char *minutes = difference.minutes == 1 ? "minuto" : "minuti";
 
 	printf("Grande Giove! Hai viaggiato nel %s di %d %s, %d %s, %d %s, %d %s e %d %s!\n",
-		time_direction,
-		difference.year, year,
-		difference.month, month,
-		difference.day, day,
-		difference.hours, hours,
-		difference.minutes, minutes);
+		   time_direction,
+		   difference.year, year,
+		   difference.month, month,
+		   difference.day, day,
+		   difference.hours, hours,
+		   difference.minutes, minutes);
 
 	return 0;
 }
@@ -160,10 +160,10 @@ bool is_leap_year(int year)
 bool are_equal_dates(struct date date1, struct date date2)
 {
 	return date1.year == date2.year &&
-		date1.month == date2.month &&
-		date1.day == date2.day &&
-		date1.hours == date2.hours &&
-		date1.minutes == date2.minutes;
+		   date1.month == date2.month &&
+		   date1.day == date2.day &&
+		   date1.hours == date2.hours &&
+		   date1.minutes == date2.minutes;
 }
 
 bool are_sorted_dates(struct date date1, struct date date2)

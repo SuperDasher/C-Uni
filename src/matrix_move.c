@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <matrix.h>
+#include <custom/datastruct.h>
 
 #define N 3
 #define K 5
@@ -18,7 +18,7 @@ struct move
 
 int main()
 {
-	int m[N][N] = { 0 };
+	int m[N][N] = {0};
 	succfill_m(m, N, N);
 	struct move a[K];
 
@@ -50,6 +50,6 @@ int main()
 	}
 
 	printf("la somma degli indici visitati e' %d\n", sum);
-	
+
 	return 0;
 }

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <dmatrix.h>
+#include <custom/datastruct.h>
 
 int main()
 {

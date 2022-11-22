@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <matrix.h>
+#include <custom/datastruct.h>
 
 #define DIM 5
 

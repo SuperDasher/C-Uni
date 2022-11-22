@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <errno.h>
-#include <utils/intsort.h>
-#include <array.h>
+#include <custom/intsort.h>
+#include <custom/datastruct.h>
 
 #define ARRAY_LEN 10
 
