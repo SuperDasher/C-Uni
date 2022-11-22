@@ -1,3 +1,6 @@
+#ifndef MATRIX_H
+#define MATRIX_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -179,3 +182,5 @@ int filter_m(__filter_func_m__ func, int (*target)[], int (*mat)[], int rows, in
 	}
 	return target_dim;
 }
+
+#endif /* MATRIX_H */

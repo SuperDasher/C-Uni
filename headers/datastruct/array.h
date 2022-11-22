@@ -1,3 +1,6 @@
+#ifndef ARRAY_H
+#define ARRAY_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -136,3 +139,5 @@ int filter_a(__filter_func_a__ func, int **target, int *array, int dim)
 	free(target_full);
 	return target_dim;
 }
+
+#endif /* ARRAY_H */

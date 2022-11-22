@@ -1,3 +1,6 @@
+#ifndef INTSORT_H
+#define INTSORT_H
+
 #include <intsort/bubble.h>
 #include <intsort/quick.h>
 
@@ -12,3 +15,5 @@ bool is_sorted(int *array, int length)
 	}
 	return true;
 }
+
+#endif /* INTSORT_H */

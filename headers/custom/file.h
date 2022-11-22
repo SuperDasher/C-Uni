@@ -1,3 +1,6 @@
+#ifndef FILE_H
+#define FILE_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,3 +14,5 @@ long file_size(FILE *file)
 	fseek(file, current_position, SEEK_SET);
 	return size;
 }
+
+#endif /* FILE_H */

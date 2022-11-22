@@ -1,3 +1,6 @@
+#ifndef DMATRIX_H
+#define DMATRIX_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -222,3 +225,5 @@ int filter_dm(__filter_func_dm__ func, int ***target, int **mat, int rows, int c
 	}
 	return target_dim;
 }
+
+#endif /* MATRIX_H */

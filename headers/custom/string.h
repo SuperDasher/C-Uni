@@ -1,3 +1,6 @@
+#ifndef CUSTOM_STRING_H
+#define CUSTOM_STRING_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -113,3 +116,5 @@ bool str_isint(char *str)
 {
 	return str_isuint(str) || str_isnegint(str);
 }
+
+#endif /* CUSTOM_STRING_H */

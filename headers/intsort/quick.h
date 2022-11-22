@@ -1,3 +1,6 @@
+#ifndef QUICK_H
+#define QUICK_H
+
 #include <custom/swap.h>
 
 static int partition(int *array, int left, int right)
@@ -25,3 +28,5 @@ void quick_sort(int *array, int left, int right)
 		quick_sort(array, pivot + 1, right);
 	}
 }
+
+#endif /* QUICK_H */
