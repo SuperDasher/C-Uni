@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <errno.h>
-#include <sort.h>
+#include <utils/intsort.h>
 #include <array.h>
 
 #define ARRAY_LEN 10
