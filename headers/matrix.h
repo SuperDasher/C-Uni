@@ -131,11 +131,11 @@ void succfill_m(int (*mat)[], int rows, int columns)
 	}
 }
 
-typedef int (*reduce_func_m)(int, int);
-typedef int (*map_func_m)(int);
-typedef bool (*filter_func_m)(int);
+typedef int (*__reduce_func_m__)(int, int);
+typedef int (*__map_func_m__)(int);
+typedef bool (*__filter_func_m__)(int);
 
-int reduce_m(reduce_func_m func, int (*mat)[], int rows, int columns)
+int reduce_m(__reduce_func_m__ func, int (*mat)[], int rows, int columns)
 {
 	int result = *(*mat + 0 * columns + 0);
 	for (int i = 0; i < rows; i++)
@@ -148,7 +148,7 @@ int reduce_m(reduce_func_m func, int (*mat)[], int rows, int columns)
 	return result;
 }
 
-void map_m(map_func_m func, int (*target)[], int (*mat)[], int rows, int columns)
+void map_m(__map_func_m__ func, int (*target)[], int (*mat)[], int rows, int columns)
 {
 	for (int i = 0; i < rows; i++)
 	{
@@ -159,7 +159,7 @@ void map_m(map_func_m func, int (*target)[], int (*mat)[], int rows, int columns
 	}
 }
 
-int filter_m(filter_func_m func, int (*target)[], int (*mat)[], int rows, int columns)
+int filter_m(__filter_func_m__ func, int (*target)[], int (*mat)[], int rows, int columns)
 {
 	int target_dim = 0;
 	for (int i = 0; i < rows; i++)

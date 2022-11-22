@@ -164,11 +164,11 @@ void succfill_dm(int **mat, int rows, int columns)
 	}
 }
 
-typedef int (*reduce_func_dm)(int, int);
-typedef int (*map_func_dm)(int);
-typedef bool (*filter_func_dm)(int);
+typedef int (*__reduce_func_dm__)(int, int);
+typedef int (*__map_func_dm__)(int);
+typedef bool (*__filter_func_dm__)(int);
 
-int reduce_dm(reduce_func_dm func, int **mat, int rows, int columns)
+int reduce_dm(__reduce_func_dm__ func, int **mat, int rows, int columns)
 {
 	int result = 0;
 	for (int i = 0; i < rows; i++)
@@ -181,7 +181,7 @@ int reduce_dm(reduce_func_dm func, int **mat, int rows, int columns)
 	return result;
 }
 
-void map_dm(map_func_dm func, int ***target, int **mat, int rows, int columns)
+void map_dm(__map_func_dm__ func, int ***target, int **mat, int rows, int columns)
 {
 	if (!malloc_m(target, rows, columns))
 	{
@@ -197,7 +197,7 @@ void map_dm(map_func_dm func, int ***target, int **mat, int rows, int columns)
 	}
 }
 
-int filter_dm(filter_func_dm func, int ***target, int **mat, int rows, int columns)
+int filter_dm(__filter_func_dm__ func, int ***target, int **mat, int rows, int columns)
 {
 	if (!malloc_m(target, rows, columns))
 	{

@@ -84,11 +84,11 @@ void succfill_a(int *array, int dim)
 	}
 }
 
-typedef int (*reduce_func_a)(int, int);
-typedef int (*map_func_a)(int);
-typedef bool (*filter_func_a)(int);
+typedef int (*__reduce_func_a__)(int, int);
+typedef int (*__map_func_a__)(int);
+typedef bool (*__filter_func_a__)(int);
 
-int reduce_a(reduce_func_a func, int *array, int dim)
+int reduce_a(__reduce_func_a__ func, int *array, int dim)
 {
 	int result = array[0];
 	for (int i = 1; i < dim; i++)
@@ -98,7 +98,7 @@ int reduce_a(reduce_func_a func, int *array, int dim)
 	return result;
 }
 
-void map_a(map_func_a func, int *target, int *array, int dim)
+void map_a(__map_func_a__ func, int *target, int *array, int dim)
 {
 	for (int i = 0; i < dim; i++)
 	{
@@ -106,7 +106,7 @@ void map_a(map_func_a func, int *target, int *array, int dim)
 	}
 }
 
-int filter_a(filter_func_a func, int **target, int *array, int dim)
+int filter_a(__filter_func_a__ func, int **target, int *array, int dim)
 {
 	int *target_full = (int *)malloc(dim * sizeof(int));
 	if (target_full == NULL)
