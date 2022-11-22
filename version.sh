@@ -21,7 +21,6 @@ else
 fi
 
 #check the C standard version used
-
 case $c_version in
 199409L)
 	echo "C version: C90"
