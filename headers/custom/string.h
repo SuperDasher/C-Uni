@@ -54,6 +54,8 @@ void str_toupper(char *str)
 bool str_isalpha(char *str)
 {
 	int len = strlen(str);
+	if (len == 0)
+		return false;
 	for (int i = 0; i < len; i++)
 	{
 		if ((str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z'))
@@ -65,6 +67,8 @@ bool str_isalpha(char *str)
 bool str_isalpha_lower(char *str)
 {
 	int len = strlen(str);
+	if (len == 0)
+		return false;
 	for (int i = 0; i < len; i++)
 	{
 		if (str[i] < 'a' || str[i] > 'z')
@@ -76,6 +80,8 @@ bool str_isalpha_lower(char *str)
 bool str_isalpha_upper(char *str)
 {
 	int len = strlen(str);
+	if (len == 0)
+		return false;
 	for (int i = 0; i < len; i++)
 	{
 		if (str[i] < 'A' || str[i] > 'Z')
@@ -100,7 +106,7 @@ bool str_isuint(char *str)
 bool str_isnegint(char *str)
 {
 	int len = strlen(str);
-	if (len == 0)
+	if (len < 2)
 		return false;
 	if (str[0] != '-')
 		return false;
