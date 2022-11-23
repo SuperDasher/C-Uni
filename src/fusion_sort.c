@@ -10,8 +10,8 @@ int main()
 {
 	int array1[N1];
 	int array2[N2];
-	scan_a(array1, N1, "inserisci i valori del primo array");
-	scan_a(array2, N2, "inserisci i valori del secondo array");
+	scan_a(array1, N1, "inserisci i valori del primo array (%d elementi)");
+	scan_a(array2, N2, "inserisci i valori del secondo array (%d elementi)");
 	bubble_sort(array1, N1);
 	bubble_sort(array2, N2);
 
