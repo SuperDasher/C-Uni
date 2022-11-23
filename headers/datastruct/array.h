@@ -21,11 +21,23 @@ void init_a(int **array, int *size, char *prompt)
 
 void scan_a(int *array, int dim, char *prompt)
 {
-	printf("%s\n", prompt);
+	char *prompt_newline = (char *)malloc(strlen(prompt) + 2);
+	if (prompt_newline == NULL)
+	{
+		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		exit(errno);
+	}
+	strncpy(prompt_newline, prompt, strlen(prompt) + 1);
+	strcat(prompt_newline, "\n");
+	if (strstr(prompt, "%d"))
+		printf(prompt, dim);
+	else
+		printf("%s", prompt_newline);
 	for (int i = 0; i < dim; i++)
 	{
 		scanf("%d", &array[i]);
 	}
+	free(prompt_newline);
 }
 
 void print_a(int *array, int dim)
