@@ -40,7 +40,7 @@ void print_a(int *array, int dim)
 	{
 		printf("%d, ", array[i]);
 	}
-	printf("%d]", array[dim - 1]);
+	printf("%d]\n", array[dim - 1]);
 }
 
 void empty_a(int *array, int dim)
