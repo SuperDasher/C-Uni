@@ -15,4 +15,6 @@ long file_size(FILE *file)
 	return size;
 }
 
+// TODO: Add more functions here
+
 #endif /* FILE_H */
