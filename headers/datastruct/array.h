@@ -29,8 +29,8 @@ void scan_a(int *array, int dim, char *prompt)
 	}
 	strncpy(prompt_newline, prompt, strlen(prompt) + 1);
 	strcat(prompt_newline, "\n");
-	if (strstr(prompt, "%d"))
-		printf(prompt, dim);
+	if (strstr(prompt_newline, "%d"))
+		printf(prompt_newline, dim);
 	else
 		printf("%s", prompt_newline);
 	for (int i = 0; i < dim; i++)
