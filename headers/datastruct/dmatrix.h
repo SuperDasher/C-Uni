@@ -77,36 +77,36 @@ void print_dm_n(int **mat, int rows, int columns, int n)
 
 void scan_dm(int **mat, int rows, int columns, char *row_prompt)
 {
-	char *row_prompt_end = (char *)malloc((strlen(row_prompt) + 2) * sizeof(char));
-	if (row_prompt_end == NULL)
+	char *row_prompt_newline = (char *)malloc((strlen(row_prompt) + 2) * sizeof(char));
+	if (row_prompt_newline == NULL)
 	{
 		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
 		exit(errno);
 	}
-	strncpy(row_prompt_end, row_prompt, strlen(row_prompt) + 1);
-	strcat(row_prompt_end, "\n");
-	if (strstr(row_prompt, "%d") != NULL)
+	strncpy(row_prompt_newline, row_prompt, strlen(row_prompt) + 1);
+	strcat(row_prompt_newline, "\n");
+	if (strstr(row_prompt, "%d"))
 	{
 		for (int i = 0; i < rows; i++)
 		{
-			printf(row_prompt_end, i + 1);
+			printf(row_prompt_newline, i + 1);
 			for (int j = 0; j < columns; j++)
 			{
 				scanf("%d", &mat[i][j]);
 			}
 		}
-		free(row_prompt_end);
+		free(row_prompt_newline);
 		return;
 	}
 	for (int i = 0; i < rows; i++)
 	{
-		printf("%s", row_prompt_end);
+		printf("%s", row_prompt_newline);
 		for (int j = 0; j < columns; j++)
 		{
 			scanf("%d", &mat[i][j]);
 		}
 	}
-	free(row_prompt_end);
+	free(row_prompt_newline);
 }
 
 void empty_dm(int **mat, int rows, int columns)
