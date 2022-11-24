@@ -14,12 +14,19 @@ else
 fi
 
 #compile every .c file in src as .o extension and every .cpp file as .opp extension and put them in out
+current_file=0
+file_tally=0
+for file in src/*; do
+	((file_tally++))
+done
 for file in src/*; do
 	if [[ "${file##*.}" == c ]]; then
 		gcc -Iheaders/ ${1:+-std=c$1} -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" -o "out/$(basename -- "$file" .c).o"
 	elif [[ "${file##*.}" == cpp ]]; then
 		g++ -Iheaders/ ${2:+-std=c++$2} -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" -o "out/$(basename -- "$file" .cpp).opp"
 	fi
+	((current_file++))
+	echo "Compiled $(basename -- "$file") ($current_file/$file_tally)"
 done
 
 printf "\nall files compiled.\n"
