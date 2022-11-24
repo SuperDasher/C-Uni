@@ -69,7 +69,10 @@ void print_dm_n(int **mat, int rows, int columns, int n)
 		{
 			printf("%d\t", mat[i][j]);
 			if (--n == 0)
+			{
+				printf("\n");
 				return;
+			}
 		}
 		printf("\n");
 	}

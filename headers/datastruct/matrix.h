@@ -31,8 +31,9 @@ void print_m_n(int (*mat)[], int rows, int columns, int n)
 		for (int j = 0; j < columns; j++)
 		{
 			printf("%d\t", *(*mat + i * columns + j));
-			if (i * columns + j == n - 1)
+			if (--n == 0)
 			{
+				printf("\n");
 				return;
 			}
 		}

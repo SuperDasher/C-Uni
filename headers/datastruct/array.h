@@ -55,6 +55,21 @@ void print_a(int *array, int dim)
 	printf("%d]\n", array[dim - 1]);
 }
 
+void print_a_n(int *array, int n)
+{
+	if (n < 2)
+	{
+		printf("[%d]", array[0]);
+		return;
+	}
+	printf("[%d, ", array[0]);
+	for (int i = 1; i < n - 1; i++)
+	{
+		printf("%d, ", array[i]);
+	}
+	printf("%d]\n", array[n - 1]);
+}
+
 void empty_a(int *array, int dim)
 {
 	for (int i = 0; i < dim; i++)
