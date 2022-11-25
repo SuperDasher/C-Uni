@@ -46,7 +46,7 @@ done
 for file in "${files[@]}"; do
 	if ! echo "${src_files[@]}" | grep -q -o "$file"; then
 		((current_file++))
-		echo "File $(basename -- "$file") does not exist ($current_file/$file_tally)"
+		echo -e "File $(basename -- "$file") does not exist ($current_file/$file_tally)"
 		continue
 	fi
 
