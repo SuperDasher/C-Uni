@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Usage: %s <first_number> <second_number>\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}
-	if (!is_number(argv[1]) || !is_number(argv[2]))
+	if (!str_isuint(argv[1]) || !str_isuint(argv[2]))
 	{
 		fprintf(stderr, "Error: Invalid number(s) provided.\n");
 		exit(EXIT_FAILURE);
