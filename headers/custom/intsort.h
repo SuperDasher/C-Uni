@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 #ifndef INTSORT_H
 #define INTSORT_H
 
@@ -5,25 +7,8 @@
 #include <intsort/quick.h>
 #include <custom/swap.h>
 
-bool is_sorted(int *array, int length)
-{
-	for (int i = 0; i < length - 1; i++)
-	{
-		if (array[i] > array[i + 1])
-		{
-			return false;
-		}
-	}
-	return true;
-}
+bool is_sorted(int *array, int length);
 
-void shuffle(int *array, int length)
-{
-	for (int i = 0; i < length; i++)
-	{
-		int j = rand() % length;
-		swap(&array[i], &array[j]);
-	}
-}
+void shuffle(int *array, int length);
 
 #endif /* INTSORT_H */

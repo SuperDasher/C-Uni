@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <custom/datastruct.h>
 
 #define N 50

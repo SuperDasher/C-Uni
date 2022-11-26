@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <custom/string.h>
 
 #define STR_LEN 101

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <custom/datastruct.h>
 
 #define N 3

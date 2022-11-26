@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <custom/string.h>
 #include <custom/datastruct.h>
 

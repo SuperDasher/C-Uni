@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
-int mcd(int, int);
-int mcm(int, int);
+#include <custom/math.h>
 
 int main()
 {
@@ -38,22 +36,4 @@ int main()
 	printf("\n");
 
 	return 0;
-}
-
-int mcd(int a, int b)
-{
-	a = abs(a);
-	b = abs(b);
-	while (a != b)
-	{
-		(a > b) ? (a -= b) : (b -= a);
-	}
-	return a;
-}
-
-int mcm(int a, int b)
-{
-	a = abs(a);
-	b = abs(b);
-	return a * b / mcd(a, b);
 }

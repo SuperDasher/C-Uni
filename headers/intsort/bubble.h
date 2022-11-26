@@ -1,20 +1,6 @@
 #ifndef BUBBLE_H
 #define BUBBLE_H
 
-#include <custom/swap.h>
-
-void bubble_sort(int *array, int length)
-{
-	for (int len = length - 1; len > 0; len--)
-	{
-		for (int i = 0; i < len; i++)
-		{
-			if (array[i] > array[i + 1])
-			{
-				swap(&array[i], &array[i + 1]);
-			}
-		}
-	}
-}
+void bubble_sort(int *array, int length);
 
 #endif /* BUBBLE_H */

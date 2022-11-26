@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <custom/math.h>
 #include <custom/string.h>
 

@@ -3,10 +3,8 @@
 #include <string.h>
 #include <errno.h>
 #include <custom/datastruct.h>
+#include <custom/intsort.h>
 
-void quick_sort(int *, int, int);
-int partition(int *, int, int);
-void swap(int *, int *);
 
 int main(int argc, char *argv[])
 {
@@ -41,37 +39,4 @@ int main(int argc, char *argv[])
 	free(numbers);
 
 	return 0;
-}
-
-void quick_sort(int *array, int left, int right)
-{
-	if (left < right)
-	{
-		int pivot = partition(array, left, right);
-		quick_sort(array, left, pivot - 1);
-		quick_sort(array, pivot + 1, right);
-	}
-}
-
-int partition(int *array, int left, int right)
-{
-	int pivot = array[right];
-	int i = left - 1;
-	for (int j = left; j < right; j++)
-	{
-		if (array[j] < pivot)
-		{
-			i++;
-			swap(&array[i], &array[j]);
-		}
-	}
-	swap(&array[i + 1], &array[right]);
-	return i + 1;
-}
-
-void swap(int *a, int *b)
-{
-	int temp = *a;
-	*a = *b;
-	*b = temp;
 }
