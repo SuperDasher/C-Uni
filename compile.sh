@@ -27,7 +27,6 @@ fi
 src_files=()
 mapfile -t src_files < <(find src/ -name "*.c" -o -name "*.cpp")
 
-#if no files were passed as parameters, all the files in out get deleted
 #the files array contains all the files that will be compiled
 if [ $version_params -eq $# ]; then
 	if [ -d out ]; then
@@ -42,6 +41,14 @@ else
 		files[$i]="src/${files[$i]}"
 	done
 fi
+
+#delete the old executable
+for i in "${files[@]}"; do
+	if [ -f "out/${i:4:-2}.o" ]; then
+		rm "out/${i:4:-2}.o"
+	fi
+done
+find out/ -type d -empty -delete
 
 #declares variables to keep track of the compiled files in real time
 current_file=0
@@ -72,19 +79,32 @@ for file in "${files[@]}"; do
 		g++ -Iheaders/ ${cpp_version:+-std=c++$cpp_version} -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" "${definition_cpp_files[@]}" -o "out/${file:4:-4}.opp"
 	fi
 	((current_file++))
-	
+
 	#if the current file is not present in out, print an error message
+	#the array error_files contains all the files that failed to compile
+
 	if [ ! -f "out/${file:4:-2}.o" ] && [ ! -f "out/${file:4:-4}.opp" ]; then
 		echo -e "!!==> File $(basename -- "$file") failed to compile ($current_file/$file_tally)"
+		error_files+=("$file")
 	else
 		echo "==> Compiled $(basename -- "$file") ($current_file/$file_tally)"
 	fi
 done
 
-printf "\n"
-printf "==========================\n"
-printf "=== Operation complete ===\n"
-printf "==========================\n"
-printf "\n"
+echo ""
+echo "=========================="
+echo "=== Operation complete ==="
+echo "=========================="
+echo ""
+
+#if error_files is not empty, list all the files that failed to compile
+if [ ${#error_files[@]} -gt 0 ]; then
+	echo "The following files failed to compile:"
+	for file in "${error_files[@]}"; do
+		echo -e "${file:4}"
+	done
+fi
+echo ""
+
 read -n 1 -s -r -p "Press any key to continue..."
 clear
