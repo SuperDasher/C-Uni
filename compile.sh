@@ -72,12 +72,18 @@ for file in "${files[@]}"; do
 		g++ -Iheaders/ ${cpp_version:+-std=c++$cpp_version} -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" "${definition_cpp_files[@]}" -o "out/${file:4:-4}.opp"
 	fi
 	((current_file++))
-	echo "==> Compiled $(basename -- "$file") ($current_file/$file_tally)"
+	
+	#if the current file is not present in out, print an error message
+	if [ ! -f "out/${file:4:-2}.o" ] && [ ! -f "out/${file:4:-4}.opp" ]; then
+		echo -e "!!==> File $(basename -- "$file") failed to compile ($current_file/$file_tally)"
+	else
+		echo "==> Compiled $(basename -- "$file") ($current_file/$file_tally)"
+	fi
 done
 
 printf "\n"
 printf "==========================\n"
-printf "=== All files compiled ===\n"
+printf "=== Operation complete ===\n"
 printf "==========================\n"
 printf "\n"
 read -n 1 -s -r -p "Press any key to continue..."
