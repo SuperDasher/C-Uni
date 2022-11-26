@@ -102,8 +102,8 @@ if [ ${#error_files[@]} -gt 0 ]; then
 	for file in "${error_files[@]}"; do
 		echo -e "${file:4}"
 	done
+	echo ""
 fi
-echo ""
 
 read -n 1 -s -r -p "Press any key to continue..."
 clear
