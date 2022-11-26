@@ -82,7 +82,6 @@ for file in "${files[@]}"; do
 
 	#if the current file is not present in out, print an error message
 	#the array error_files contains all the files that failed to compile
-
 	if [ ! -f "out/${file:4:-2}.o" ] && [ ! -f "out/${file:4:-4}.opp" ]; then
 		echo -e "!!==> File $(basename -- "$file") failed to compile ($current_file/$file_tally)"
 		error_files+=("$file")
