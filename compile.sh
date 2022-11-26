@@ -59,13 +59,13 @@ for file in "${files[@]}"; do
 		continue
 	fi
 
-	# if the dir present in src doesn't exist in out, create it with
+	#if the dir present in src doesn't exist in out, create it
 	src_dir=$(dirname -- "$file")
 	if [ ! -d "out/${src_dir:4}" ]; then
 		mkdir -p "out/${src_dir:4}"
 	fi
 
-	#otherwise compile and place the output file in the out directory corresponding to the one in src
+	#compile and place the output file in the out directory corresponding to the one in src
 	if [[ "$file" == *.c ]]; then
 		gcc -Iheaders/ ${c_version:+-std=c$c_version} -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" "${definition_c_files[@]}" -o "out/${file:4:-2}.o"
 	elif [[ "$file" == *.cpp ]]; then
