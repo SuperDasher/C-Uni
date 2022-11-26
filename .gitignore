@@ -58,4 +58,4 @@ dkms.conf
 .dccache
 
 # test code
-test.c
+**/test/**
