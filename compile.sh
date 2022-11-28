@@ -18,9 +18,31 @@ if [[ -n "${*: -2:1}" && "${*: -2:1}" =~ ^[0-9]+$ ]]; then
 	c_version=${*: -2:1}
 	cpp_version=${*: -1}
 	version_params=2
+	# if the c or cpp versions are not valid, exit the script, checking if it gives problems with a test file
+	touch test.c
+	touch test.cpp
+	if [[ ! "$(gcc -std="c$c_version" -dM -E - </dev/null test.c 2>/dev/null | grep __STDC_VERSION__ | awk '{print $3}')" != "" ]]; then
+		echo -e "Invalid C version"
+		rm test.c
+		rm test.cpp
+		exit 1
+	fi
+	if [[ ! "$(g++ -std="c++$cpp_version" -dM -E -x c++ /dev/null test.cpp 2>/dev/null | grep -F __cplusplus | awk '{print $3}')" != "" ]]; then
+		echo -e "Invalid C++ version"
+		rm test.c
+		rm test.cpp
+		exit 1
+	fi
 elif [[ -n "${*: -1}" && "${*: -1}" =~ ^[0-9]+$ ]]; then
 	c_version=${*: -1}
 	version_params=1
+	# if the c version is not valid, exit the script, checking if it gives problems with a test file
+	touch test.c
+	if [[ ! "$(gcc -std="c$c_version" -dM -E - </dev/null test.c 2>/dev/null | grep __STDC_VERSION__ | awk '{print $3}')" != "" ]]; then
+		echo -e "Invalid C version"
+		rm test.c
+		exit 1
+	fi
 fi
 
 #declare an array that contains c and cpp files in src
@@ -164,8 +186,8 @@ echo
 #if error_files is not empty, list all the files that failed to compile
 if [ ${#error_files[@]} -gt 0 ]; then
 	echo "The following files failed to compile:"
-	for file in "${error_files[@]}"; do
-		echo -e "${file:4}"
+	for i in "${!error_files[@]}"; do
+		echo -e "$i || ${error_files[i]:4}"
 	done
 	echo
 fi
