@@ -13,12 +13,12 @@ option_params_lengths=()
 first_found=false
 for i in "$@"; do
 	if [[ "$i" == -* ]]; then
-		first_found=true
-		if "$first_found"; then
+		if ! "$first_found"; then
 			option_params_lengths+=("$option_param_length")
 		fi
+		first_found=true
 		option_param_length=0
-	elif "$first_found"; then
+	elif ! "$first_found"; then
 		option_param_length=$((option_param_length + 1))
 	fi
 done
@@ -26,7 +26,7 @@ params_args_tally=0
 for option_param_length in "${option_params_lengths[@]}"; do
 	params_args_tally=$((params_args_tally + option_param_length + 1))
 done
-base_args=("${@:1:$params_args_tally}")
+base_args=("${@:1:$params_args_tally-1}")
 
 #declare an array that contains c and cpp files in definitions
 definition_c_files=()
@@ -36,9 +36,9 @@ mapfile -t definition_cpp_files < <(find definitions/ -name "*.cpp")
 
 #check the amount of parameters used for the c and cpp standard version
 version_params=0
-if [[ -n "${base_args: -2:1}" && "${base_args: -2:1}" =~ ^[0-9]+$ ]]; then
-	c_version=${base_args: -2:1}
-	cpp_version=${base_args: -1:1}
+if [[ -n "${base_args[*]: -2:1}" && "${base_args[*]: -2:1}" =~ ^[0-9]+$ ]]; then
+	c_version=${base_args[*]: -2:1}
+	cpp_version=${base_args[*]: -1:1}
 	version_params=2
 	# if the c or cpp versions are not valid, exit the script, checking if it gives problems with a test file
 	if [ -f test.c ] || [ -f test.cpp ]; then
@@ -59,8 +59,8 @@ if [[ -n "${base_args: -2:1}" && "${base_args: -2:1}" =~ ^[0-9]+$ ]]; then
 		rm test.cpp
 		exit 1
 	fi
-elif [[ -n "${base_args: -1}" && "${base_args: -1}" =~ ^[0-9]+$ ]]; then
-	c_version=${base_args: -1}
+elif [[ -n "${base_args[*]: -1}" && "${base_args[*]: -1}" =~ ^[0-9]+$ ]]; then
+	c_version=${base_args[*]: -1}
 	version_params=1
 	# if the c version is not valid, exit the script, checking if it gives problems with a test file
 	if [ -f test.c ]; then
@@ -96,7 +96,7 @@ if [ $version_params -eq ${#base_args[@]} ]; then
 else
 	#declare a dirs array that will be filled with all the args that end with a /
 	dirs=()
-	for arg in "${base_args[@]:1:${#base_args[@]}-$version_params}"; do
+	for arg in "${base_args[@]:0:${#base_args[@]}-$version_params}"; do
 		if [[ $arg =~ /$ ]]; then
 			if [ -d "src/$arg" ]; then
 				dirs+=("$arg")
@@ -128,7 +128,9 @@ else
 
 	#declare an array that contains o and opp files in out
 	out_files=()
-	mapfile -t out_files < <(find out/ -name "*.o" -o -name "*.opp")
+	if [ -d out/ ]; then
+		mapfile -t out_files < <(find out/ -name "*.o" -o -name "*.opp")
+	fi
 
 	#delete the out files that do not correspond to the files in src
 	for out_file in "${out_files[@]}"; do
@@ -144,7 +146,9 @@ else
 
 	#remove any file in out that doesn't have the o or opp extension
 	files_in_out=()
-	mapfile -t files_in_out < <(find out/ -type f)
+	if [ -d out/ ]; then
+		mapfile -t files_in_out < <(find out/ -type f)
+	fi
 	for out_file in "${files_in_out[@]}"; do
 		if [[ "$out_file" != *.o ]] && [[ "$out_file" != *.opp ]]; then
 			rm -f "$out_file"
@@ -164,8 +168,9 @@ for file in "${files[@]}"; do
 		fi
 	fi
 done
-find out/ -type d -empty -delete
-
+if [ -d out/ ]; then
+	find out/ -type d -empty -delete
+fi
 #declares variables to keep track of the compiled files in real time
 current_file=0
 file_tally=0
