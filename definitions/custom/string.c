@@ -20,7 +20,7 @@ void inputstring_dynamic(char **str, int len)
 	*str = (char *)malloc(len * sizeof(char));
 	if (*str == NULL)
 	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		perror("malloc() failed");
 		exit(errno);
 	}
 	fgets(*str, len, stdin);

@@ -24,7 +24,7 @@ int main()
 	polygon = malloc(n * sizeof(struct point));
 	if (polygon == NULL)
 	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		perror("malloc() failed");
 		exit(errno);
 	}
 

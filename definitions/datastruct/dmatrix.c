@@ -28,7 +28,7 @@ void init_m(int ***mat, int *rows, int *columns, char *prompt, char *row_prompt,
 	scanf("%d", columns);
 	if (!malloc_m(mat, *rows, *columns))
 	{
-		fprintf(stderr, "malloc_m() failed: %s\n", strerror(errno));
+		perror("malloc_m() failed");
 		exit(errno);
 	}
 }
@@ -81,7 +81,7 @@ void scan_dm(int **mat, int rows, int columns, char *row_prompt)
 	char *row_prompt_newline = (char *)malloc((strlen(row_prompt) + 2) * sizeof(char));
 	if (row_prompt_newline == NULL)
 	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		perror("malloc() failed");
 		exit(errno);
 	}
 	strncpy(row_prompt_newline, row_prompt, strlen(row_prompt) + 1);
@@ -189,7 +189,7 @@ void map_dm(int (*func)(int), int ***target, int **mat, int rows, int columns)
 {
 	if (!malloc_m(target, rows, columns))
 	{
-		fprintf(stderr, "malloc_m() failed: %s\n", strerror(errno));
+		perror("malloc_m() failed");
 		exit(errno);
 	}
 	for (int i = 0; i < rows; i++)
@@ -205,7 +205,7 @@ int filter_dm(bool (*func)(int), int ***target, int **mat, int rows, int columns
 {
 	if (!malloc_m(target, rows, columns))
 	{
-		fprintf(stderr, "malloc_m() failed: %s\n", strerror(errno));
+		perror("malloc_m() failed");
 		exit(errno);
 	}
 	int target_dim = 0;

@@ -44,7 +44,7 @@ void scan_m(int (*mat)[], int rows, int columns, char *row_prompt)
 	char *row_prompt_newline = (char *)malloc((strlen(row_prompt) + 2) * sizeof(char));
 	if (row_prompt_newline == NULL)
 	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		perror("malloc() failed");
 		exit(errno);
 	}
 	strncpy(row_prompt_newline, row_prompt, strlen(row_prompt) + 1);

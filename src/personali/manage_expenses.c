@@ -45,7 +45,7 @@ void check_file(FILE *file)
 {
 	if (file == NULL)
 	{
-		fprintf(stderr, "fopen() failed: %s\n", strerror(errno));
+		perror("fopen() failed");
 		exit(errno);
 	}
 }

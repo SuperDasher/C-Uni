@@ -25,7 +25,7 @@ int main()
 			int **submatrix;
 			if (!malloc_m(&submatrix, SUBMATRIX_SIZE, SUBMATRIX_SIZE))
 			{
-				fprintf(stderr, "malloc_m() failed: %s\n", strerror(errno));
+				perror("malloc_m() failed");
 				exit(errno);
 			}
 			for (int k = 0; k < SUBMATRIX_SIZE; k++)

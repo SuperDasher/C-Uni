@@ -12,7 +12,7 @@ void init_a(int **array, int *size, char *prompt)
 	*array = (int *)malloc(*size * sizeof(int));
 	if (*array == NULL)
 	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		perror("malloc() failed");
 		exit(errno);
 	}
 }
@@ -22,7 +22,7 @@ void scan_a(int *array, int dim, char *prompt)
 	char *prompt_newline = (char *)malloc(strlen(prompt) + 2);
 	if (prompt_newline == NULL)
 	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		perror("malloc() failed");
 		exit(errno);
 	}
 	strncpy(prompt_newline, prompt, strlen(prompt) + 1);
@@ -120,7 +120,7 @@ int filter_a(bool (*func)(int), int **target, int *array, int dim)
 	int *target_full = (int *)malloc(dim * sizeof(int));
 	if (target_full == NULL)
 	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		perror("malloc() failed");
 		exit(errno);
 	}
 	int target_dim = 0;
@@ -135,7 +135,7 @@ int filter_a(bool (*func)(int), int **target, int *array, int dim)
 	*target = (int *)malloc(target_dim * sizeof(int));
 	if (*target == NULL)
 	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		perror("malloc() failed");
 		exit(errno);
 	}
 	for (int i = 0; i < target_dim; i++)

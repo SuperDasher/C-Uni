@@ -16,13 +16,13 @@ int main()
 	scanf("%d", &cols_b);
 	if (!malloc_m(&b, rows_b, cols_b))
 	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		perror("malloc() failed");
 		exit(errno);
 	}
 
 	if (!malloc_m(&result, rows_a, cols_b))
 	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		perror("malloc() failed");
 		exit(errno);
 	}
 

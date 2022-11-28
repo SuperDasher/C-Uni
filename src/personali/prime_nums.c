@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 		prime = (uint64_t *)malloc(sizeof(uint64_t) * amount);
 		if (prime == NULL)
 		{
-			fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+			perror("malloc() failed");
 			exit(errno);
 		}
 		prime[0] = 2;

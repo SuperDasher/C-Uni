@@ -21,7 +21,7 @@ int main()
 		!malloc_m(&b, n, m) ||
 		!malloc_m(&result, n, m))
 	{
-		fprintf(stderr, "malloc_m() failed: %s\n", strerror(errno));
+		perror("malloc_m() failed");
 		exit(errno);
 	}
 

@@ -5,7 +5,6 @@
 #include <custom/datastruct.h>
 #include <custom/intsort.h>
 
-
 int main(int argc, char *argv[])
 {
 	argv++;
@@ -20,7 +19,7 @@ int main(int argc, char *argv[])
 	int *numbers = malloc(argc * sizeof(int));
 	if (numbers == NULL)
 	{
-		fprintf(stderr, "malloc() failed: %s\n", strerror(errno));
+		perror("malloc() failed");
 		exit(errno);
 	}
 	printf("array di parametri prima del sort:\n[");
