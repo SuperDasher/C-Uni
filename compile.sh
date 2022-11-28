@@ -1,5 +1,18 @@
 #!/bin/bash
 
+function is_in_array {
+	local array="$1[@]"
+	local seeking=$2
+	local in=1
+	for element in "${!array}"; do
+		if [[ $element == "$seeking" ]]; then
+			in=0
+			break
+		fi
+	done
+	return $in
+}
+
 #if the directory src does not exist, exit the script
 if [ ! -d src ]; then
 	echo -e "src directory does not exist"
@@ -8,25 +21,28 @@ if [ ! -d src ]; then
 fi
 
 #check for the option parameters
-option_param_length=0
-option_params_lengths=()
-first_found=false
-for i in "$@"; do
-	if [[ "$i" == -* ]]; then
-		if ! "$first_found"; then
-			option_params_lengths+=("$option_param_length")
-		fi
-		first_found=true
-		option_param_length=0
-	elif ! "$first_found"; then
-		option_param_length=$((option_param_length + 1))
+declare -A option_params
+option_param_index=0
+option_params_index=-1
+for arg in "$@"; do
+	if [[ "$arg" == -* ]]; then
+		option_param_index=0
+		option_params_index=$((option_params_index + 1))
+		option_params["$option_params_index","$option_param_index"]="$arg"
+	elif [ "$option_params_index" -gt -1 ]; then
+		option_param_index=$((option_param_index + 1))
+		option_params["$option_params_index","$option_param_index"]="$arg"
 	fi
+	echo "[$option_params_index,$option_param_index]  ${option_params["$option_params_index","$option_param_index"]}"
 done
 params_args_tally=0
-for option_param_length in "${option_params_lengths[@]}"; do
-	params_args_tally=$((params_args_tally + option_param_length + 1))
+for i in "${!option_params[@]}"; do
+	params_args_tally=$((params_args_tally + 1))
 done
 base_args=("${@:1:$params_args_tally-1}")
+
+echo "${base_args[@]}"
+exit
 
 #declare an array that contains c and cpp files in definitions
 definition_c_files=()
