@@ -40,6 +40,31 @@ else
 	for i in "${!files[@]}"; do
 		files[$i]="src/${files[$i]}"
 	done
+
+	#declare an array that contains o and opp files in out
+	out_files=()
+	mapfile -t out_files < <(find out/ -name "*.o" -o -name "*.opp")
+
+	#delete the out files that do not correspond to the files in src
+	for out_file in "${out_files[@]}"; do
+		out_file=${out_file#out/}
+		for src_file in "${src_files[@]}"; do
+			src_file=${src_file#src/}
+			if [ "${out_file%.*}" = "${src_file%.*}" ]; then
+				continue 2
+			fi
+		done
+		rm "out/$out_file"
+	done
+
+	#remove any file in out that doesn't have the o or opp extension
+	files_in_out=()
+	mapfile -t files_in_out < <(find out/ -type f)
+	for out_file in "${files_in_out[@]}"; do
+		if [[ "$out_file" != *.o ]] && [[ "$out_file" != *.opp ]]; then
+			rm -f "$out_file"
+		fi
+	done
 fi
 
 #delete the old executable
