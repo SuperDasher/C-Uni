@@ -26,7 +26,7 @@ if [[ -n "${*: -2:1}" && "${*: -2:1}" =~ ^[0-9]+$ ]]; then
 	fi
 	touch test.c
 	touch test.cpp
-	if [[ -z "$(gcc -std="c$c_version" -dM -E - </dev/null test.c 2>/dev/null | grep __STDC_VERSION__ | awk '{print $3}')" ]]; then
+	if [[ -z "$(gcc -std="c$c_version" -dM -E - test.c </dev/null 2>/dev/null | grep __STDC_VERSION__ | awk '{print $3}')" ]]; then
 		echo -e "Invalid C version"
 		rm test.c
 		rm test.cpp
@@ -47,7 +47,7 @@ elif [[ -n "${*: -1}" && "${*: -1}" =~ ^[0-9]+$ ]]; then
 		exit 1
 	fi
 	touch test.c
-	if [[ ! "$(gcc -std="c$c_version" -dM -E - </dev/null test.c 2>/dev/null | grep __STDC_VERSION__ | awk '{print $3}')" != "" ]]; then
+	if [[ -z "$(gcc -std="c$c_version" -dM -E - test.c </dev/null 2>/dev/null | grep __STDC_VERSION__ | awk '{print $3}')" ]]; then
 		echo -e "Invalid C version"
 		rm test.c
 		exit 1
