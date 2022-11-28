@@ -1,18 +1,5 @@
 #!/bin/bash
 
-function is_in_array {
-	local array="$1[@]"
-	local seeking=$2
-	local in=1
-	for element in "${!array}"; do
-		if [[ $element == "$seeking" ]]; then
-			in=0
-			break
-		fi
-	done
-	return $in
-}
-
 #if the directory src does not exist, exit the script
 if [ ! -d src ]; then
 	echo -e "src directory does not exist"
@@ -28,10 +15,10 @@ for arg in "$@"; do
 	if [[ "$arg" == -* ]]; then
 		option_param_index=0
 		option_params_index=$((option_params_index + 1))
-		option_params["$option_params_index", "$option_param_index"]="$arg"
+		option_params["$option_params_index","$option_param_index"]="$arg"
 	elif [ "$option_params_index" -gt -1 ]; then
 		option_param_index=$((option_param_index + 1))
-		option_params["$option_params_index", "$option_param_index"]="$arg"
+		option_params["$option_params_index","$option_param_index"]="$arg"
 	fi
 done
 params_args_tally=0
@@ -42,12 +29,6 @@ base_args=("$@")
 for ((i = 0; i < params_args_tally; i++)); do
 	base_args=("${base_args[@]:0:${#base_args[@]}-1}")
 done
-
-#declare an array that contains c and cpp files in definitions
-definition_c_files=()
-mapfile -t definition_c_files < <(find definitions/ -name "*.c")
-definition_cpp_files=()
-mapfile -t definition_cpp_files < <(find definitions/ -name "*.cpp")
 
 #check the amount of parameters used for the c and cpp standard version
 version_params=0
@@ -186,6 +167,13 @@ done
 if [ -d out/ ]; then
 	find out/ -type d -empty -delete
 fi
+
+#declare an array that contains c and cpp files in definitions
+definition_c_files=()
+mapfile -t definition_c_files < <(find definitions/ -name "*.c")
+definition_cpp_files=()
+mapfile -t definition_cpp_files < <(find definitions/ -name "*.cpp")
+
 #declares variables to keep track of the compiled files in real time
 current_file=0
 file_tally=0
