@@ -20,6 +20,10 @@ if [[ -n "${*: -2:1}" && "${*: -2:1}" =~ ^[0-9]+$ ]]; then
 	cpp_version=${*: -1}
 	version_params=2
 	# if the c or cpp versions are not valid, exit the script, checking if it gives problems with a test file
+	if [ -f test.c ] || [ -f test.cpp ]; then
+		echo -e "There is a test file in the directory, please remove, rename or move it"
+		exit 1
+	fi
 	touch test.c
 	touch test.cpp
 	if [[ -z "$(gcc -std="c$c_version" -dM -E - </dev/null test.c 2>/dev/null | grep __STDC_VERSION__ | awk '{print $3}')" ]]; then
@@ -38,12 +42,22 @@ elif [[ -n "${*: -1}" && "${*: -1}" =~ ^[0-9]+$ ]]; then
 	c_version=${*: -1}
 	version_params=1
 	# if the c version is not valid, exit the script, checking if it gives problems with a test file
+	if [ -f test.c ]; then
+		echo -e "There is a test file in the directory, please remove, rename or move it"
+		exit 1
+	fi
 	touch test.c
 	if [[ ! "$(gcc -std="c$c_version" -dM -E - </dev/null test.c 2>/dev/null | grep __STDC_VERSION__ | awk '{print $3}')" != "" ]]; then
 		echo -e "Invalid C version"
 		rm test.c
 		exit 1
 	fi
+fi
+if [ -f test.c ]; then
+	rm test.c
+fi
+if [ -f test.cpp ]; then
+	rm test.cpp
 fi
 
 #declare an array that contains c and cpp files in src
