@@ -62,7 +62,7 @@ for file in "${files[@]}"; do
 	#if the file doesn't exist in src then print an error message and keep going
 	if ! echo "${src_files[@]}" | grep -q -o "$file"; then
 		((current_file++))
-		echo -e "==> File $(basename -- "$file") does not exist ($current_file/$file_tally)"
+		echo -e "??==> File ${file:4} does not exist ($current_file/$file_tally)"
 		continue
 	fi
 
@@ -83,18 +83,18 @@ for file in "${files[@]}"; do
 	#if the current file is not present in out, print an error message
 	#the array error_files contains all the files that failed to compile
 	if [ ! -f "out/${file:4:-2}.o" ] && [ ! -f "out/${file:4:-4}.opp" ]; then
-		echo -e "!!==> File $(basename -- "$file") failed to compile ($current_file/$file_tally)"
+		echo -e "!!==> File ${file:4} failed to compile ($current_file/$file_tally)"
 		error_files+=("$file")
 	else
-		echo "==> Compiled $(basename -- "$file") ($current_file/$file_tally)"
+		echo "==> Compiled ${file:4} ($current_file/$file_tally)"
 	fi
 done
 
-echo ""
+echo
 echo "=========================="
 echo "=== Operation complete ==="
 echo "=========================="
-echo ""
+echo
 
 #if error_files is not empty, list all the files that failed to compile
 if [ ${#error_files[@]} -gt 0 ]; then
@@ -102,7 +102,7 @@ if [ ${#error_files[@]} -gt 0 ]; then
 	for file in "${error_files[@]}"; do
 		echo -e "${file:4}"
 	done
-	echo ""
+	echo
 fi
 
 read -n 1 -s -r -p "Press any key to continue..."
