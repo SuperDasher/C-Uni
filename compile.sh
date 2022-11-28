@@ -43,9 +43,15 @@ else
 fi
 
 #delete the old executable
-for i in "${files[@]}"; do
-	if [ -f "out/${i:4:-2}.o" ]; then
-		rm "out/${i:4:-2}.o"
+for file in "${files[@]}"; do
+	if [[ "$file" == *.c ]]; then
+		if [ -f "out/${file:4:-2}.o" ]; then
+			rm "out/${file:4:-2}.o"
+		fi
+	elif [[ "$file" == *.cpp ]]; then
+		if [ -f "out/${file:4:-4}.opp" ]; then
+			rm "out/${file:4:-4}.opp"
+		fi
 	fi
 done
 find out/ -type d -empty -delete
@@ -60,7 +66,14 @@ done
 #compile every .c file in src as .o extension and every .cpp file as .opp extension and put them in out
 for file in "${files[@]}"; do
 	#if the file doesn't exist in src then print an error message and keep going
-	if ! echo "${src_files[@]}" | grep -q -o "$file"; then
+	found=false
+	for src_file in "${src_files[@]}"; do
+		if [ "$src_file" = "$file" ]; then
+			found=true
+			break
+		fi
+	done
+	if ! "$found"; then
 		((current_file++))
 		echo -e "??==> File ${file:4} does not exist ($current_file/$file_tally)"
 		continue
