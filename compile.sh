@@ -36,9 +36,36 @@ if [ $version_params -eq $# ]; then
 	fi
 	files=("${src_files[@]}")
 else
-	files=("${@:1:$#-$version_params}")
+	#declare a dirs array that will be filled with all the args that end with a /
+	dirs=()
+	for arg in "${@:1:$#-$version_params}"; do
+		if [[ $arg =~ /$ ]]; then
+			if [ -d "src/$arg" ]; then
+				dirs+=("$arg")
+			else
+				echo -e "??==> Directory $arg does not exist"
+			fi
+		else
+			files+=("$arg")
+		fi
+	done
 	for i in "${!files[@]}"; do
 		files[$i]="src/${files[$i]}"
+	done
+	for dir in "${dirs[@]}"; do
+		mapfile -t dir_files < <(find "src/$dir" -name "*.c" -o -name "*.cpp")
+		files+=("${dir_files[@]}")
+	done
+
+	#remove any duplicates from the files array
+	for i in "${!files[@]}"; do
+		for j in "${!files[@]}"; do
+			if [ "$i" -ne "$j" ]; then
+				if [ "${files[$i]}" = "${files[$j]}" ]; then
+					unset 'files[$j]'
+				fi
+			fi
+		done
 	done
 
 	#declare an array that contains o and opp files in out
