@@ -7,6 +7,27 @@ if [ ! -d src ]; then
 	exit 1
 fi
 
+#check for the option parameters
+option_param_length=0
+option_params_lengths=()
+first_found=false
+for i in "$@"; do
+	if [[ "$i" == -* ]]; then
+		first_found=true
+		if "$first_found"; then
+			option_params_lengths+=("$option_param_length")
+		fi
+		option_param_length=0
+	elif "$first_found"; then
+		option_param_length=$((option_param_length + 1))
+	fi
+done
+params_args_tally=0
+for option_param_length in "${option_params_lengths[@]}"; do
+	params_args_tally=$((params_args_tally + option_param_length + 1))
+done
+base_args=("${@:1:$params_args_tally}")
+
 #declare an array that contains c and cpp files in definitions
 definition_c_files=()
 mapfile -t definition_c_files < <(find definitions/ -name "*.c")
@@ -15,9 +36,9 @@ mapfile -t definition_cpp_files < <(find definitions/ -name "*.cpp")
 
 #check the amount of parameters used for the c and cpp standard version
 version_params=0
-if [[ -n "${*: -2:1}" && "${*: -2:1}" =~ ^[0-9]+$ ]]; then
-	c_version=${*: -2:1}
-	cpp_version=${*: -1}
+if [[ -n "${base_args: -2:1}" && "${base_args: -2:1}" =~ ^[0-9]+$ ]]; then
+	c_version=${base_args: -2:1}
+	cpp_version=${base_args: -1:1}
 	version_params=2
 	# if the c or cpp versions are not valid, exit the script, checking if it gives problems with a test file
 	if [ -f test.c ] || [ -f test.cpp ]; then
@@ -38,8 +59,8 @@ if [[ -n "${*: -2:1}" && "${*: -2:1}" =~ ^[0-9]+$ ]]; then
 		rm test.cpp
 		exit 1
 	fi
-elif [[ -n "${*: -1}" && "${*: -1}" =~ ^[0-9]+$ ]]; then
-	c_version=${*: -1}
+elif [[ -n "${base_args: -1}" && "${base_args: -1}" =~ ^[0-9]+$ ]]; then
+	c_version=${base_args: -1}
 	version_params=1
 	# if the c version is not valid, exit the script, checking if it gives problems with a test file
 	if [ -f test.c ]; then
@@ -65,7 +86,7 @@ src_files=()
 mapfile -t src_files < <(find src/ -name "*.c" -o -name "*.cpp")
 
 #the files array contains all the files that will be compiled
-if [ $version_params -eq $# ]; then
+if [ $version_params -eq ${#base_args[@]} ]; then
 	if [ -d out ]; then
 		rm -rf out/*
 	else
@@ -75,7 +96,7 @@ if [ $version_params -eq $# ]; then
 else
 	#declare a dirs array that will be filled with all the args that end with a /
 	dirs=()
-	for arg in "${@:1:$#-$version_params}"; do
+	for arg in "${base_args[@]:1:${#base_args[@]}-$version_params}"; do
 		if [[ $arg =~ /$ ]]; then
 			if [ -d "src/$arg" ]; then
 				dirs+=("$arg")
