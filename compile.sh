@@ -28,21 +28,20 @@ for arg in "$@"; do
 	if [[ "$arg" == -* ]]; then
 		option_param_index=0
 		option_params_index=$((option_params_index + 1))
-		option_params["$option_params_index","$option_param_index"]="$arg"
+		option_params["$option_params_index", "$option_param_index"]="$arg"
 	elif [ "$option_params_index" -gt -1 ]; then
 		option_param_index=$((option_param_index + 1))
-		option_params["$option_params_index","$option_param_index"]="$arg"
+		option_params["$option_params_index", "$option_param_index"]="$arg"
 	fi
-	echo "[$option_params_index,$option_param_index]  ${option_params["$option_params_index","$option_param_index"]}"
 done
 params_args_tally=0
-for i in "${!option_params[@]}"; do
+for _ in "${option_params[@]}"; do
 	params_args_tally=$((params_args_tally + 1))
 done
-base_args=("${@:1:$params_args_tally-1}")
-
-echo "${base_args[@]}"
-exit
+base_args=("$@")
+for ((i = 0; i < params_args_tally; i++)); do
+	base_args=("${base_args[@]:0:${#base_args[@]}-1}")
+done
 
 #declare an array that contains c and cpp files in definitions
 definition_c_files=()
