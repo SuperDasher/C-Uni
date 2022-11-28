@@ -128,7 +128,9 @@ else
 
 	#declare an array that contains o and opp files in out
 	out_files=()
-	mapfile -t out_files < <(find out/ -name "*.o" -o -name "*.opp")
+	if [ -d out/ ]; then
+		mapfile -t out_files < <(find out/ -name "*.o" -o -name "*.opp")
+	fi
 
 	#delete the out files that do not correspond to the files in src
 	for out_file in "${out_files[@]}"; do
@@ -144,7 +146,9 @@ else
 
 	#remove any file in out that doesn't have the o or opp extension
 	files_in_out=()
-	mapfile -t files_in_out < <(find out/ -type f)
+	if [ -d out/ ]; then
+		mapfile -t files_in_out < <(find out/ -type f)
+	fi
 	for out_file in "${files_in_out[@]}"; do
 		if [[ "$out_file" != *.o ]] && [[ "$out_file" != *.opp ]]; then
 			rm -f "$out_file"
@@ -164,8 +168,9 @@ for file in "${files[@]}"; do
 		fi
 	fi
 done
-find out/ -type d -empty -delete
-
+if [ -d out/ ]; then
+	find out/ -type d -empty -delete
+fi
 #declares variables to keep track of the compiled files in real time
 current_file=0
 file_tally=0
