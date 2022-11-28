@@ -2,7 +2,8 @@
 
 #if the directory src does not exist, exit the script
 if [ ! -d src ]; then
-	echo "src directory does not exist"
+	echo -e "src directory does not exist"
+	echo -e "create src directory and put your source files in it"
 	exit 1
 fi
 
@@ -21,13 +22,13 @@ if [[ -n "${*: -2:1}" && "${*: -2:1}" =~ ^[0-9]+$ ]]; then
 	# if the c or cpp versions are not valid, exit the script, checking if it gives problems with a test file
 	touch test.c
 	touch test.cpp
-	if [[ ! "$(gcc -std="c$c_version" -dM -E - </dev/null test.c 2>/dev/null | grep __STDC_VERSION__ | awk '{print $3}')" != "" ]]; then
+	if [[ -z "$(gcc -std="c$c_version" -dM -E - </dev/null test.c 2>/dev/null | grep __STDC_VERSION__ | awk '{print $3}')" ]]; then
 		echo -e "Invalid C version"
 		rm test.c
 		rm test.cpp
 		exit 1
 	fi
-	if [[ ! "$(g++ -std="c++$cpp_version" -dM -E -x c++ /dev/null test.cpp 2>/dev/null | grep -F __cplusplus | awk '{print $3}')" != "" ]]; then
+	if [[ -z "$(g++ -std="c++$cpp_version" -dM -E -x c++ /dev/null test.cpp 2>/dev/null | grep -F __cplusplus | awk '{print $3}')" ]]; then
 		echo -e "Invalid C++ version"
 		rm test.c
 		rm test.cpp
@@ -187,7 +188,7 @@ echo
 if [ ${#error_files[@]} -gt 0 ]; then
 	echo "The following files failed to compile:"
 	for i in "${!error_files[@]}"; do
-		echo -e "$i || ${error_files[i]:4}"
+		echo -e "${i+1} || ${error_files[i]:4}"
 	done
 	echo
 fi
