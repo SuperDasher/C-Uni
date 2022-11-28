@@ -38,11 +38,15 @@ int main()
 			if (is_empty_dm(submatrix, SUBMATRIX_SIZE, SUBMATRIX_SIZE))
 			{
 				printf("Sotto-matrice vuota trovata in posizione (%d, %d)\n", i + 1, j + 1);
+				free_m(matrix, rows);
+				free_m(submatrix, rows);
 				return 0;
 			}
+			free_m(submatrix, rows);
 		}
 	}
 	printf("Nessuna sotto-matrice vuota trovata\n");
+	free_m(matrix, rows);
 
 	return 0;
 }

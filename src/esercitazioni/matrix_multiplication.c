@@ -46,6 +46,9 @@ int main()
 		}
 		printf("\n");
 	}
+	free_m(a, rows_a);
+	free_m(b, rows_b);
+	free_m(result, rows_a);
 
 	return 0;
 }
