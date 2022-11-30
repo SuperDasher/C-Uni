@@ -21,10 +21,7 @@ for arg in "$@"; do
 		option_params["$option_params_index","$option_param_index"]="$arg"
 	fi
 done
-params_args_tally=0
-for _ in "${option_params[@]}"; do
-	params_args_tally=$((params_args_tally + 1))
-done
+params_args_tally="${#option_params[@]}"
 base_args=("$@")
 for ((i = 0; i < params_args_tally; i++)); do
 	base_args=("${base_args[@]:0:${#base_args[@]}-1}")
