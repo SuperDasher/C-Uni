@@ -6,18 +6,18 @@ if [ -n "$1" ]; then
 		echo "Invalid argument"
 		exit 1
 	fi
-	c_version="$(gcc -std="c$1" -dM -E - </dev/null | grep __STDC_VERSION__ | awk '{print $3}')"
+	c_version="$(gcc -std="c$1" -dM -E - </dev/null 2>/dev/null | grep __STDC_VERSION__ | awk '{print $3}')"
 else
-	c_version="$(gcc -dM -E - </dev/null | grep __STDC_VERSION__ | awk '{print $3}')"
+	c_version="$(gcc -dM -E - </dev/null 2>/dev/null | grep __STDC_VERSION__ | awk '{print $3}')"
 fi
 if [ -n "$2" ]; then
 	if [[ ! "$2" =~ ^[0-9]+$ ]]; then
 		echo "Invalid argument"
 		exit 1
 	fi
-	cpp_version="$(g++ -std="c++$2" -dM -E -x c++ /dev/null | grep -F __cplusplus | awk '{print $3}')"
+	cpp_version="$(g++ -std="c++$2" -dM -E -x c++ /dev/null 2>/dev/null | grep -F __cplusplus | awk '{print $3}')"
 else
-	cpp_version="$(g++ -dM -E -x c++ /dev/null | grep -F __cplusplus | awk '{print $3}')"
+	cpp_version="$(g++ -dM -E -x c++ /dev/null 2>/dev/null | grep -F __cplusplus | awk '{print $3}')"
 fi
 
 #check the C standard version used
