@@ -412,6 +412,18 @@ main() {
 
 	read -n 1 -s -r -p "Press any key to continue..."
 	clear
+
+	#these next instructions are merely to silence the shellcheck warnings
+	args=("${args[@]}")
+	out_files=("${out_files[@]}")
+	files_in_out=("${files_in_out[@]}")
+	c_src_files_without_extension=("${c_src_files_without_extension[@]}")
+	c_out_files_without_extension=("${c_out_files_without_extension[@]}")
+	cpp_src_files_without_extension=("${cpp_src_files_without_extension[@]}")
+	cpp_out_files_without_extension=("${cpp_out_files_without_extension[@]}")
+	c_files_without_extension=("${c_files_without_extension[@]}")
+	cpp_files_without_extension=("${cpp_files_without_extension[@]}")
+	files_to_ignore=("${files_to_ignore[@]}")
 }
 
 main "$@"
