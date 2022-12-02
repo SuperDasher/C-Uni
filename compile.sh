@@ -368,10 +368,9 @@ main() {
 
 	#declares variables to keep track of the compiled files in real time
 	local -- current_file=0
-	local -- file_tally=0
-	for file in "${files[@]}"; do
-		((file_tally++))
-	done
+
+	#the array error_files contains all the files that failed to compile
+	local -a error_files=()
 
 	#compile every .c file in src as .o extension and every .cpp file as .opp extension and put them in out
 	for file in "${files[@]}"; do
@@ -383,36 +382,36 @@ main() {
 
 		#compile and place the output file in the out directory corresponding to the one in src
 		if [[ "$file" == *.c ]]; then
-			gcc -Iheaders/ ${c_version:+-std=c$c_version} -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" "${definition_c_files[@]}" -o "out/${file:4:-2}.o"
+			gcc -Iheaders/ ${c_version:+-std=c$c_version} -x c -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" "${definition_c_files[@]}" -o "out/${file:4:-2}.o"
 		elif [[ "$file" == *.cpp ]]; then
-			g++ -Iheaders/ ${cpp_version:+-std=c++$cpp_version} -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" "${definition_cpp_files[@]}" -o "out/${file:4:-4}.opp"
+			g++ -Iheaders/ ${cpp_version:+-std=c++$cpp_version} -x c++ -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" "${definition_cpp_files[@]}" -o "out/${file:4:-4}.opp"
 		fi
 		((current_file++))
 
 		#if the current file is not present in out, print an error message
-		#the array error_files contains all the files that failed to compile
-		if [ ! -f "out/${file:4:-2}.o" ] && [ ! -f "out/${file:4:-4}.opp" ]; then
-			echo -e "!!==> File ${file:4} failed to compile ($current_file/$file_tally)"
-			error_files+=("$file")
+
+		if { [[ "$file" == *.c ]] && [ -f "out/${file:4:-2}.o" ]; } || { [[ "$file" == *.cpp ]] && [ -f "out/${file:4:-4}.opp" ]; }; then
+			echo "==> Compiled ${file:4} ($current_file/${#files[@]})"
 		else
-			echo "==> Compiled ${file:4} ($current_file/$file_tally)"
+			echo -e "!!==> File ${file:4} failed to compile ($current_file/${#files[@]})"
+			error_files+=("$file")
 		fi
 	done
+
+	#if error_files is not empty, list all the files that failed to compile
+	if [ ${#error_files[@]} -gt 0 ]; then
+		echo
+		echo -e "${#error_files[@]} out of ${#files[@]} files failed to compile:"
+		for i in "${!error_files[@]}"; do
+			echo -e "$((i+1))/${#error_files[@]} ||==> ${error_files[i]:4}"
+		done
+	fi
 
 	echo
 	echo "=========================="
 	echo "=== Operation complete ==="
 	echo "=========================="
 	echo
-
-	#if error_files is not empty, list all the files that failed to compile
-	if [ ${#error_files[@]} -gt 0 ]; then
-		echo "The following files failed to compile:"
-		for i in "${!error_files[@]}"; do
-			echo -e "${i+1} || ${error_files[i]:4}"
-		done
-		echo
-	fi
 
 	read -n 1 -s -r -p "Press any key to continue..."
 	clear
