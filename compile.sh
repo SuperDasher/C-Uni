@@ -358,9 +358,13 @@ main() {
 
 	#declare an array that contains c and cpp files in definitions
 	local -a definition_c_files=()
-	mapfile -t definition_c_files < <(find definitions/ -type f -name "*.c")
+	if [ -d definitions/ ]; then
+		mapfile -t definition_c_files < <(find definitions/ -type f -name "*.c")
+	fi
 	local -a definition_cpp_files=()
-	mapfile -t definition_cpp_files < <(find definitions/ -type f -name "*.cpp")
+	if [ -d definitions/ ]; then
+		mapfile -t definition_cpp_files < <(find definitions/ -type f -name "*.cpp")
+	fi
 
 	#declares variables to keep track of the compiled files in real time
 	local -- current_file=0
