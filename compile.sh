@@ -62,7 +62,7 @@ array_prepend_pattern() {
 	local -- __pattern__="$2"
 	local -a __result__=()
 	for element in "${__array__[@]}"; do
-		if [ -n $element ]; then
+		if [ -n "$element" ]; then
 			__result__+=("$__pattern__$element")
 		fi
 	done
@@ -74,7 +74,7 @@ array_append_pattern() {
 	local -- __pattern__="$2"
 	local -a __result__=()
 	for element in "${__array__[@]}"; do
-		if [ -n $element ]; then
+		if [ -n "$element" ]; then
 			__result__+=("$element$__pattern__")
 		fi
 	done
