@@ -46,18 +46,18 @@
 ## September 2022
 
 1. started with 1830.33€
-2. money spent so far: 312.07€ [110.10€ not refunded]
+2. money spent so far: 326.07€ [124.10€ not refunded]
     1. subscriptions: 105.94€ (105.94€ total)
         - [x] 101.95€
         - [x] 3.99€
     2. extras for myself: 58.03€
-    3. extras for Uni: 148.10€
+    3. extras for Uni: 162.10€
         - 38€ refunded
-        - 110.10€ not refunded
+        - 124.10€ not refunded
     4. on others behalf: 0€
         - 0€ refunded
         - 0€ not refunded
-3. balance: 1589.85€
+3. balance: 1575.85€
 4. gain: -40.38€
     - -73.97€ from normal gain
     - 30€ from other gain
@@ -65,3 +65,23 @@
 5. start next month: 1789.95€
 
 ---
+
+## December 2022
+
+1. started with 1789.95€
+2. money spent so far: 38€ [0€ not refunded]
+    1. subscriptions: 0€ (3.99€ total)
+        - [ ] 3.99€
+    2. extras for myself: 0€
+    3. extras for Uni: 38€
+        - 38€ refunded
+        - 0€ not refunded
+    4. on others behalf: 0€
+        - 0€ refunded
+        - 0€ not refunded
+3. balance: 1789.85€
+4. gain: 85.91€
+    - 86.01€ from normal gain
+    - 0€ from other gain
+    - -0.10€ from gifts/extra gain
+5. start next month: 1875.76€
