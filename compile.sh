@@ -388,14 +388,14 @@ main() {
 		fi
 		((current_file++))
 
-		#if the current file is not present in out, print an error message
-
+		#if the current file is not present in out, print an error message and add it to the error_files array
 		if { [[ "$file" == *.c ]] && [ -f "out/${file:4:-2}.o" ]; } || { [[ "$file" == *.cpp ]] && [ -f "out/${file:4:-4}.opp" ]; }; then
 			echo "==> Compiled ${file:4} ($current_file/${#files[@]})"
 		else
 			echo -e "!!==> File ${file:4} failed to compile ($current_file/${#files[@]})"
 			error_files+=("$file")
 		fi
+		find out/ -type d -empty -delete
 	done
 
 	#if error_files is not empty, list all the files that failed to compile
