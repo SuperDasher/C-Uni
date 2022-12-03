@@ -477,7 +477,7 @@ main() {
 	echo "================"
 	echo
 
-	read -n 1 -s -r -t 5
+	read -n 1 -s -r -t 20 -p "Press any key to continue..."
 
 	#these next instructions are merely to silence the shellcheck warnings
 	args=("${args[@]}")
