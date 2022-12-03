@@ -3,7 +3,8 @@
 ctrl_c_confirm() {
 	echo -ne "\033[s"
 	echo
-	echo -ne "\e[31mAre you sure you want to exit? [Y/n] \e[0m"
+	echo -ne "\e[31mAre you sure you want to exit? [Y/n] _\e[0m"
+	echo -ne "\033[1D"
 	read -r answer
 	if [[ "$answer" =~ ^[yY]$ ]]; then
 		exit 1
@@ -258,9 +259,9 @@ main() {
 		if [ ! -d headers/ ]; then
 			echo -e "\e[31mheaders directory does not exist\e[0m"
 			echo -e "\e[31mdo you want to continue?\e[0m"
-			tput setaf 1
-			read -r -p "(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] " answer
-			tput setaf 7
+			echo "\e[31m(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] _\e[0m"
+			echo -ne "\033[1D"
+			read -r answer
 			if [[ ! "$answer" =~ ^[yY]$ ]]; then
 				exit 1
 			fi
@@ -268,9 +269,9 @@ main() {
 		if [ ! -d definitions/ ]; then
 			echo -e "\e[31mdefinitions directory does not exist\e[0m"
 			echo -e "\e[31mdo you want to continue?\e[0m"
-			tput setaf 1
-			read -r -p "(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] " answer
-			tput setaf 7
+			echo -ne "\e[31m(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] _\e[0m"
+			echo -ne "\033[1D"
+			read -r answer
 			if [[ ! "$answer" =~ ^[yY]$ ]]; then
 				exit 1
 			fi
