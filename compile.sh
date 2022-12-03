@@ -251,6 +251,8 @@ main() {
 		--help | -h | -H | "-?")
 			# TODO: print help
 			echo "help will be printed here, not implemented yet"
+			echo
+			trap 'read -n 1 -s -r -p "Press any key to continue..."; tput cnorm; clear' EXIT
 			exit 0
 			;;
 		esac
