@@ -1,13 +1,14 @@
 #!/bin/bash
 
+# make sure that the user can't move the cursor while seeing it
+
+
 ctrl_c_confirm() {
-	tput cnorm
 	echo -ne "\033[s"
 	echo
 	echo -ne "\e[31mAre you sure you want to exit? [Y/n] \e[0m"
 	read -r answer
 	if [[ "$answer" =~ ^[yY]$ ]]; then
-		clear
 		exit 1
 	fi
 	tput cuu1
@@ -248,7 +249,7 @@ main() {
 		--cpp-version | -Vcpp)
 			get_parameters_from_option_index "$i" cpp_version
 			;;
-		--help | -h | -H | -?)
+		--help | -h | -H | "-?")
 			# TODO: print help
 			echo "help will be printed here, not implemented yet"
 			exit 0
@@ -260,11 +261,9 @@ main() {
 		if [ ! -d headers/ ]; then
 			echo -e "\e[31mheaders directory does not exist\e[0m"
 			echo -e "\e[31mdo you want to continue?\e[0m"
-			tput cnorm
 			tput setaf 1
 			read -r -p "(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] " answer
 			tput setaf 7
-			tput civis
 			if [[ ! "$answer" =~ ^[yY]$ ]]; then
 				exit 1
 			fi
@@ -272,11 +271,9 @@ main() {
 		if [ ! -d definitions/ ]; then
 			echo -e "\e[31mdefinitions directory does not exist\e[0m"
 			echo -e "\e[31mdo you want to continue?\e[0m"
-			tput cnorm
 			tput setaf 1
 			read -r -p "(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] " answer
 			tput setaf 7
-			tput civis
 			if [[ ! "$answer" =~ ^[yY]$ ]]; then
 				exit 1
 			fi
