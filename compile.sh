@@ -1,5 +1,23 @@
 #!/bin/bash
 
+ctrl_c_confirm() {
+	tput cnorm
+	echo -ne "\033[s"
+	echo
+	echo -ne "\e[31mAre you sure you want to exit? [Y/n] \e[0m"
+	read -r answer
+	if [[ "$answer" =~ ^[yY]$ ]]; then
+		clear
+		exit 1
+	fi
+	tput cuu1
+	tput el
+	echo -ne "\033[u"
+}
+
+trap 'tput cnorm; clear' EXIT
+trap ctrl_c_confirm INT
+
 is_element_in_array() {
 	local -- __element__="$1"
 	local -a __array__=("${!2}")
@@ -129,8 +147,8 @@ array_diff_symmetric() {
 # main procedure
 check_source_directory() {
 	if [ ! -d src ]; then
-		>&2 echo "src directory does not exist"
-		>&2 echo "create src directory and put your source files in it"
+		echo -e "\e[31msrc directory does not exist\e[0m"
+		echo -e "\e[31mcreate src directory and put your source files in it\e[0m"
 		exit 1
 	fi
 }
@@ -172,7 +190,7 @@ get_source_files_from_arguments() {
 		elif [ -f "$arg" ]; then
 			__source_files__+=("$arg")
 		else
-			>&2 echo "??==> ${arg#src/} does not exist"
+			echo -e "\e[31m??==> ${arg#src/} does not exist\e[0m"
 		fi
 	done
 	local -a source_files_dirs=()
@@ -196,6 +214,7 @@ get_parameters_from_option_index() {
 }
 
 main() {
+	tput civis
 	local -a args=("$@")
 
 	#if the directory src does not exist, exit the script
@@ -233,27 +252,32 @@ main() {
 			# TODO: print help
 			echo "help will be printed here, not implemented yet"
 			exit 0
-		;;
+			;;
 		esac
 	done
 
-	
 	if ! "$silence_warnings"; then
 		if [ ! -d headers/ ]; then
-			>&2 echo "headers directory does not exist"
-			>&2 echo "do you want to continue?"
-			>&2 echo -n "(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] "
-			read -r answer
-			if [ "$answer" != "y" ]; then
+			echo -e "\e[31mheaders directory does not exist\e[0m"
+			echo -e "\e[31mdo you want to continue?\e[0m"
+			tput cnorm
+			tput setaf 1
+			read -r -p "(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] " answer
+			tput setaf 7
+			tput civis
+			if [[ ! "$answer" =~ ^[yY]$ ]]; then
 				exit 1
 			fi
 		fi
 		if [ ! -d definitions/ ]; then
-			>&2 echo "definitions directory does not exist"
-			>&2 echo "do you want to continue?"
-			>&2 echo -n "(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] "
-			read -r answer
-			if [ "$answer" != "y" ]; then
+			echo -e "\e[31mdefinitions directory does not exist\e[0m"
+			echo -e "\e[31mdo you want to continue?\e[0m"
+			tput cnorm
+			tput setaf 1
+			read -r -p "(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] " answer
+			tput setaf 7
+			tput civis
+			if [[ ! "$answer" =~ ^[yY]$ ]]; then
 				exit 1
 			fi
 		fi
@@ -262,13 +286,13 @@ main() {
 	#check for the validity of the c and c++ standard versions
 	if [ "${#c_version[@]}" -gt 0 ]; then
 		if ! is_c_valid "${c_version[*]}"; then
-			>&2 echo "Invalid C version"
+			echo -e "\e[31mInvalid C version\e[0m"
 			exit 1
 		fi
 	fi
 	if [ "${#cpp_version[@]}" -gt 0 ]; then
 		if ! is_cpp_valid "${cpp_version[*]}"; then
-			>&2 echo "Invalid C++ version"
+			echo -e "\e[31mInvalid C++ version\e[0m"
 			exit 1
 		fi
 	fi
@@ -419,21 +443,24 @@ main() {
 
 		#compile and place the output file in the out directory corresponding to the one in src
 		local -- fail_message
+		local -- success
 		if [[ "$file" == *.c ]]; then
 			fail_message=$(gcc -Iheaders/ ${c_version:+-std=c${c_version[*]}} -x c -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" "${definition_c_files[@]}" -o "out/${file:4:-2}.o" 2>&1)
+			success=$?
 		elif [[ "$file" == *.cpp ]]; then
 			fail_message=$(g++ -Iheaders/ ${cpp_version:+-std=c++${cpp_version[*]}} -x c++ -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" "${definition_cpp_files[@]}" -o "out/${file:4:-4}.opp" 2>&1)
+			success=$?
 		fi
 		((current_file++))
 
 		#if the current file is not present in out, print an error message and add it to the error_files array
-		if [ -z "$fail_message" ]; then
+		if [ $success -eq 0 ]; then
 			echo "==> Compiled ${file:4} ($current_file/${#files[@]})"
 		else
 			if $gcc_errors; then
-				>&2 echo "$fail_message"
+				echo -e "\e[31m${fail_message:-"Interrupt"}\e[0m"
 			fi
-			>&2 echo "!!==> File ${file:4} failed to compile ($current_file/${#files[@]})"
+			echo -e "\e[31m!!==> File ${file:4} failed to compile ($current_file/${#files[@]})\e[0m"
 			error_files+=("$file")
 		fi
 		find out/ -type d -empty -delete
@@ -442,20 +469,21 @@ main() {
 	#if error_files is not empty, list all the files that failed to compile
 	if [ ${#error_files[@]} -gt 0 ]; then
 		echo
-		>&2 echo "${#error_files[@]} out of ${#files[@]} files failed to compile:"
+		# print the error message in red
+		echo -e "\e[31m==> The following files failed to compile:\e[0m"
+		echo -e "\e[31m${#error_files[@]} out of ${#files[@]} files failed to compile:\e[0m"
 		for i in "${!error_files[@]}"; do
-			>&2 echo "$((i+1))/${#error_files[@]} ||==> ${error_files[i]:4}"
+			echo -e "\e[31m$((i + 1))/${#error_files[@]} ||==> ${error_files[i]:4}\e[0m"
 		done
 	fi
 
 	echo
-	echo "=========================="
-	echo "=== Operation complete ==="
-	echo "=========================="
+	echo "================"
+	echo "=== All done ==="
+	echo "================"
 	echo
 
-	read -n 1 -s -r -p "Press any key to continue..."
-	clear
+	read -n 1 -s -r -t 5
 
 	#these next instructions are merely to silence the shellcheck warnings
 	args=("${args[@]}")
