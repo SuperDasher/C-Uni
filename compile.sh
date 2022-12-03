@@ -428,6 +428,7 @@ main() {
 
 	#the array error_files contains all the files that failed to compile
 	local -a error_files=()
+	local -a error_files_messages=()
 
 	#compile every .c file in src as .o extension and every .cpp file as .opp extension and put them in out
 	for file in "${files[@]}"; do
@@ -458,20 +459,72 @@ main() {
 			fi
 			echo -e "\e[31m!!==> File ${file:4} failed to compile ($current_file/${#files[@]})\e[0m"
 			error_files+=("$file")
+			error_files_messages+=("$fail_message")
 		fi
 		find out/ -type d -empty -delete
 	done
 
+	trap - EXIT
 	trap 'tput cnorm; clear; exit 0' INT
 
 	#if error_files is not empty, list all the files that failed to compile
+	tput cnorm
 	if [ ${#error_files[@]} -gt 0 ]; then
 		echo
-		echo -e "\e[31m==> The following files failed to compile:\e[0m"
-		echo -e "\e[31m${#error_files[@]} out of ${#files[@]} files failed to compile:\e[0m"
-		for i in "${!error_files[@]}"; do
-			echo -e "\e[31m$((i + 1))/${#error_files[@]} ||==> ${error_files[i]:4}\e[0m"
+		local -- answer="1"
+		while [[ "$answer" != "" ]]; do
+			echo -e "\e[31m${#error_files[@]} out of ${#files[@]} files failed to compile:\e[0m"
+			for i in "${!error_files[@]}"; do
+				if [ -z "${error_files_messages[i]}" ]; then
+					echo "$((i + 1))/${#error_files[@]} ||==> ${error_files[i]:4}"
+				else
+					echo -e "\e[31m$((i + 1))/${#error_files[@]} ||==> ${error_files[i]:4}\e[0m"
+				fi
+			done
+
+			#ask the user if he wants to see the error messages
+			echo
+			echo "==> Type the number corresponding to the file you want to see the error message of"
+			echo "==> Type 'all' to see all the error messages"
+			echo "==> Enter nothing to exit"
+			echo "==> The files in the list colored in white are the ones that did not compile due to user input during compilation"
+			echo
+			local -- valid_answer=false
+			while ! "$valid_answer"; do
+				tput sc
+				read -r -p "==> " answer
+				if [[ "$answer" == "all" ]]; then
+					valid_answer=true
+					clear
+					for i in "${!error_files_messages[@]}"; do
+						echo "$((i + 1))/${#error_files[@]}||==> Error message for ${error_files[i]:4}:"
+						echo -e "\e[31m${error_files_messages[i]:-"Interrupted mid-compilation"}\e[0m"
+					done
+					echo
+					tput civis
+					read -n 1 -s -r -p "Press any key to continue..."
+					tput cnorm
+					clear
+				elif [[ "$answer" =~ ^[0-9]+$ ]] && [ "$answer" -gt 0 ] && [ "$answer" -le "${#error_files_messages[@]}" ]; then
+					valid_answer=true
+					clear
+					echo "$answer/${#error_files[@]} ||==> Error message for ${error_files[$((answer - 1))]:4}:"
+					echo -e "\e[31m${error_files_messages[$((answer - 1))]:-"Interrupted mid-compilation"}\e[0m"
+					echo
+					tput civis
+					read -n 1 -s -r -p "Press any key to continue..."
+					tput cnorm
+					clear
+				elif [[ "$answer" == "" ]]; then
+					valid_answer=true
+				else
+					tput cuu1
+					tput rc
+					tput ed
+				fi
+			done
 		done
+		clear
 	fi
 
 	echo
@@ -479,6 +532,11 @@ main() {
 	echo "=== All done ==="
 	echo "================"
 	echo
+
+	tput civis
+	read -n 1 -s -r -t 30 -p "Press any key to continue..."
+	tput cnorm
+	clear
 
 	#these next instructions are merely to silence the shellcheck warnings
 	args=("${args[@]}")
