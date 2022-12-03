@@ -5,7 +5,7 @@ ctrl_c_confirm() {
 	echo
 	echo -ne "\e[31mAre you sure you want to exit? [Y/n] _\e[0m"
 	tput cub1
-	read -r answer
+	read -n 1 -r -s answer
 	if [[ "$answer" =~ ^[yY]$ ]]; then
 		exit 1
 	fi
@@ -261,7 +261,7 @@ main() {
 			echo -e "\e[31mdo you want to continue?\e[0m"
 			echo "\e[31m(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] _\e[0m"
 			tput cub1
-			read -r answer
+			read -n 1 -r -s answer
 			if [[ ! "$answer" =~ ^[yY]$ ]]; then
 				exit 1
 			fi
@@ -271,7 +271,7 @@ main() {
 			echo -e "\e[31mdo you want to continue?\e[0m"
 			echo -ne "\e[31m(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] _\e[0m"
 			tput cub1
-			read -r answer
+			read -n 1 -r -s answer
 			if [[ ! "$answer" =~ ^[yY]$ ]]; then
 				exit 1
 			fi
