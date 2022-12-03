@@ -463,7 +463,6 @@ main() {
 	#if error_files is not empty, list all the files that failed to compile
 	if [ ${#error_files[@]} -gt 0 ]; then
 		echo
-		# print the error message in red
 		echo -e "\e[31m==> The following files failed to compile:\e[0m"
 		echo -e "\e[31m${#error_files[@]} out of ${#files[@]} files failed to compile:\e[0m"
 		for i in "${!error_files[@]}"; do
