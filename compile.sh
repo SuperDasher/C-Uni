@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# make sure that the user can't move the cursor while seeing it
-
-
 ctrl_c_confirm() {
 	echo -ne "\033[s"
 	echo
