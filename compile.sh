@@ -129,8 +129,8 @@ array_diff_symmetric() {
 # main procedure
 check_source_directory() {
 	if [ ! -d src ]; then
-		echo -e "src directory does not exist"
-		echo -e "create src directory and put your source files in it"
+		>&2 echo "src directory does not exist"
+		>&2 echo "create src directory and put your source files in it"
 		exit 1
 	fi
 }
@@ -172,7 +172,7 @@ get_source_files_from_arguments() {
 		elif [ -f "$arg" ]; then
 			__source_files__+=("$arg")
 		else
-			echo -e "??==> ${arg#src/} does not exist"
+			>&2 echo "??==> ${arg#src/} does not exist"
 		fi
 	done
 	local -a source_files_dirs=()
@@ -181,6 +181,18 @@ get_source_files_from_arguments() {
 		__source_files__+=("${source_files_dirs[@]}")
 	done
 	eval "$2"='("${__source_files__[@]}")'
+}
+
+get_parameters_from_option_index() {
+	local -- __option_index__=$1
+	local -a __parameters__=()
+	for ((j = 0; j < ${#parameters[@]}; j++)); do
+		__parameters__+=("${parameters["$__option_index__","$j"]}")
+		if [ -z "${parameters["$__option_index__","$((j + 1))"]}" ]; then
+			break
+		fi
+	done
+	eval "$2"='("${__parameters__[@]}")'
 }
 
 main() {
@@ -198,33 +210,68 @@ main() {
 	array_diff args[@] options[@] base_args
 	base_args=("${base_args[@]:0:${#base_args[@]}-${#parameters[@]}}")
 
-	#check the amount of parameters used for the c and cpp standard version
-	local -- c_version
-	local -- cpp_version
-	local -- version_params=0
-	if [[ -n "${base_args[*]: -2:1}" && "${base_args[*]: -2:1}" =~ ^[0-9]+$ ]]; then
-		c_version=${base_args[*]: -2:1}
-		cpp_version=${base_args[*]: -1:1}
-		version_params=2
-		# if the c or cpp versions are not valid, exit the script
-		if ! is_c_valid "$c_version"; then
-			echo -e "Invalid C version"
-			exit 1
+	#check the standard options
+	local -- silence_warnings=false
+	local -- gcc_errors=true
+	local -a c_version=()
+	local -a cpp_version=()
+	for i in "${!options[@]}"; do
+		case "${options[i]}" in
+		--silence-warnings | -S)
+			silence_warnings=true
+			;;
+		--no-error-messages | -N)
+			gcc_errors=false
+			;;
+		--c-version | -Vc)
+			get_parameters_from_option_index "$i" c_version
+			;;
+		--cpp-version | -Vcpp)
+			get_parameters_from_option_index "$i" cpp_version
+			;;
+		--help | -h | -H | -?)
+			# TODO: print help
+			echo "help will be printed here, not implemented yet"
+			exit 0
+		;;
+		esac
+	done
+
+	
+	if ! "$silence_warnings"; then
+		if [ ! -d headers/ ]; then
+			>&2 echo "headers directory does not exist"
+			>&2 echo "do you want to continue?"
+			>&2 echo -n "(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] "
+			read -r answer
+			if [ "$answer" != "y" ]; then
+				exit 1
+			fi
 		fi
-		if ! is_cpp_valid "$cpp_version"; then
-			echo -e "Invalid C++ version"
-			exit 1
+		if [ ! -d definitions/ ]; then
+			>&2 echo "definitions directory does not exist"
+			>&2 echo "do you want to continue?"
+			>&2 echo -n "(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] "
+			read -r answer
+			if [ "$answer" != "y" ]; then
+				exit 1
+			fi
 		fi
-	elif [[ -n "${base_args[*]: -1}" && "${base_args[*]: -1}" =~ ^[0-9]+$ ]]; then
-		c_version=${base_args[*]: -1:1}
-		version_params=1
-		# if the c version is not valid, exit the script
-		if ! is_c_valid "$c_version"; then
-			echo -e "Invalid C version"
+	fi
+
+	#check for the validity of the c and c++ standard versions
+	if [ "${#c_version[@]}" -gt 0 ]; then
+		if ! is_c_valid "${c_version[*]}"; then
+			>&2 echo "Invalid C version"
 			exit 1
 		fi
 	fi
-	base_args=("${base_args[@]:0:$((${#base_args[@]} - version_params))}")
+	if [ "${#cpp_version[@]}" -gt 0 ]; then
+		if ! is_cpp_valid "${cpp_version[*]}"; then
+			>&2 echo "Invalid C++ version"
+			exit 1
+		fi
+	fi
 
 	#declare an array that contains c and cpp files in src
 	local -a src_files=()
@@ -282,8 +329,10 @@ main() {
 	local -a cpp_files_without_extension=()
 	array_remove_append_prepend_pattern files[@] "src/" ".cpp" cpp_files_without_extension
 
-	#check the parameters
+	#check the options for file exclusion or inclusion
+	local -a option_params=()
 	for i in "${!options[@]}"; do
+		get_parameters_from_option_index "$i" option_params
 		case "${options[i]}" in
 		--only-new | -n)
 			local -a c_files_to_ignore=()
@@ -310,13 +359,7 @@ main() {
 			array_remove_append_prepend_pattern files[@] "src/" ".cpp" cpp_files_without_extension
 			;;
 		--exclude | -e)
-			local -a files_dirs_to_exclude=()
-			for ((j = 0; j < ${#parameters[@]}; j++)); do
-				files_dirs_to_exclude+=("${parameters["$i","$j"]}")
-				if [ -z "${parameters["$i","$((j + 1))"]}" ]; then
-					break
-				fi
-			done
+			local -a files_dirs_to_exclude=("${option_params[@]}")
 			local -a files_to_ignore=()
 			get_source_files_from_arguments files_dirs_to_exclude[@] files_to_ignore
 			array_diff files[@] files_to_ignore[@] files
@@ -324,13 +367,7 @@ main() {
 			array_remove_append_prepend_pattern files[@] "src/" ".cpp" cpp_files_without_extension
 			;;
 		--include | -i)
-			local -a files_dirs_to_include=()
-			for ((j = 0; j < ${#parameters[@]}; j++)); do
-				files_dirs_to_include+=("${parameters["$i","$j"]}")
-				if [ -z "${parameters["$i","$((j + 1))"]}" ]; then
-					break
-				fi
-			done
+			local -a files_dirs_to_include=("${option_params[@]}")
 			local -a files_to_add=()
 			get_source_files_from_arguments files_dirs_to_include[@] files_to_add
 			files=("${files[@]}" "${files_to_add[@]}")
@@ -381,18 +418,22 @@ main() {
 		fi
 
 		#compile and place the output file in the out directory corresponding to the one in src
+		local -- fail_message
 		if [[ "$file" == *.c ]]; then
-			gcc -Iheaders/ ${c_version:+-std=c$c_version} -x c -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" "${definition_c_files[@]}" -o "out/${file:4:-2}.o"
+			fail_message=$(gcc -Iheaders/ ${c_version:+-std=c${c_version[*]}} -x c -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" "${definition_c_files[@]}" -o "out/${file:4:-2}.o" 2>&1)
 		elif [[ "$file" == *.cpp ]]; then
-			g++ -Iheaders/ ${cpp_version:+-std=c++$cpp_version} -x c++ -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" "${definition_cpp_files[@]}" -o "out/${file:4:-4}.opp"
+			fail_message=$(g++ -Iheaders/ ${cpp_version:+-std=c++${cpp_version[*]}} -x c++ -Wall -Werror --pedantic -fdiagnostics-color=always -g -O0 "$file" "${definition_cpp_files[@]}" -o "out/${file:4:-4}.opp" 2>&1)
 		fi
 		((current_file++))
 
 		#if the current file is not present in out, print an error message and add it to the error_files array
-		if { [[ "$file" == *.c ]] && [ -f "out/${file:4:-2}.o" ]; } || { [[ "$file" == *.cpp ]] && [ -f "out/${file:4:-4}.opp" ]; }; then
+		if [ -z "$fail_message" ]; then
 			echo "==> Compiled ${file:4} ($current_file/${#files[@]})"
 		else
-			echo -e "!!==> File ${file:4} failed to compile ($current_file/${#files[@]})"
+			if $gcc_errors; then
+				>&2 echo "$fail_message"
+			fi
+			>&2 echo "!!==> File ${file:4} failed to compile ($current_file/${#files[@]})"
 			error_files+=("$file")
 		fi
 		find out/ -type d -empty -delete
@@ -401,9 +442,9 @@ main() {
 	#if error_files is not empty, list all the files that failed to compile
 	if [ ${#error_files[@]} -gt 0 ]; then
 		echo
-		echo -e "${#error_files[@]} out of ${#files[@]} files failed to compile:"
+		>&2 echo "${#error_files[@]} out of ${#files[@]} files failed to compile:"
 		for i in "${!error_files[@]}"; do
-			echo -e "$((i+1))/${#error_files[@]} ||==> ${error_files[i]:4}"
+			>&2 echo "$((i+1))/${#error_files[@]} ||==> ${error_files[i]:4}"
 		done
 	fi
 
@@ -426,6 +467,8 @@ main() {
 	cpp_out_files_without_extension=("${cpp_out_files_without_extension[@]}")
 	c_files_without_extension=("${c_files_without_extension[@]}")
 	cpp_files_without_extension=("${cpp_files_without_extension[@]}")
+	files_dirs_to_exclude=("${files_dirs_to_exclude[@]}")
+	files_dirs_to_include=("${files_dirs_to_include[@]}")
 	files_to_ignore=("${files_to_ignore[@]}")
 }
 
