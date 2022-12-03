@@ -1,17 +1,17 @@
 #!/bin/bash
 
 ctrl_c_confirm() {
-	echo -ne "\033[s"
+	tput sc
 	echo
 	echo -ne "\e[31mAre you sure you want to exit? [Y/n] _\e[0m"
-	echo -ne "\033[1D"
+	tput cub1
 	read -r answer
 	if [[ "$answer" =~ ^[yY]$ ]]; then
 		exit 1
 	fi
 	tput cuu1
 	tput el
-	echo -ne "\033[u"
+	tput rc
 }
 
 trap 'tput cnorm; clear' EXIT
@@ -260,7 +260,7 @@ main() {
 			echo -e "\e[31mheaders directory does not exist\e[0m"
 			echo -e "\e[31mdo you want to continue?\e[0m"
 			echo "\e[31m(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] _\e[0m"
-			echo -ne "\033[1D"
+			tput cub1
 			read -r answer
 			if [[ ! "$answer" =~ ^[yY]$ ]]; then
 				exit 1
@@ -270,7 +270,7 @@ main() {
 			echo -e "\e[31mdefinitions directory does not exist\e[0m"
 			echo -e "\e[31mdo you want to continue?\e[0m"
 			echo -ne "\e[31m(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] _\e[0m"
-			echo -ne "\033[1D"
+			tput cub1
 			read -r answer
 			if [[ ! "$answer" =~ ^[yY]$ ]]; then
 				exit 1
