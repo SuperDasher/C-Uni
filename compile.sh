@@ -7,6 +7,7 @@ ctrl_c_confirm() {
 	tput cub1
 	read -n 1 -r -s answer
 	if [[ "$answer" =~ ^[yY]$ ]]; then
+		trap 'tput cnorm; clear' EXIT
 		exit 1
 	fi
 	tput cuu1
@@ -14,7 +15,7 @@ ctrl_c_confirm() {
 	tput rc
 }
 
-trap 'tput cnorm; clear' EXIT
+trap 'read -n 1 -s -r -t 30 -p "Press any key to continue..."; tput cnorm; clear' EXIT
 trap ctrl_c_confirm INT
 
 is_element_in_array() {
@@ -474,8 +475,6 @@ main() {
 	echo "=== All done ==="
 	echo "================"
 	echo
-
-	read -n 1 -s -r -t 20 -p "Press any key to continue..."
 
 	#these next instructions are merely to silence the shellcheck warnings
 	args=("${args[@]}")
