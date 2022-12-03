@@ -334,10 +334,10 @@ main() {
 	array_remove_append_prepend_pattern out_files[@] "out/" ".opp" cpp_out_files_without_extension
 	local -a c_files_to_delete=()
 	array_diff c_out_files_without_extension[@] c_src_files_without_extension[@] c_files_to_delete
-	array_prepend_pattern c_files_to_delete[@] "out/" c_files_to_delete
+	array_append_prepend_pattern c_files_to_delete[@] "out/" ".o" c_files_to_delete
 	local -a cpp_files_to_delete=()
 	array_diff cpp_out_files_without_extension[@] cpp_src_files_without_extension[@] cpp_files_to_delete
-	array_prepend_pattern cpp_files_to_delete[@] "out/" cpp_files_to_delete
+	array_append_prepend_pattern cpp_files_to_delete[@] "out/" ".opp" cpp_files_to_delete
 	local -a files_to_delete=("${c_files_to_delete[@]}" "${cpp_files_to_delete[@]}")
 	for file in "${files_to_delete[@]}"; do
 		rm -f "$file"
@@ -461,6 +461,8 @@ main() {
 		fi
 		find out/ -type d -empty -delete
 	done
+
+	trap 'tput cnorm; clear; exit 0' INT
 
 	#if error_files is not empty, list all the files that failed to compile
 	if [ ${#error_files[@]} -gt 0 ]; then
