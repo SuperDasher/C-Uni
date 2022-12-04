@@ -7,7 +7,7 @@ bool malloc_m(int ***mat, int rows, int columns);
 
 void init_m(int ***mat, int *rows, int *columns, char *prompt, char *row_prompt, char *column_prompt);
 
-void free_m(int ***mat, int rows);
+void free_m(int **mat, int rows);
 
 void print_dm(int **mat, int rows, int columns);
 

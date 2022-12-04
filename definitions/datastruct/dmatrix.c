@@ -33,13 +33,11 @@ void init_m(int ***mat, int *rows, int *columns, char *prompt, char *row_prompt,
 	}
 }
 
-void free_m(int ***mat, int rows)
+void free_m(int **mat, int rows)
 {
 	for (int i = 0; i < rows; i++)
-	{
-		free(*(*mat + i));
-	}
-	free(*mat);
+		free(*(mat + i));
+	free(mat);
 }
 
 void print_dm(int **mat, int rows, int columns)
