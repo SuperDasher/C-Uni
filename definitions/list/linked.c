@@ -43,10 +43,12 @@ void linked_list_destroy(linked_list *list)
 		exit(EXIT_FAILURE);
 	}
 	node *current = (*list)->head;
+	node *next = NULL;
 	while (current != NULL)
 	{
+		next = current->next;
 		free(current);
-		current = current->next;
+		current = next;
 	}
 	free(*list);
 	*list = NULL;
@@ -288,10 +290,12 @@ void linked_list_clear(linked_list list)
 	null_list_check(list);
 	empty_list_check(list);
 	node *current = list->head;
+	node *next = NULL;
 	while (current != NULL)
 	{
+		next = current->next;
 		free(current);
-		current = current->next;
+		current = next;
 	}
 	list->head = NULL;
 	list->tail = NULL;
