@@ -7,7 +7,7 @@ int main()
 	int array[] = {7, 3, 4, 1, 9, 5, 2, 6, 8};
 	int size = sizeof(array) / sizeof(array[0]);
 	int occurrence = 3;
-	int index = find_occurrence_index(array, size, occurrence);
+	int index = find_occurrence_index(array, occurrence, size);
 	printf("Occurrence: %d\nIndex: %d\n", occurrence, index);
 
 	return 0;
