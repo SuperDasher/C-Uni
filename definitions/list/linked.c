@@ -34,16 +34,22 @@ linked_list linked_list_create()
 	return list;
 }
 
-void linked_list_destroy(linked_list list)
+void linked_list_destroy(linked_list *list)
 {
-	null_list_check(list);
-	node *current = list->head;
+	null_list_check(*list);
+	if (list != NULL)
+	{
+		fprintf(stderr, "passed NULL pointer to linked_list_destroy");
+		exit(EXIT_FAILURE);
+	}
+	node *current = (*list)->head;
 	while (current != NULL)
 	{
 		free(current);
 		current = current->next;
 	}
-	free(list);
+	free(*list);
+	*list = NULL;
 }
 
 void linked_list_add_head(linked_list list, int data)
