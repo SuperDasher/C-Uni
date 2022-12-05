@@ -42,9 +42,9 @@ int main()
 	printf("somma:\n");
 	print_dm(result, n, m);
 
-	free(a, n);
-	free(b, n);
-	free(result, n);
+	free_m(a, n);
+	free_m(b, n);
+	free_m(result, n);
 
 	return 0;
 }
