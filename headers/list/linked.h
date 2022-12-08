@@ -49,4 +49,6 @@ void linked_list_swap(linked_list list, int index1, int index2);
 
 void linked_list_sort(linked_list list);
 
+void linked_list_sort_desc(linked_list list);
+
 #endif /* LINKED_LIST_H */

@@ -14,12 +14,15 @@ typedef struct _linked_list
 {
 	node *head;
 	node *tail;
-} * linked_list;
+} *linked_list;
+
+typedef int (*compare_function)(int, int);
 
 // Utility functions definitions not exposed in the header file
-void linked_list_quick_sort_helper(linked_list list, int low, int high);
-int linked_list_partition(linked_list list, int low, int high);
-void linked_list_swap(linked_list list, int index1, int index2);
+int compare(int a, int b);
+int compare_desc(int a, int b);
+void linked_list_quick_sort_helper(linked_list list, int low, int high, compare_function compare);
+int linked_list_partition(linked_list list, int low, int high, compare_function compare);
 void null_list_check(linked_list list);
 void malloc_fail_check(void *ptr);
 void index_out_of_range_check(linked_list list, int index);
@@ -312,36 +315,56 @@ void linked_list_sort(linked_list list)
 {
 	null_list_check(list);
 	empty_list_check(list);
-	linked_list_quick_sort_helper(list, 0, linked_list_size(list) - 1);
+	linked_list_quick_sort_helper(list, 0, linked_list_size(list) - 1, compare);
+}
+
+void linked_list_sort_desc(linked_list list)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	linked_list_quick_sort_helper(list, 0, linked_list_size(list) - 1, compare_desc);
+}
+
+// normal compare function for linked_list_sort
+int compare(int a, int b)
+{
+	return a - b;
+}
+
+// reverse compare function for linked_list_sort_reverse
+int compare_desc(int a, int b)
+{
+	return b - a;
 }
 
 // Helper function for linked_list_sort
-void linked_list_quick_sort_helper(linked_list list, int low, int high)
+void linked_list_quick_sort_helper(linked_list list, int low, int high, compare_function compare)
 {
 	if (low < high)
 	{
-		int pi = linked_list_partition(list, low, high);
-		linked_list_quick_sort_helper(list, low, pi - 1);
-		linked_list_quick_sort_helper(list, pi + 1, high);
+		int pi = linked_list_partition(list, low, high, compare);
+		linked_list_quick_sort_helper(list, low, pi - 1, compare);
+		linked_list_quick_sort_helper(list, pi + 1, high, compare);
 	}
 }
 
-int linked_list_partition(linked_list list, int low, int high)
+int linked_list_partition(linked_list list, int low, int high, compare_function compare)
 {
 	int pivot = linked_list_get(list, high);
-	int i = (low - 1);
-	for (int j = low; j <= high - 1; j++)
+	int i = low - 1;
+	for (int j = low; j < high; j++)
 	{
-		if (linked_list_get(list, j) < pivot)
+		if (compare(linked_list_get(list, j), pivot) < 0)
 		{
 			i++;
 			linked_list_swap(list, i, j);
 		}
 	}
 	linked_list_swap(list, i + 1, high);
-	return (i + 1);
+	return i + 1;
 }
 
+// Other helper functions
 void null_list_check(linked_list list)
 {
 	if (list == NULL)
