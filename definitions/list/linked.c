@@ -37,9 +37,9 @@ linked_list linked_list_create()
 void linked_list_destroy(linked_list *list)
 {
 	null_list_check(*list);
-	if (list != NULL)
+	if (list == NULL)
 	{
-		fprintf(stderr, "passed NULL pointer to linked_list_destroy");
+		fprintf(stderr, "passed NULL pointer to linked_list_destroy\n");
 		exit(EXIT_FAILURE);
 	}
 	node *current = (*list)->head;
