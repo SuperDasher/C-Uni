@@ -27,6 +27,7 @@ void null_list_check(linked_list list);
 void malloc_fail_check(void *ptr);
 void index_out_of_range_check(linked_list list, int index);
 void empty_list_check(linked_list list);
+void linked_list_remove_node(linked_list list, node *node_to_remove);
 
 linked_list linked_list_create()
 {
@@ -664,6 +665,24 @@ void empty_list_check(linked_list list)
 		fprintf(stderr, "list is empty\n");
 		exit(EXIT_FAILURE);
 	}
+}
+
+void linked_list_remove_node(linked_list list, node *node_to_remove)
+{
+	if (node_to_remove == list->head)
+	{
+		list->head = node_to_remove->next;
+	}
+	else
+	{
+		node *current = list->head;
+		while (current->next != node_to_remove)
+		{
+			current = current->next;
+		}
+		current->next = node_to_remove->next;
+	}
+	free(node_to_remove);
 }
 
 // file deepcode ignore DerefOfMaybeNull: malloc_fail_check is used
