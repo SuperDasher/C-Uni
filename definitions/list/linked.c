@@ -567,7 +567,7 @@ bool linked_list_is_sorted(linked_list list)
 	return true;
 }
 
-void linked_list_is_sorted_desc(linked_list list)
+bool linked_list_is_sorted_desc(linked_list list)
 {
 	null_list_check(list);
 	empty_list_check(list);
