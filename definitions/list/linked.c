@@ -249,6 +249,11 @@ void linked_list_print(linked_list list)
 	null_list_check(list);
 	node *current = list->head;
 	printf("[");
+	if (current == NULL)
+	{
+		printf("]\n");
+		return;
+	}
 	while (current != list->tail)
 	{
 		printf("%d, ", current->data);
