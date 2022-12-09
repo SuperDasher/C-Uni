@@ -51,4 +51,34 @@ void linked_list_sort(linked_list list);
 
 void linked_list_sort_desc(linked_list list);
 
+int *linked_list_to_array(linked_list list);
+
+linked_list linked_list_from_array(int *array, int size);
+
+void linked_list_concatenate(linked_list dest, linked_list src);
+
+bool linked_list_contains_duplicates(linked_list list);
+
+void linked_list_remove_duplicates(linked_list list);
+
+bool linked_list_contains(linked_list list, int data);
+
+int linked_list_occurrences_of(linked_list list, int data);
+
+int *linked_list_indices_of(linked_list list, int data);
+
+int linked_list_first_index_of(linked_list list, int data);
+
+int linked_list_last_index_of(linked_list list, int data);
+
+int linked_list_index_of(linked_list list, int data, int offset);
+
+void linked_list_remove(linked_list list, int data);
+
+bool linked_list_equals(linked_list list1, linked_list list2);
+
+bool linked_list_is_sorted(linked_list list);
+
+bool linked_list_is_sorted_desc(linked_list list);
+
 #endif /* LINKED_LIST_H */

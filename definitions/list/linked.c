@@ -325,6 +325,266 @@ void linked_list_sort_desc(linked_list list)
 	linked_list_quick_sort_helper(list, 0, linked_list_size(list) - 1, compare_desc);
 }
 
+int *linked_list_to_array(linked_list list)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	int *array = malloc(sizeof(int) * linked_list_size(list));
+	malloc_fail_check((void *)array);
+	node *current = list->head;
+	for (int i = 0; i < linked_list_size(list); i++)
+	{
+		array[i] = current->data;
+		current = current->next;
+	}
+	return array;
+}
+
+linked_list linked_list_from_array(int *array, int size)
+{
+	if (array == NULL)
+	{
+		fprintf(stderr, "array is NULL");
+		exit(EXIT_FAILURE);
+	}
+	linked_list list = linked_list_create();
+	for (int i = 0; i < size; i++)
+	{
+		linked_list_add_tail(list, array[i]);
+	}
+	return list;
+}
+
+void linked_list_concatenate(linked_list dest, linked_list src)
+{
+	null_list_check(dest);
+	null_list_check(src);
+	empty_list_check(src);
+	node *current = src->head;
+	while (current != NULL)
+	{
+		linked_list_add_tail(dest, current->data);
+		current = current->next;
+	}
+}
+
+bool linked_list_contains_duplicates(linked_list list)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	node *current = list->head;
+	node *next = NULL;
+	while (current != NULL)
+	{
+		next = current->next;
+		while (next != NULL)
+		{
+			if (next->data == current->data)
+			{
+				return true;
+			}
+			next = next->next;
+		}
+		current = current->next;
+	}
+	return false;
+}
+
+void linked_list_remove_duplicates(linked_list list)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	node *current = list->head;
+	node *next = NULL;
+	while (current != NULL)
+	{
+		next = current->next;
+		while (next != NULL && next->data == current->data)
+		{
+			node *temp = next;
+			next = next->next;
+			linked_list_remove_node(list, temp);
+		}
+		current = next;
+	}
+}
+
+bool linked_list_contains(linked_list list, int data)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	node *current = list->head;
+	while (current != NULL)
+	{
+		if (current->data == data)
+		{
+			return true;
+		}
+		current = current->next;
+	}
+	return false;
+}
+
+int linked_list_occurrences_of(linked_list list, int data)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	int count = 0;
+	node *current = list->head;
+	while (current != NULL)
+	{
+		if (current->data == data)
+		{
+			count++;
+		}
+		current = current->next;
+	}
+	return count;
+}
+
+int *linked_list_indices_of(linked_list list, int data)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	int malloc_size = sizeof(int) * linked_list_occurrences_of(list, data);
+	if (malloc_size == 0)
+		return NULL;
+	int *indices = malloc(malloc_size);
+	malloc_fail_check((void *)indices);
+	int count = 0;
+	node *current = list->head;
+	for (int i = 0; i < linked_list_size(list); i++)
+	{
+		if (current->data == data)
+			indices[count++] = i;
+		current = current->next;
+	}
+	return indices;
+}
+
+int linked_list_first_index_of(linked_list list, int data)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	node *current = list->head;
+	for (int i = 0; i < linked_list_size(list); i++)
+	{
+		if (current->data == data)
+			return i;
+		current = current->next;
+	}
+	return -1;
+}
+
+int linked_list_last_index_of(linked_list list, int data)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	node *current = list->head;
+	int index = -1;
+	for (int i = 0; i < linked_list_size(list); i++)
+	{
+		if (current->data == data)
+			index = i;
+		current = current->next;
+	}
+	return index;
+}
+
+int linked_list_index_of(linked_list list, int data, int offset)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	if (offset < 0 || offset >= linked_list_size(list))
+	{
+		fprintf(stderr, "offset index out of bounds");
+		exit(EXIT_FAILURE);
+	}
+	node *current = list->head;
+	int count = 0;
+	for (int i = 0; i < linked_list_size(list); i++)
+	{
+		if (current->data == data)
+		{
+			if (count == offset)
+				return i;
+			count++;
+		}
+		current = current->next;
+	}
+	return -1;
+}
+
+void linked_list_remove(linked_list list, int data)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	node *current = list->head;
+	while (current != NULL)
+	{
+		if (current->data == data)
+		{
+			node *temp = current;
+			current = current->next;
+			linked_list_remove_node(list, temp);
+		}
+		else
+		{
+			current = current->next;
+		}
+	}
+}
+
+bool linked_list_equals(linked_list list1, linked_list list2)
+{
+	null_list_check(list1);
+	null_list_check(list2);
+	if (linked_list_size(list1) != linked_list_size(list2))
+		return false;
+	node *current1 = list1->head;
+	node *current2 = list2->head;
+	while (current1 != NULL)
+	{
+		if (current1->data != current2->data)
+			return false;
+		current1 = current1->next;
+		current2 = current2->next;
+	}
+	return true;
+}
+
+bool linked_list_is_sorted(linked_list list)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	node *current = list->head;
+	while (current->next != NULL)
+	{
+		if (current->data > current->next->data)
+			return false;
+		current = current->next;
+	}
+	return true;
+}
+
+void linked_list_is_sorted_desc(linked_list list)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	node *current = list->head;
+	while (current->next != NULL)
+	{
+		if (current->data < current->next->data)
+			return false;
+		current = current->next;
+	}
+	return true;
+}
+
+/*******************************/
+/****** Private functions ******/
+/*******************************/
+
 // normal compare function for linked_list_sort
 int compare(int a, int b)
 {
