@@ -307,8 +307,8 @@ void linked_list_clear(linked_list list)
 void linked_list_swap(linked_list list, int index1, int index2)
 {
 	int temp = linked_list_get(list, index1);
-	linked_list_set(list, index1, linked_list_get(list, index2));
-	linked_list_set(list, index2, temp);
+	linked_list_set(list, linked_list_get(list, index2), index1);
+	linked_list_set(list, temp, index2);
 }
 
 void linked_list_sort(linked_list list)
