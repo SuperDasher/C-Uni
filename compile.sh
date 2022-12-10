@@ -234,8 +234,12 @@ main() {
 	local -- gcc_errors=true
 	local -a c_version=()
 	local -a cpp_version=()
+	local -a optimization_parameters=(-O2)
 	for i in "${!options[@]}"; do
 		case "${options[i]}" in
+		--debug-optimized | -D)
+			optimization_parameters=(-Og -g3)
+			;;
 		--silence-warnings | -S)
 			silence_warnings=true
 			;;
@@ -442,10 +446,10 @@ main() {
 		local -- fail_message
 		local -- success
 		if [[ "$file" == *.c ]]; then
-			fail_message=$(gcc -Iheaders/ ${c_version:+-std=c${c_version[*]}} -x c -Wall -Werror --pedantic -fdiagnostics-color=always -g3 -O0 "$file" "${definition_c_files[@]}" -o "out/${file:4:-2}.o" 2>&1)
+			fail_message=$(gcc -Iheaders/ ${c_version:+-std=c${c_version[*]}} -x c -Wall -Wextra -Wpedantic -Werror -fdiagnostics-color=always "${optimization_parameters[@]}" "$file" "${definition_c_files[@]}" -o "out/${file:4:-2}.o" 2>&1)
 			success=$?
 		elif [[ "$file" == *.cpp ]]; then
-			fail_message=$(g++ -Iheaders/ ${cpp_version:+-std=c++${cpp_version[*]}} -x c++ -Wall -Werror --pedantic -fdiagnostics-color=always -g3 -O0 "$file" "${definition_cpp_files[@]}" -o "out/${file:4:-4}.opp" 2>&1)
+			fail_message=$(g++ -Iheaders/ ${cpp_version:+-std=c++${cpp_version[*]}} -x c++ -Wall -Wextra -Wpedantic -Werror -fdiagnostics-color=always "${optimization_parameters[@]}" "$file" "${definition_cpp_files[@]}" -o "out/${file:4:-4}.opp" 2>&1)
 			success=$?
 		fi
 		((current_file++))

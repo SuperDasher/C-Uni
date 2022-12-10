@@ -20,7 +20,7 @@ char *edit_email(char *email)
 {
 	char *edited_email;
 	int new_email_length = strlen(email) + 1;
-	for (int i = 0; i < strlen(email); i++)
+	for (size_t i = 0; i < strlen(email); i++)
 	{
 		if (email[i] == '.')
 			new_email_length += 4;
@@ -33,7 +33,7 @@ char *edit_email(char *email)
 		perror("calloc() failed");
 		exit(errno);
 	}
-	for (int i = 0; i < strlen(email); i++)
+	for (size_t i = 0; i < strlen(email); i++)
 	{
 		if (email[i] == '.')
 		{

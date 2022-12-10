@@ -31,7 +31,7 @@ void linked_list_remove_node(linked_list list, node *node_to_remove);
 
 linked_list linked_list_create()
 {
-	linked_list list = (linked_list)malloc(sizeof(linked_list));
+	linked_list list = (linked_list)malloc(sizeof(struct _linked_list));
 	malloc_fail_check((void *)list);
 	list->head = NULL;
 	list->tail = NULL;

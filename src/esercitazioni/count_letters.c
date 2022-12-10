@@ -14,7 +14,7 @@ int main()
 	int count[ALPHABET_LETTERS] = {0};
 
 	printf("lettera\tcodice ASCII\n");
-	for (int i = 0; i < strlen(string); i++)
+	for (size_t i = 0; i < strlen(string); i++)
 	{
 		if (string[i] >= 'a' && string[i] <= 'z')
 		{

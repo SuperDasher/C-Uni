@@ -15,7 +15,7 @@ void seek_last_month(FILE *file);
 void get_month_year(char month_year[MONTH_YEAR_CHARS]);
 void get_file_month_year(FILE *file, char month_year[MONTH_YEAR_CHARS]);
 
-int main(int argc, char *argv[])
+int main()
 {
 	FILE *file = fopen("money.md", "r+");
 	check_file(file);

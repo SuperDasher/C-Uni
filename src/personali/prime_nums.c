@@ -60,14 +60,14 @@ int main(int argc, char *argv[])
 		prime[i] = current - 2;
 	}
 
-	for (uint32_t i = 0; i < amount - 1; i++)
-	{
-		if (i % 5 == 0)
-		{
-			printf("\n");
-		}
-		printf("%" PRIu64 "\t\t\t", prime[i]);
-	}
+	// for (uint32_t i = 0; i < amount - 1; i++)
+	// {
+	// 	if (i % 5 == 0)
+	// 	{
+	// 		printf("\n");
+	// 	}
+	// 	printf("%" PRIu64 "\t\t\t", prime[i]);
+	// }
 	printf("%" PRIu64 "\n", prime[amount - 1]);
 	free(prime);
 
