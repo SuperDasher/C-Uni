@@ -172,6 +172,35 @@ void linked_list_remove_at(linked_list list, int index)
 	}
 }
 
+void linked_list_remove_data(linked_list list, int data)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	node *current = list->head;
+	node *previous = NULL;
+	while (current != NULL)
+	{
+		if (current->data == data)
+		{
+			if (current == list->head)
+			{
+				linked_list_remove_head(list);
+			}
+			else if (current == list->tail)
+			{
+				linked_list_remove_tail(list);
+			}
+			else
+			{
+				previous->next = current->next;
+				free(current);
+			}
+		}
+		previous = current;
+		current = current->next;
+	}
+}
+
 int linked_list_size(linked_list list)
 {
 	null_list_check(list);
