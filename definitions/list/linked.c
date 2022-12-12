@@ -526,22 +526,18 @@ int linked_list_last_index_of(linked_list list, int data)
 	return index;
 }
 
-int linked_list_index_of(linked_list list, int data, int offset)
+int linked_list_index_of(linked_list list, int data, int occurrence)
 {
 	null_list_check(list);
 	empty_list_check(list);
-	if (offset < 0 || offset >= linked_list_size(list))
-	{
-		fprintf(stderr, "offset index out of bounds");
-		exit(EXIT_FAILURE);
-	}
+	index_out_of_range_check(list, occurrence);
 	node *current = list->head;
 	int count = 0;
 	for (int i = 0; i < linked_list_size(list); i++)
 	{
 		if (current->data == data)
 		{
-			if (count == offset)
+			if (count == occurrence)
 				return i;
 			count++;
 		}
