@@ -27,7 +27,7 @@ int main()
 	srand(time(NULL));
 
 	struct card deck[DECK_SIZE];
-	FILE *file = fopen("src/files/mazzoPolimi.bin", "rb");
+	FILE *file = fopen("src/files/input/mazzoPolimi.bin", "rb");
 	if (file == NULL)
 	{
 		perror("Error opening file");
@@ -44,7 +44,7 @@ int main()
 		extractedCards[i] = deck[i];
 	}
 	shuffle_deck(deck, EXTRACTED_CARDS);
-	file = fopen("src/files/mazzoStudente.bin", "wb");
+	file = fopen("src/files/output/mazzoStudente.bin", "wb");
 	if (file == NULL)
 	{
 		perror("Error opening file");
