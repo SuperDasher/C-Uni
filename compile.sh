@@ -266,7 +266,7 @@ main() {
 		if [ ! -d headers/ ]; then
 			echo -e "\e[31mheaders directory does not exist\e[0m"
 			echo -e "\e[31mdo you want to continue?\e[0m"
-			echo "\e[31m(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] _\e[0m"
+			echo -ne "\e[31m(if you don't want to see this message in the future, use the option --silence-warnings) [Y/n] _\e[0m"
 			read -n 1 -r -s answer
 			if [[ ! "$answer" =~ ^[yY]$ ]]; then
 				exit 1
@@ -294,6 +294,13 @@ main() {
 		if ! is_cpp_valid "${cpp_version[*]}"; then
 			echo -e "\e[31mInvalid C++ version\e[0m"
 			exit 1
+		fi
+	fi
+
+	# if the directory src/files/input exists, make sure the output directory exists in the same files folder
+	if [ -d src/files/input/ ]; then
+		if [ ! -d src/files/output/ ]; then
+			mkdir src/files/output/
 		fi
 	fi
 
