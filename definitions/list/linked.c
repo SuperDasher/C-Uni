@@ -187,6 +187,17 @@ void linked_list_destroy(linked_list *list)
 	*list = NULL;
 }
 
+void linked_list_scan(linked_list list, int n)
+{
+	null_list_check(list);
+	int data;
+	for (int i = 0; i < n; i++)
+	{
+		scanf("%d", &data);
+		linked_list_insert(list, data);
+	}
+}
+
 void linked_list_insert_head(linked_list list, int data)
 {
 	null_list_check(list);
@@ -407,18 +418,17 @@ void linked_list_print(linked_list list)
 {
 	null_list_check(list);
 	node *current = list->head;
-	printf("[");
 	if (current == NULL)
 	{
-		printf("]\n");
+		printf("\n");
 		return;
 	}
 	while (current != list->tail)
 	{
-		printf("%d, ", current->data);
+		printf("%d --> ", current->data);
 		current = current->next;
 	}
-	printf("%d]\n", current->data);
+	printf("%d\n", current->data);
 }
 
 linked_list linked_list_copy(linked_list list)
