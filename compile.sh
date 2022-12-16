@@ -252,9 +252,29 @@ main() {
 		--cpp-version | -Vcpp)
 			get_parameters_from_option_index "$i" cpp_version
 			;;
-		--help | -h | -H | "-?")
-			# TODO: print help
-			echo "help will be printed here, not implemented yet"
+		--help | -h | -H)
+			echo "usage: $0 [files and directories] [options]"
+			echo
+			echo "files and directories: the files and directories to compile, without including the src directory"
+			echo "if no files or directories are specified, all the files in the src directory will be compiled"
+			echo
+			echo "the standard options used by gcc in this script are:"
+			echo "  -Wall: show all the warnings"
+			echo "  -Wextra: show extra warnings"
+			echo "  -Werror: treat warnings as errors"
+			echo "  -Wpedantic: show pedantic warnings"
+			echo
+			echo "options:"
+			echo "  --help | -h | -H: shows this message"
+			echo "  --debug-optimized | -D: compile with -Og -g3"
+			echo "  --silence-warnings | -S: don't show warnings if the headers directory or the definitions directory do not exist"
+			echo "  --no-error-messages | -N: don't show error messages from gcc during compilation"
+			echo "  --c-version | -Vc: specify the c version to use"
+			echo "  --cpp-version | -Vcpp: specify the c++ version to use"
+			echo "  --only-new | -n: compile only the files that aren't present in the out directory"
+			echo "  --only-old | -o: compile only the files that are present in the out directory"
+			echo "  --include | -i: include the specified directories and files in the compilation of what would be compiled otherwise without this option"
+			echo "  --exclude | -e: exclude the specified directories and files from the compilation of what would be compiled otherwise without this option"
 			echo
 			trap 'read -n 1 -s -r -p "Press any key to continue..."; tput cnorm; clear' EXIT
 			exit 0
@@ -462,7 +482,7 @@ main() {
 		((current_file++))
 
 		#if the current file is not present in out, print an error message and add it to the error_files array
-		if [ $success -eq 0 ]; then
+		if [ "$success" -eq 0 ]; then
 			echo "==> Compiled ${file:4} ($current_file/${#files[@]})"
 		else
 			if $gcc_errors; then
