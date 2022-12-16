@@ -220,6 +220,7 @@ print_help() {
 	echo "if no files or directories are specified, all the files in the src directory will be compiled"
 	echo
 	echo "the standard options used by gcc in this script are:"
+	echo "  -O2: optimize the code"
 	echo "  -Wall: show all the warnings"
 	echo "  -Wextra: show extra warnings"
 	echo "  -Werror: treat warnings as errors"
