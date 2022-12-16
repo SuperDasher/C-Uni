@@ -37,6 +37,7 @@ bool is_valid_row(int[N][N], int, int);
 bool is_valid_column(int[N][N], int, int);
 bool is_valid_subgrid(int[N][N], int, int, int);
 void sudoku_file_to_matrix(FILE *, int[N][N]);
+void print_sudoku_up_to(int[N][N], int);
 
 int main()
 {
@@ -61,17 +62,22 @@ int main()
 
 	printf("parte 2:\n");
 	int input_sudoku[N][N];
+	int count = 0;
 	for (int row = 0; row < N; row++)
 		for (int column = 0; column < N; column++)
 		{
-			printf("Inserisci il valore della cella [%d][%d]: ", row, column);
+			printf("Inserisci il valore della cella [%d][%d]: ", row + 1, column + 1);
 			scanf("%d", &input_sudoku[row][column]);
+			count++;
+			printf("\n\n\n");
+			print_sudoku_up_to(input_sudoku, count);
 			if (!is_valid_sudoku_up_to(input_sudoku, row + 1, column + 1))
 			{
 				printf("Sudoku non valido\n");
 				return 0;
 			}
 		}
+	printf("Sudoku valido\n");
 
 	return 0;
 }
@@ -195,5 +201,54 @@ void sudoku_file_to_matrix(FILE *file, int matrix[N][N])
 			i++;
 			j = 0;
 		}
+	}
+}
+
+void print_sudoku_up_to(int sudoku[N][N], int element)
+{
+	int count = 0;
+	bool finish_numbers = false;
+	for (int row = 0; row < N; row++)
+	{
+		printf("[ ");
+		for (int column = 0; column < N; column++)
+		{
+			if (count == element)
+			{
+				finish_numbers = true;
+				break;
+			}
+			printf("%d ", sudoku[row][column]);
+			if (column % 3 == 2 && column != N - 1)
+				printf("]   [ ");
+			count++;
+		}
+		if (finish_numbers)
+			break;
+		printf("]\n");
+		if (row % 3 == 2 && row != N - 1)
+			printf("\n");
+	}
+	if (count == N * N)
+		return;
+	for (int i = count % N; i < N; i++)
+	{
+		printf("X ");
+		if (i % 3 == 2 && i != N - 1)
+			printf("]   [ ");
+	}
+	printf("]\n");
+	for (int row = count / N + 1; row < N; row++)
+	{
+		printf("[ ");
+		for (int column = 0; column < N; column++)
+		{
+			printf("X ");
+			if (column % 3 == 2 && column != N - 1)
+				printf("]   [ ");
+		}
+		printf("]\n");
+		if (row % 3 == 2 && row != N - 1)
+			printf("\n");
 	}
 }
