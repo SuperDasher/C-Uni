@@ -5,7 +5,7 @@
 
 typedef struct _linked_list *linked_list;
 
-typedef node *linked_list_iterator;
+typedef struct _linked_list_iterator *linked_list_iterator;
 
 linked_list_iterator linked_list_iterator_create(linked_list list);
 

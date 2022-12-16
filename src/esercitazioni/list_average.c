@@ -26,7 +26,14 @@ int main(int argc, char *argv[])
 
 float list_average(linked_list list){
 	float sum = 0;
-	for (int i = 0; i < linked_list_size(list); i++)
-		sum += linked_list_get(list, i);
-	return sum / linked_list_size(list);
+	int count = 0;
+	linked_list_iterator it = linked_list_iterator_create(list);
+	while (linked_list_iterator_has_next(it))
+	{
+		int number = linked_list_iterator_next(it);
+		sum += number;
+		count++;
+	}
+	linked_list_iterator_destroy(it);
+	return sum / count;
 }
