@@ -35,6 +35,8 @@ linked_list linked_list_create();
 
 void linked_list_destroy(linked_list *list);
 
+void linked_list_scan(linked_list list, int n);
+
 void linked_list_insert_head(linked_list list, int data);
 
 void linked_list_insert(linked_list list, int data);
