@@ -35,7 +35,7 @@ void index_out_of_range_check(linked_list list, int index);
 void empty_list_check(linked_list list);
 void linked_list_remove_node(linked_list list, node *node_to_remove);
 
-linked_list_iterator linked_list_iterator_create(linked_list list)
+linked_list_iterator linked_list_iterator_begin(linked_list list)
 {
 	linked_list_iterator iterator = malloc(sizeof(struct _linked_list_iterator));
 	malloc_fail_check(iterator);

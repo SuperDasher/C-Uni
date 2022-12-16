@@ -20,14 +20,16 @@ int main(int argc, char *argv[])
 	linked_list_remove_duplicates(list);
 	float average = list_average(list);
 	printf("Average: %.2f\n", average);
+	linked_list_destroy(list);
 
 	return 0;
 }
 
-float list_average(linked_list list){
+float list_average(linked_list list)
+{
 	float sum = 0;
 	int count = 0;
-	linked_list_iterator it = linked_list_iterator_create(list);
+	linked_list_iterator it = linked_list_iterator_begin(list);
 	while (linked_list_iterator_has_next(it))
 	{
 		int number = linked_list_iterator_next(it);

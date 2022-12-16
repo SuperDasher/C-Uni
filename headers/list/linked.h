@@ -7,7 +7,7 @@ typedef struct _linked_list *linked_list;
 
 typedef struct _linked_list_iterator *linked_list_iterator;
 
-linked_list_iterator linked_list_iterator_create(linked_list list);
+linked_list_iterator linked_list_iterator_begin(linked_list list);
 
 bool linked_list_iterator_has_next(linked_list_iterator iterator);
 
