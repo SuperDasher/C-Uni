@@ -69,17 +69,17 @@
 ## December 2022
 
 1. started with 1789.95€
-2. money spent so far: 212.55€ [29.56€ not refunded]
+2. money spent so far: 220.55€ [37.56€ not refunded]
     1. subscriptions: 0€ (3.99€ total)
         - [ ] 3.99€
     2. extras for myself: 144.99€
-    3. extras for Uni: 67.56€
+    3. extras for Uni: 75.56€
         - 38€ refunded
-        - 29.56€ not refunded
+        - 37.56€ not refunded
     4. on others behalf: 0€
         - 0€ refunded
         - 0€ not refunded
-3. balance: 1615.30€
+3. balance: 1607.30€
 4. gain: -59.08€
     - 86.01€ from normal gain
     - -144.99€ from other gain
