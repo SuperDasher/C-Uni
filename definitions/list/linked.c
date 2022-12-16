@@ -262,6 +262,51 @@ void linked_list_insert_at(linked_list list, int data, int index)
 	}
 }
 
+void linked_list_insert_ordered(linked_list list, int data)
+{
+	null_list_check(list);
+	if (linked_list_is_empty(list))
+	{
+		linked_list_insert(list, data);
+		return;
+	}
+	if (!linked_list_is_sorted(list) && !linked_list_is_sorted_desc(list))
+	{
+		fprintf(stderr, "List is not sorted\n");
+		exit(EXIT_FAILURE);
+	}
+	node *new_node = (node *)malloc(sizeof(node));
+	malloc_fail_check((void *)new_node);
+	new_node->data = data;
+	node *current = list->head;
+	node *previous = NULL;
+	if (linked_list_is_sorted(list))
+	{
+		while (current != NULL && current->data < data)
+		{
+			previous = current;
+			current = current->next;
+		}
+	}
+	else
+	{
+		while (current != NULL && current->data > data)
+		{
+			previous = current;
+			current = current->next;
+		}
+	}
+	if (previous == NULL)
+	{
+		linked_list_insert_head(list, data);
+	}
+	else
+	{
+		new_node->next = current;
+		previous->next = new_node;
+	}
+}
+
 void linked_list_remove_head(linked_list list)
 {
 	null_list_check(list);
@@ -497,6 +542,55 @@ void linked_list_sort_desc(linked_list list)
 	null_list_check(list);
 	empty_list_check(list);
 	linked_list_quick_sort_helper(list, 0, linked_list_size(list) - 1, compare_desc);
+}
+
+int linked_list_min(linked_list list)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	int min = linked_list_get(list, 0);
+	for (int i = 1; i < linked_list_size(list); i++)
+	{
+		if (linked_list_get(list, i) < min)
+		{
+			min = linked_list_get(list, i);
+		}
+	}
+	return min;
+}
+
+int linked_list_max(linked_list list)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	int max = linked_list_get(list, 0);
+	for (int i = 1; i < linked_list_size(list); i++)
+	{
+		if (linked_list_get(list, i) > max)
+		{
+			max = linked_list_get(list, i);
+		}
+	}
+	return max;
+}
+
+int linked_list_sum(linked_list list)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	int sum = 0;
+	for (int i = 0; i < linked_list_size(list); i++)
+	{
+		sum += linked_list_get(list, i);
+	}
+	return sum;
+}
+
+float linked_list_average(linked_list list)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	return (float)linked_list_sum(list) / linked_list_size(list);
 }
 
 int *linked_list_to_array(linked_list list)

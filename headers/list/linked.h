@@ -43,6 +43,8 @@ void linked_list_insert(linked_list list, int data);
 
 void linked_list_insert_at(linked_list list, int data, int index);
 
+void linked_list_insert_ordered(linked_list list, int data);
+
 void linked_list_remove_head(linked_list list);
 
 void linked_list_remove_tail(linked_list list);
@@ -80,6 +82,14 @@ void linked_list_swap(linked_list list, int index1, int index2);
 void linked_list_sort(linked_list list);
 
 void linked_list_sort_desc(linked_list list);
+
+int linked_list_min(linked_list list);
+
+int linked_list_max(linked_list list);
+
+int linked_list_sum(linked_list list);
+
+float linked_list_average(linked_list list);
 
 int *linked_list_to_array(linked_list list);
 
