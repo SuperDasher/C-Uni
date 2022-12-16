@@ -382,7 +382,9 @@ void linked_list_remove_data(linked_list list, int data)
 			else
 			{
 				previous->next = current->next;
-				free(current);
+				node *temp = current;
+				current = previous;
+				free(temp);
 			}
 		}
 		previous = current;
