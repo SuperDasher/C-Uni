@@ -304,6 +304,10 @@ void linked_list_insert_ordered(linked_list list, int data)
 	{
 		new_node->next = current;
 		previous->next = new_node;
+		if (current == NULL)
+		{
+			list->tail = new_node;
+		}
 	}
 }
 
