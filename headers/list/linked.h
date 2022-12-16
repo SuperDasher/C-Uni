@@ -5,6 +5,16 @@
 
 typedef struct _linked_list *linked_list;
 
+typedef node *linked_list_iterator;
+
+linked_list_iterator linked_list_iterator_create(linked_list list);
+
+bool linked_list_iterator_has_next(linked_list_iterator iterator);
+
+int linked_list_iterator_next(linked_list_iterator iterator);
+
+void linked_list_iterator_destroy(linked_list_iterator iterator);
+
 linked_list linked_list_create();
 
 void linked_list_destroy(linked_list *list);

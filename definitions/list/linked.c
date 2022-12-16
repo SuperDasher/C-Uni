@@ -16,6 +16,8 @@ typedef struct _linked_list
 	node *tail;
 } *linked_list;
 
+typedef node *linked_list_iterator;
+
 typedef int (*compare_function)(int, int);
 
 // Utility functions definitions not exposed in the header file
@@ -28,6 +30,37 @@ void malloc_fail_check(void *ptr);
 void index_out_of_range_check(linked_list list, int index);
 void empty_list_check(linked_list list);
 void linked_list_remove_node(linked_list list, node *node_to_remove);
+
+linked_list_iterator linked_list_iterator_create(linked_list list)
+{
+	linked_list_iterator iterator = malloc(sizeof(node));
+	malloc_fail_check(iterator);
+	iterator->data = 0;
+	iterator->next = list->head;
+	return iterator;
+}
+
+bool linked_list_iterator_has_next(linked_list_iterator iterator)
+{
+	return iterator->next != NULL;
+}
+
+int linked_list_iterator_next(linked_list_iterator iterator)
+{
+	if (!linked_list_iterator_has_next(iterator))
+	{
+		fprintf(stderr, "No more elements in the list\n");
+		exit(EXIT_FAILURE);
+	}
+	int data = iterator->next->data;
+	iterator->next = iterator->next->next;
+	return data;
+}
+
+void linked_list_iterator_destroy(linked_list_iterator iterator)
+{
+	free(iterator);
+}
 
 linked_list linked_list_create()
 {
