@@ -594,6 +594,7 @@ float linked_list_average(linked_list list)
 {
 	null_list_check(list);
 	empty_list_check(list);
+	// deepcode ignore DivisionByZero: empty_list_check() will catch this
 	return (float)linked_list_sum(list) / linked_list_size(list);
 }
 
