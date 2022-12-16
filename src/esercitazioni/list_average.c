@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	for (int i = 1; i < argc; i++)
 	{
 		int number = atoi(argv[i]);
-		linked_list_add_tail(list, number);
+		linked_list_insert(list, number);
 	}
 	linked_list_remove_duplicates(list);
 	float average = list_average(list);
@@ -27,6 +27,8 @@ int main(int argc, char *argv[])
 
 float list_average(linked_list list)
 {
+	if (linked_list_is_empty(list))
+		return 0;
 	float sum = 0;
 	int count = 0;
 	linked_list_iterator it = linked_list_iterator_begin(list);
@@ -37,5 +39,6 @@ float list_average(linked_list list)
 		count++;
 	}
 	linked_list_iterator_destroy(it);
+	// deepcode ignore DivisionByZero: linked_list_is_empty() checks if the list is empty
 	return sum / count;
 }

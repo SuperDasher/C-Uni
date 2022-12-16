@@ -20,6 +20,7 @@ typedef struct _linked_list_iterator
 {
 	linked_list list;
 	node *current;
+	int index;
 } *linked_list_iterator;
 
 typedef int (*compare_function)(int, int);
@@ -41,6 +42,7 @@ linked_list_iterator linked_list_iterator_begin(linked_list list)
 	malloc_fail_check(iterator);
 	iterator->list = list;
 	iterator->current = list->head;
+	iterator->index = 0;
 	return iterator;
 }
 
@@ -53,7 +55,81 @@ int linked_list_iterator_next(linked_list_iterator iterator)
 {
 	int data = iterator->current->data;
 	iterator->current = iterator->current->next;
+	iterator->index++;
 	return data;
+}
+
+int linked_list_iterator_previous(linked_list_iterator iterator)
+{
+	int data = iterator->current->data;
+	linked_list_iterator temp = linked_list_iterator_begin(iterator->list);
+	while (temp->index < iterator->index - 1)
+	{
+		linked_list_iterator_next(temp);
+	}
+	iterator->current = temp->current;
+	iterator->index--;
+	linked_list_iterator_destroy(temp);
+	return data;
+}
+
+int linked_list_iterator_index(linked_list_iterator iterator)
+{
+	return iterator->index;
+}
+
+int linked_list_iterator_data(linked_list_iterator iterator)
+{
+	return iterator->current->data;
+}
+
+void linked_list_iterator_set(linked_list_iterator iterator, int data)
+{
+	iterator->current->data = data;
+}
+
+void linked_list_iterator_insert(linked_list_iterator iterator, int data)
+{
+	node *new_node = malloc(sizeof(node));
+	malloc_fail_check(new_node);
+	new_node->data = data;
+	new_node->next = iterator->current;
+	if (iterator->index == 0)
+	{
+		iterator->list->head = new_node;
+	}
+	else
+	{
+		linked_list_iterator temp = linked_list_iterator_begin(iterator->list);
+		while (temp->index < iterator->index - 1)
+		{
+			linked_list_iterator_next(temp);
+		}
+		temp->current->next = new_node;
+		linked_list_iterator_destroy(temp);
+	}
+	iterator->index++;
+}
+
+void linked_list_iterator_remove(linked_list_iterator iterator)
+{
+	if (iterator->index == 0)
+	{
+		iterator->list->head = iterator->current->next;
+	}
+	else
+	{
+		linked_list_iterator temp = linked_list_iterator_begin(iterator->list);
+		while (temp->index < iterator->index - 1)
+		{
+			linked_list_iterator_next(temp);
+		}
+		temp->current->next = iterator->current->next;
+		linked_list_iterator_destroy(temp);
+	}
+	iterator->index--;
+	linked_list_remove_node(iterator->list, iterator->current);
+	iterator->current = iterator->current->next;
 }
 
 void linked_list_iterator_destroy(linked_list_iterator iterator)
@@ -90,7 +166,7 @@ void linked_list_destroy(linked_list *list)
 	*list = NULL;
 }
 
-void linked_list_add_head(linked_list list, int data)
+void linked_list_insert_head(linked_list list, int data)
 {
 	null_list_check(list);
 	node *new_node = (node *)malloc(sizeof(node));
@@ -104,7 +180,7 @@ void linked_list_add_head(linked_list list, int data)
 	}
 }
 
-void linked_list_add_tail(linked_list list, int data)
+void linked_list_insert(linked_list list, int data)
 {
 	null_list_check(list);
 	node *new_node = (node *)malloc(sizeof(node));
@@ -122,7 +198,7 @@ void linked_list_add_tail(linked_list list, int data)
 	list->tail = new_node;
 }
 
-void linked_list_add_at(linked_list list, int data, int index)
+void linked_list_insert_at(linked_list list, int data, int index)
 {
 	null_list_check(list);
 	if (index < 0 || index > linked_list_size(list))
@@ -133,11 +209,11 @@ void linked_list_add_at(linked_list list, int data, int index)
 
 	if (index == 0)
 	{
-		linked_list_add_head(list, data);
+		linked_list_insert_head(list, data);
 	}
 	else if (index == linked_list_size(list))
 	{
-		linked_list_add_tail(list, data);
+		linked_list_insert(list, data);
 	}
 	else
 	{
@@ -331,7 +407,7 @@ linked_list linked_list_copy(linked_list list)
 	node *current = list->head;
 	for (int i = 0; i < linked_list_size(list); i++)
 	{
-		linked_list_add_tail(new_list, current->data);
+		linked_list_insert(new_list, current->data);
 		current = current->next;
 	}
 	return new_list;
@@ -417,7 +493,7 @@ linked_list linked_list_from_array(int *array, int size)
 	linked_list list = linked_list_create();
 	for (int i = 0; i < size; i++)
 	{
-		linked_list_add_tail(list, array[i]);
+		linked_list_insert(list, array[i]);
 	}
 	return list;
 }
@@ -430,7 +506,7 @@ void linked_list_concatenate(linked_list dest, linked_list src)
 	node *current = src->head;
 	while (current != NULL)
 	{
-		linked_list_add_tail(dest, current->data);
+		linked_list_insert(dest, current->data);
 		current = current->next;
 	}
 }

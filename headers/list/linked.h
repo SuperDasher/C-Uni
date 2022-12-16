@@ -13,17 +13,29 @@ bool linked_list_iterator_has_next(linked_list_iterator iterator);
 
 int linked_list_iterator_next(linked_list_iterator iterator);
 
+int linked_list_iterator_previous(linked_list_iterator iterator);
+
+int linked_list_iterator_index(linked_list_iterator iterator);
+
+int linked_list_iterator_data(linked_list_iterator iterator);
+
+void linked_list_iterator_set(linked_list_iterator iterator, int data);
+
+void linked_list_iterator_insert(linked_list_iterator iterator, int data);
+
+void linked_list_iterator_remove(linked_list_iterator iterator);
+
 void linked_list_iterator_destroy(linked_list_iterator iterator);
 
 linked_list linked_list_create();
 
 void linked_list_destroy(linked_list *list);
 
-void linked_list_add_head(linked_list list, int data);
+void linked_list_insert_head(linked_list list, int data);
 
-void linked_list_add_tail(linked_list list, int data);
+void linked_list_insert(linked_list list, int data);
 
-void linked_list_add_at(linked_list list, int data, int index);
+void linked_list_insert_at(linked_list list, int data, int index);
 
 void linked_list_remove_head(linked_list list);
 
