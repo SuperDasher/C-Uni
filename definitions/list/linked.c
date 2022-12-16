@@ -46,22 +46,30 @@ linked_list_iterator linked_list_iterator_begin(linked_list list)
 	return iterator;
 }
 
-bool linked_list_iterator_has_next(linked_list_iterator iterator)
+linked_list_iterator linked_list_iterator_copy(linked_list_iterator iterator)
 {
-	return iterator->current != NULL;
+	linked_list_iterator copy = malloc(sizeof(struct _linked_list_iterator));
+	malloc_fail_check(copy);
+	copy->list = iterator->list;
+	copy->current = iterator->current;
+	copy->index = iterator->index;
+	return copy;
 }
 
-int linked_list_iterator_next(linked_list_iterator iterator)
+bool linked_list_iterator_has_next(linked_list_iterator iterator)
+{
+	return iterator->current->next != NULL;
+}
+
+void linked_list_iterator_next(linked_list_iterator iterator)
 {
 	if (!linked_list_iterator_has_next(iterator))
 	{
 		fprintf(stderr, "iterator has no next element\n");
 		exit(EXIT_FAILURE);
 	}
-	int data = iterator->current->data;
 	iterator->current = iterator->current->next;
 	iterator->index++;
-	return data;
 }
 
 bool linked_list_iterator_has_previous(linked_list_iterator iterator)
@@ -69,14 +77,13 @@ bool linked_list_iterator_has_previous(linked_list_iterator iterator)
 	return iterator->index != 0;
 }
 
-int linked_list_iterator_previous(linked_list_iterator iterator)
+void linked_list_iterator_previous(linked_list_iterator iterator)
 {
 	if (iterator->index == 0)
 	{
 		fprintf(stderr, "iterator has no previous element\n");
 		exit(EXIT_FAILURE);
 	}
-	int data = iterator->current->data;
 	linked_list_iterator temp = linked_list_iterator_begin(iterator->list);
 	while (temp->index < iterator->index - 1)
 	{
@@ -85,7 +92,6 @@ int linked_list_iterator_previous(linked_list_iterator iterator)
 	iterator->current = temp->current;
 	iterator->index--;
 	linked_list_iterator_destroy(temp);
-	return data;
 }
 
 int linked_list_iterator_index(linked_list_iterator iterator)
