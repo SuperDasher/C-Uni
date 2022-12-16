@@ -53,14 +53,29 @@ bool linked_list_iterator_has_next(linked_list_iterator iterator)
 
 int linked_list_iterator_next(linked_list_iterator iterator)
 {
+	if (!linked_list_iterator_has_next(iterator))
+	{
+		fprintf(stderr, "iterator has no next element\n");
+		exit(EXIT_FAILURE);
+	}
 	int data = iterator->current->data;
 	iterator->current = iterator->current->next;
 	iterator->index++;
 	return data;
 }
 
+bool linked_list_iterator_has_previous(linked_list_iterator iterator)
+{
+	return iterator->index != 0;
+}
+
 int linked_list_iterator_previous(linked_list_iterator iterator)
 {
+	if (iterator->index == 0)
+	{
+		fprintf(stderr, "iterator has no previous element\n");
+		exit(EXIT_FAILURE);
+	}
 	int data = iterator->current->data;
 	linked_list_iterator temp = linked_list_iterator_begin(iterator->list);
 	while (temp->index < iterator->index - 1)

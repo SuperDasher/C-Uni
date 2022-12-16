@@ -13,6 +13,8 @@ bool linked_list_iterator_has_next(linked_list_iterator iterator);
 
 int linked_list_iterator_next(linked_list_iterator iterator);
 
+bool linked_list_iterator_has_previous(linked_list_iterator iterator);
+
 int linked_list_iterator_previous(linked_list_iterator iterator);
 
 int linked_list_iterator_index(linked_list_iterator iterator);
