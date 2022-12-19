@@ -73,6 +73,10 @@ void linked_list_print(linked_list list);
 
 linked_list linked_list_copy(linked_list list);
 
+void linked_list_rotate_leftcoglione(linked_list list);
+
+void linked_list_rotate_right(linked_list list);
+
 void linked_list_reverse(linked_list list);
 
 void linked_list_clear(linked_list list);

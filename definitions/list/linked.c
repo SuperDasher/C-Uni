@@ -495,6 +495,36 @@ linked_list linked_list_copy(linked_list list)
 	return new_list;
 }
 
+void linked_list_rotate_left(linked_list list)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	node *current = list->head;
+	while (current->next != NULL)
+	{
+		current = current->next;
+	}
+	current->next = list->head;
+	list->head = list->head->next;
+	current->next->next = NULL;
+	list->tail = current->next;
+}
+
+void linked_list_rotate_right(linked_list list)
+{
+	null_list_check(list);
+	empty_list_check(list);
+	node *current = list->head;
+	while (current->next != list->tail)
+	{
+		current = current->next;
+	}
+	current->next = NULL;
+	list->tail->next = list->head;
+	list->head = list->tail;
+	list->tail = current;
+}
+
 void linked_list_reverse(linked_list list)
 {
 	null_list_check(list);
