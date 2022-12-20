@@ -670,7 +670,7 @@ void linked_list_remove_duplicates(linked_list list)
 	empty_list_check(list);
 	node *current = list->head;
 	node *next = NULL;
-	while (current != NULL)
+	while (current->next != NULL)
 	{
 		next = current->next;
 		while (next != NULL)
