@@ -361,37 +361,6 @@ void linked_list_remove_at(linked_list list, int index)
 	}
 }
 
-void linked_list_remove_data(linked_list list, int data)
-{
-	null_list_check(list);
-	empty_list_check(list);
-	node *current = list->head;
-	node *previous = NULL;
-	while (current != NULL)
-	{
-		if (current->data == data)
-		{
-			if (current == list->head)
-			{
-				linked_list_remove_head(list);
-			}
-			else if (current == list->tail)
-			{
-				linked_list_remove_tail(list);
-			}
-			else
-			{
-				previous->next = current->next;
-				node *temp = current;
-				current = previous;
-				free(temp);
-			}
-		}
-		previous = current;
-		current = current->next;
-	}
-}
-
 int linked_list_size(linked_list list)
 {
 	null_list_check(list);
@@ -471,7 +440,7 @@ void linked_list_print(linked_list list)
 	node *current = list->head;
 	if (current == NULL)
 	{
-		printf("\n");
+		printf("list is empty\n");
 		return;
 	}
 	while (current != list->tail)
@@ -704,13 +673,20 @@ void linked_list_remove_duplicates(linked_list list)
 	while (current != NULL)
 	{
 		next = current->next;
-		while (next != NULL && next->data == current->data)
+		while (next != NULL)
 		{
-			node *temp = next;
-			next = next->next;
-			linked_list_remove_node(list, temp);
+			if (next->data == current->data)
+			{
+				node *temp = next;
+				next = next->next;
+				linked_list_remove_node(list, temp);
+			}
+			else
+			{
+				next = next->next;
+			}
 		}
-		current = next;
+		current = current->next;
 	}
 }
 
@@ -976,6 +952,10 @@ void linked_list_remove_node(linked_list list, node *node_to_remove)
 			current = current->next;
 		}
 		current->next = node_to_remove->next;
+		if (node_to_remove == list->tail)
+		{
+			list->tail = current;
+		}
 	}
 	free(node_to_remove);
 }

@@ -51,8 +51,6 @@ void linked_list_remove_tail(linked_list list);
 
 void linked_list_remove_at(linked_list list, int index);
 
-void linked_list_remove_data(linked_list list, int data);
-
 int linked_list_size(linked_list list);
 
 bool linked_list_is_empty(linked_list list);
