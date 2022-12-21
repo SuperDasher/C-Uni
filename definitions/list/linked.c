@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <errno.h>
 
 typedef struct _node
@@ -187,14 +188,33 @@ void linked_list_destroy(linked_list *list)
 	*list = NULL;
 }
 
-void linked_list_scan(linked_list list, int n)
+void linked_list_scan(linked_list list, size_t n, char *prompt)
 {
 	null_list_check(list);
 	int data;
-	for (int i = 0; i < n; i++)
+	for (size_t i = 0; i < n; i++)
 	{
+		if (strstr(prompt, "%d") == NULL)
+			printf("%s", prompt);
+		else
+			printf(prompt, i + 1);
 		scanf("%d", &data);
 		linked_list_insert(list, data);
+	}
+}
+
+void linked_list_scan_ordered(linked_list list, size_t n, char *prompt)
+{
+	null_list_check(list);
+	int data;
+	for (size_t i = 0; i < n; i++)
+	{
+		if (strstr(prompt, "%d") == NULL)
+			printf("%s", prompt);
+		else
+			printf(prompt, i + 1);
+		scanf("%d", &data);
+		linked_list_insert_ordered(list, data);
 	}
 }
 
@@ -468,15 +488,10 @@ void linked_list_rotate_left(linked_list list)
 {
 	null_list_check(list);
 	empty_list_check(list);
-	node *current = list->head;
-	while (current->next != NULL)
-	{
-		current = current->next;
-	}
-	current->next = list->head;
+	list->tail->next = list->head;
+	list->tail = list->head;
 	list->head = list->head->next;
-	current->next->next = NULL;
-	list->tail = current->next;
+	list->tail->next = NULL;
 }
 
 void linked_list_rotate_right(linked_list list)
@@ -670,7 +685,7 @@ void linked_list_remove_duplicates(linked_list list)
 	empty_list_check(list);
 	node *current = list->head;
 	node *next = NULL;
-	while (current->next != NULL)
+	while (current != NULL)
 	{
 		next = current->next;
 		while (next != NULL)
