@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <custom/string.h>
+
+#define MAX_STRING_LENGTH 20
 
 typedef struct _node
 {
@@ -214,6 +217,44 @@ void linked_list_scan_ordered(linked_list list, size_t n, char *prompt)
 		else
 			printf(prompt, i + 1);
 		scanf("%d", &data);
+		linked_list_insert_ordered(list, data);
+	}
+}
+
+void linked_list_scan_indefinite(linked_list list, char *prompt)
+{
+	null_list_check(list);
+	int data;
+	while (true)
+	{
+		if (strstr(prompt, "%d") == NULL)
+			printf("%s", prompt);
+		else
+			printf(prompt, linked_list_size(list) + 1);
+		char response[MAX_STRING_LENGTH];
+		inputstring(response, MAX_STRING_LENGTH);
+		if (!str_isint(response))
+			break;
+		data = atoi(response);
+		linked_list_insert(list, data);
+	}
+}
+
+void linked_list_scan_indefinite_ordered(linked_list list, char *prompt)
+{
+	null_list_check(list);
+	int data;
+	while (true)
+	{
+		if (strstr(prompt, "%d") == NULL)
+			printf("%s", prompt);
+		else
+			printf(prompt, linked_list_size(list) + 1);
+		char response[MAX_STRING_LENGTH];
+		inputstring(response, MAX_STRING_LENGTH);
+		if (!str_isint(response))
+			break;
+		data = atoi(response);
 		linked_list_insert_ordered(list, data);
 	}
 }
@@ -484,29 +525,47 @@ linked_list linked_list_copy(linked_list list)
 	return new_list;
 }
 
-void linked_list_rotate_left(linked_list list)
+void linked_list_rotate_left(linked_list list, size_t n)
 {
 	null_list_check(list);
 	empty_list_check(list);
+	int shift = n % linked_list_size(list);
+	if (shift == 0)
+		return;
+
+	node *new_tail = list->head;
+	for (int i = 0; i < shift - 1; i++)
+		new_tail = new_tail->next;
+
 	list->tail->next = list->head;
-	list->tail = list->head;
-	list->head = list->head->next;
-	list->tail->next = NULL;
+	list->head = new_tail->next;
+	list->tail = new_tail;
+	new_tail->next = NULL;
 }
 
-void linked_list_rotate_right(linked_list list)
+void linked_list_rotate_right(linked_list list, size_t n)
 {
 	null_list_check(list);
 	empty_list_check(list);
-	node *current = list->head;
-	while (current->next != list->tail)
+	int shift = n % linked_list_size(list);
+	if (shift == 0)
+		return;
+
+	node *old_tail = list->head;
+	for (int i = 0; i < shift; i++)
+		old_tail = old_tail->next;
+
+	node *new_tail = list->head;
+	while (old_tail != list->tail)
 	{
-		current = current->next;
+		old_tail = old_tail->next;
+		new_tail = new_tail->next;
 	}
-	current->next = NULL;
-	list->tail->next = list->head;
-	list->head = list->tail;
-	list->tail = current;
+
+	old_tail->next = list->head;
+	list->head = new_tail->next;
+	list->tail = new_tail;
+	new_tail->next = NULL;
 }
 
 void linked_list_reverse(linked_list list)
@@ -610,7 +669,6 @@ float linked_list_average(linked_list list)
 {
 	null_list_check(list);
 	empty_list_check(list);
-	// deepcode ignore DivisionByZero: empty_list_check() will catch this
 	return (float)linked_list_sum(list) / linked_list_size(list);
 }
 
@@ -975,5 +1033,6 @@ void linked_list_remove_node(linked_list list, node *node_to_remove)
 	free(node_to_remove);
 }
 
+// file deepcode ignore DivisionByZero: empty_list_check() will catch it
 // file deepcode ignore DerefOfMaybeNull: malloc_fail_check is used
 // file deepcode ignore CMemoryLeak: the memory is freed in linked_list_destroy

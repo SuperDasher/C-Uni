@@ -40,6 +40,10 @@ void linked_list_scan(linked_list list, size_t n, char *prompt);
 
 void linked_list_scan_ordered(linked_list list, size_t n, char *prompt);
 
+void linked_list_scan_indefinite(linked_list list, char *prompt);
+
+void linked_list_scan_indefinite_ordered(linked_list list, char *prompt);
+
 void linked_list_insert_head(linked_list list, int data);
 
 void linked_list_insert(linked_list list, int data);
@@ -74,9 +78,9 @@ void linked_list_print(linked_list list);
 
 linked_list linked_list_copy(linked_list list);
 
-void linked_list_rotate_left(linked_list list);
+void linked_list_rotate_left(linked_list list, size_t n);
 
-void linked_list_rotate_right(linked_list list);
+void linked_list_rotate_right(linked_list list, size_t n);
 
 void linked_list_reverse(linked_list list);
 
