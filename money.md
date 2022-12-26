@@ -6,7 +6,9 @@
 - 122.30€ every 6 months:
     1. 20.35€ [9th] (Kenshi tier 1 sub) (October and April)
     2. 101.95€ [10th] (Lupos tier 3 sub) (November and May)
-- 3.99€ per month [24th] (Flame tier 1 sub)
+- 7.98€ per month
+    1. 3.99€ per month [24th] (Flame tier 1 sub)
+    2. 3.99€ per month [26th] (Lost tier 1 sub)
 - +90€ per month
 - max gain:
     1. 86.01€ per month
@@ -69,19 +71,20 @@
 ## December 2022
 
 1. started with 1789.95€
-2. money spent so far: 237.02€ [49.62€ not refunded]
-    1. subscriptions: 3.99€ (3.99€ total)
+2. money spent so far: 261.96€ [49.62€ not refunded]
+    1. subscriptions: 7.98€ (7.98€ total)
         - [x] 3.99€
-    2. extras for myself: 153.97€
+        - [x] 3.99€
+    2. extras for myself: 173.92€
     3. extras for Uni: 87.62€
         - 38€ refunded
         - 49.62€ not refunded
     4. on others behalf: 0€
         - 0€ refunded
         - 0€ not refunded
-3. balance: 1632.27€
-4. gain: -18.06€
-    - -67.96€ from normal gain
+3. balance: 1607.33€
+4. gain: -43€
+    - -92.90€ from normal gain
     - 0€ from other gain
     - 49.90€ from gifts/extra gain
-5. start next month: 1771.89€
+5. start next month: 1746.95€
