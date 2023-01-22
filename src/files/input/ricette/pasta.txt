@@ -1,0 +1,4 @@
+Uova 5
+Acqua 100
+Sale 10
+Farina 500

@@ -1,0 +1,8 @@
+Uova 90
+Latte 4000
+Lievito 100
+Farina 4000
+Sale 100
+Zucchero 100
+Burro 300
+Acqua 10000
