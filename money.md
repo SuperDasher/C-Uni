@@ -110,4 +110,4 @@
     - 39.08€ from normal gain
     - 0€ from other gain
     - 101.38€ from gifts/extra gain
-5. start next month: 1898.40€
+5. start next month: 1887.41€
