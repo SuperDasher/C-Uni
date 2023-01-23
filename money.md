@@ -7,14 +7,14 @@
     1. 20.35€ [9th] (Kenshi tier 1 sub) (October and April)
     2. 101.95€ [10th] (Lupos tier 3 sub) (November and May)
 - 7.98€ per month
-    1. 3.99€ per month [24th] (Flame tier 1 sub)
+    1. 3.99€ per month [20th] (AbbyRoses tier 1 sub)
     2. 3.99€ per month [26th] (Lost tier 1 sub)
 - +90€ per month
 - max gain:
-    1. 86.01€ per month
-    2. 49.72€ on October + November & April + May:
-        - 65.66€ October & April
-        - -15.94€ November & May
+    1. 82.02€ per month
+    2. 41.74€ on October + November & April + May:
+        - 61.67€ October & April
+        - -19.93€ November & May
 
 ---
 ---
@@ -71,14 +71,14 @@
 ## December 2022
 
 1. started with 1789.95€
-2. money spent so far: 261.96€ [49.62€ not refunded]
+2. money spent so far: 269.52€ [48.62€ not refunded]
     1. subscriptions: 7.98€ (7.98€ total)
         - [x] 3.99€
         - [x] 3.99€
-    2. extras for myself: 173.92€
-    3. extras for Uni: 87.62€
+    2. extras for myself: 174.92€
+    3. extras for Uni: 86.62€
         - 38€ refunded
-        - 49.62€ not refunded
+        - 48.62€ not refunded
     4. on others behalf: 0€
         - 0€ refunded
         - 0€ not refunded
@@ -94,20 +94,20 @@
 ## January 2023
 
 1. started with 1746.95€
-2. money spent so far: 30.95€
-    1. subscriptions: 0€ (7.98€ total)
+2. money spent so far: 81.33€ [34.40€ not refunded]
+    1. subscriptions: 3.99€ (7.98€ total)
+        - [x] 3.99€
         - [ ] 3.99€
-        - [ ] 3.99€
-    2. extras for myself: 30.95€
-    3. extras for Uni: 0€
+    2. extras for myself: 42.94€
+    3. extras for Uni: 34.40€
         - 0€ refunded
-        - 0€ not refunded
+        - 34.40€ not refunded
     4. on others behalf: 0€
         - 0€ refunded
         - 0€ not refunded
-3. balance: 1816.38€
-4. gain: 151.45€
-    - 51.07€ from normal gain
+3. balance: 1767€
+4. gain: 140.46€
+    - 39.08€ from normal gain
     - 0€ from other gain
-    - 100.62€ from gifts/extra gain
+    - 101.38€ from gifts/extra gain
 5. start next month: 1898.40€
