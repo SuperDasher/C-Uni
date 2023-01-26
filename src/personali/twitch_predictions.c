@@ -15,6 +15,11 @@ int main()
 
 	printf("How many options are available? ");
 	scanf("%zu", &options);
+	while (options < 2)
+	{
+		printf("There must be at least 2 options. Please select a valid amount of options: ");
+		scanf("%zu", &options);
+	}
 
 	options_points = (size_t *)malloc(options * sizeof(size_t));
 	if (options_points == NULL)
