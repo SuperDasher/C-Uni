@@ -18,12 +18,17 @@ int partition(int *array, int left, int right)
 	return i;
 }
 
-void quick_sort(int *array, int left, int right)
+void quick_sort_helper(int *array, int left, int right)
 {
 	if (left < right)
 	{
 		int pivot = partition(array, left, right);
-		quick_sort(array, left, pivot - 1);
-		quick_sort(array, pivot + 1, right);
+		quick_sort_helper(array, left, pivot - 1);
+		quick_sort_helper(array, pivot + 1, right);
 	}
+}
+
+void quick_sort(int *array, int length)
+{
+	quick_sort_helper(array, 0, length - 1);
 }

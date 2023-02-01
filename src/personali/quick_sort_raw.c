@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	numbers[argc - 1] = atoi(argv[argc - 1]);
 	printf("%d]\n", numbers[argc - 1]);
 
-	quick_sort(numbers, 0, argc - 1);
+	quick_sort(numbers, argc);
 
 	printf("\narray di parametri dopo il sort:\n");
 	print_a(numbers, argc);
