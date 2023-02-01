@@ -94,20 +94,41 @@
 ## January 2023
 
 1. started with 1746.95€
-2. money spent so far: 132.99€ [34.40€ not refunded]
+2. money spent so far: 269.99€ [171.40€ not refunded]
     1. subscriptions: 7.98€ (7.98€ total)
         - [x] 3.99€
         - [x] 3.99€
     2. extras for myself: 90.61€
-    3. extras for Uni: 34.40€
+    3. extras for Uni: 171.40€
         - 0€ refunded
-        - 34.40€ not refunded
+        - 171.40€ not refunded
     4. on others behalf: 0€
         - 0€ refunded
         - 0€ not refunded
-3. balance: 1715.34€
-4. gain: 92.79€
+3. balance: 1623.34€
+4. gain: 137.79€
     - -8.59€ from normal gain
     - 0€ from other gain
-    - 101.38€ from gifts/extra gain
-5. start next month: 1839.74€
+    - 146.38€ from gifts/extra gain
+5. start next month: 1884.74€
+
+## February 2023
+
+1. started with 1884.74€
+2. money spent so far: 0€ [0€ not refunded]
+    1. subscriptions: 0€ (7.98€ total)
+        - [ ] 3.99€
+        - [ ] 3.99€
+    2. extras for myself: 0€
+    3. extras for Uni: 0€
+        - 0€ refunded
+        - 0€ not refunded
+    4. on others behalf: 0€
+        - 0€ refunded
+        - 0€ not refunded
+3. balance: 1673.34€
+4. gain: -89.38€
+    - 82.02€ from normal gain
+    - 0€ from other gain
+    - -211.40€ from gifts/extra gain
+5. start next month: 1795.36€
