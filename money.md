@@ -6,15 +6,16 @@
 - 122.30€ every 6 months:
     1. 20.35€ [9th] (Kenshi tier 1 sub) (October and April)
     2. 101.95€ [10th] (Lupos tier 3 sub) (November and May)
-- 7.98€ per month
-    1. 3.99€ per month [20th] (AbbyRoses tier 1 sub)
-    2. 3.99€ per month [26th] (Lost tier 1 sub)
+- 16.79€ per month
+    1. 8.81€ per month [14th] (Twitch Turbo)
+    2. 3.99€ per month [20th] (AbbyRoses tier 1 sub)
+    3. 3.99€ per month [26th] (Lost tier 1 sub)
 - +90€ per month
 - max gain:
-    1. 82.02€ per month
-    2. 41.74€ on October + November & April + May:
-        - 61.67€ October & April
-        - -19.93€ November & May
+    1. 73.21€ per month
+    2. 24.12€ on October + November & April + May:
+        - 52.86€ October & April
+        - -28.74€ November & May
 
 ---
 ---
@@ -115,8 +116,9 @@
 ## February 2023
 
 1. started with 1884.74€
-2. money spent so far: 113.67€ [0€ not refunded]
-    1. subscriptions: 0€ (7.98€ total)
+2. money spent so far: 122.48€ [0€ not refunded]
+    1. subscriptions: 8.81€ (16.79€ total)
+        - [x] 8.81€
         - [ ] 3.99€
         - [ ] 3.99€
     2. extras for myself: 113.67€
@@ -126,9 +128,9 @@
     4. on others behalf: 0€
         - 0€ refunded
         - 0€ not refunded
-3. balance: 2947.17€
-4. gain: 1144.45€
-    - -31.65€ from normal gain
+3. balance: 2938.36€
+4. gain: 1135.64€
+    - -40.46€ from normal gain
     - 0€ from other gain
     - 1176.10€ from gifts/extra gain
-5. start next month: 3019.19€
+5. start next month: 3010.38€
