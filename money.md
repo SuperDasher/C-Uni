@@ -116,21 +116,21 @@
 ## February 2023
 
 1. started with 1884.74€
-2. money spent so far: 122.48€ [0€ not refunded]
+2. money spent so far: 205.76€ [0€ not refunded]
     1. subscriptions: 8.81€ (16.79€ total)
         - [x] 8.81€
         - [ ] 3.99€
         - [ ] 3.99€
-    2. extras for myself: 113.67€
+    2. extras for myself: 196.95€
     3. extras for Uni: 0€
         - 0€ refunded
         - 0€ not refunded
     4. on others behalf: 0€
         - 0€ refunded
         - 0€ not refunded
-3. balance: 2938.36€
-4. gain: 1135.64€
-    - -40.46€ from normal gain
+3. balance: 2855.08€
+4. gain: 1052.36€
+    - -123.74€ from normal gain
     - 0€ from other gain
     - 1176.10€ from gifts/extra gain
-5. start next month: 3010.38€
+5. start next month: 2927.10€
