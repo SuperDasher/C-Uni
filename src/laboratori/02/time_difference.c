@@ -19,7 +19,7 @@ bool is_valid_date(char *, struct date *);
 bool is_leap_year(int);
 bool are_equal_dates(struct date, struct date);
 bool are_sorted_dates(struct date, struct date);
-void sort_dates(struct date *, struct date *);
+void sort_date(struct date *, struct date *);
 void swap_date(struct date *, struct date *);
 struct date date_difference(struct date, struct date);
 
