@@ -134,3 +134,25 @@
     - 0€ from other gain
     - 1176.10€ from gifts/extra gain
 5. start next month: 2813.08€
+
+## March 2023
+
+1. started with 2813.08€
+2. money spent so far: 0€ [0€ not refunded]
+    1. subscriptions: 0€ (16.79€ total)
+        - [ ] 8.81€
+        - [ ] 3.99€
+        - [ ] 3.99€
+    2. extras for myself: 0€
+    3. extras for Uni: 0€
+       - 0€ refunded
+       - 0€ not refunded
+    4. on others behalf: 0€
+        - 0€ refunded
+        - 0€ not refunded
+3. balance: 2757.08€
+4. gain: 73.21€
+    - 73.21€ from normal gain
+    - 0€ from other gain
+    - 0€ from gifts/extra gain
+5. start next month: 2886.29€
