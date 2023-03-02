@@ -150,7 +150,7 @@
     4. on others behalf: 0€
         - 0€ refunded
         - 0€ not refunded
-3. balance: 2757.08€
+3. balance: 2813.08€
 4. gain: 73.21€
     - 73.21€ from normal gain
     - 0€ from other gain
