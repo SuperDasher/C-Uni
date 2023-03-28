@@ -4,13 +4,15 @@
 ## Subscriptions
 
 - 20.35€ every [9th of October and April] (Kenshi tier 1 sub)
+- 89.99€ every [11th April] (Duolingo Super)
 - 28.80€ per month:
     1. [14th] (Twitch Turbo) (Can change due to conversion rate)
     2. [23rd] (ShadowTheNardo tier 3)
 - +90€ per month
 - max gain:
     1. 61.20€ per month
-    2. 40.85€ on October & April
+    2. -49.14€ on April
+    3. 40.85€ on October
 
 ---
 ---
@@ -133,20 +135,20 @@
 ## March 2023
 
 1. started with 2813.08€
-2. money spent so far: 454.47€ [272.99€ not refunded]
+2. money spent so far: 466.46€ [279.99€ not refunded]
     1. subscriptions: 12.86€ (12.80€ total)
         - [x] 3.99€
         - [x] 8.81€ (+0.06€)
-    2. extras for myself: 168.62€
-    3. extras for Uni: 153€
+    2. extras for myself: 173.61€
+    3. extras for Uni: 160€
        - 0€ refunded
-       - 153€ not refunded
+       - 160€ not refunded
     4. on others behalf: 119.99€
         - 0€ refunded
         - 119.99€ not refunded
-3. balance: 2358.61€
-4. gain: -79.48€
-    - -91.48€ from normal gain
+3. balance: 2346.62€
+4. gain: -84.47€
+    - -96.47€ from normal gain
     - 0€ from other gain
     - 12€ from gifts/extra gain
-5. start next month: 2733.60€
+5. start next month: 2728.61€
