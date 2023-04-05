@@ -6,8 +6,8 @@
 - 20.35€ every [9th of October and April] (Kenshi tier 1 sub)
 - 89.99€ every [11th April] (Duolingo Super)
 - 28.80€ per month:
-    1. [14th] (Twitch Turbo) (Can change due to conversion rate)
-    2. [23rd] (ShadowTheNardo tier 3)
+    1. 8.81€ [14th] (Twitch Turbo) (Can change due to conversion rate)
+    2. 19.99€ [23rd] (ShadowTheNardo tier 3)
 - +90€ per month
 - max gain:
     1. 61.20€ per month
@@ -16,8 +16,6 @@
 
 ---
 ---
-
-## October 2022
 
 1. started with 1880.78€
 2. money spent so far: 325.86€ [132.41€ not refunded]
@@ -41,8 +39,6 @@
     - 0€ from gift/extra gain
 5. start next month: 1830.33€
 
----
-
 ## September 2022
 
 1. started with 1830.33€
@@ -63,8 +59,6 @@
     - 30€ from other gain
     - 3.59€ from gifts/extra gain
 5. start next month: 1789.95€
-
----
 
 ## December 2022
 
@@ -135,20 +129,43 @@
 ## March 2023
 
 1. started with 2813.08€
-2. money spent so far: 466.46€ [279.99€ not refunded]
+2. money spent so far: 490.46€ [303.99€ not refunded]
     1. subscriptions: 12.86€ (12.80€ total)
         - [x] 3.99€
         - [x] 8.81€ (+0.06€)
     2. extras for myself: 173.61€
-    3. extras for Uni: 160€
+    3. extras for Uni: 184€
        - 0€ refunded
-       - 160€ not refunded
+       - 184€ not refunded
     4. on others behalf: 119.99€
         - 0€ refunded
         - 119.99€ not refunded
-3. balance: 2346.62€
+3. balance: 2322.62€
 4. gain: -84.47€
     - -96.47€ from normal gain
     - 0€ from other gain
     - 12€ from gifts/extra gain
 5. start next month: 2728.61€
+
+## April 2023
+
+1. started with 2728.61€
+2. money spent so far: 14€ [14€ not refunded]
+    1. subscriptions: 0€ (139.14€ total)
+        - [ ] 20.35€
+        - [ ] 89.99€
+        - [ ] 8.81€
+        - [ ] 19.99€
+    2. extras for myself: 0€
+    3. extras for Uni: 14€
+       - 0€ refunded
+       - 14€ not refunded
+    4. on others behalf: 0€
+        - 0€ refunded
+        - 0€ not refunded
+3. balance: 2747.62€
+4. gain: -16.13€
+    - -49.14€ from normal gain
+    - 0€ from other gain
+    - 33.01€ from gifts/extra gain
+5. start next month: 2712.48€
