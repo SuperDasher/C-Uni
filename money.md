@@ -150,20 +150,20 @@
 ## April 2023
 
 1. started with 2728.61€
-2. money spent so far: 152.94€ [42.60€ not refunded]
+2. money spent so far: 166.94€ [56.60€ not refunded]
     1. subscriptions: 118.94€ (139.14€ total)
         - [x] 20.35€
         - [x] 89.99€
         - [x] 8.81€ (-0.21€)
         - [ ] 19.99€
     2. extras for myself: 0€
-    3. extras for Uni: 42.60€
+    3. extras for Uni: 56.60€
        - 0€ refunded
-       - 42.60€ not refunded
+       - 56.60€ not refunded
     4. on others behalf: 0€
         - 0€ refunded
         - 0€ not refunded
-3. balance: 2600.08€
+3. balance: 2586.08€
 4. gain: -15.92€
     - -48.93€ from normal gain
     - 0€ from other gain
