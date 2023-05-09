@@ -171,19 +171,19 @@
 ## May 2023
 
 1. started with 2712.69€
-2. money spent so far: 32.59€ [28.60€ not refunded]
+2. money spent so far: 352.09€ [28.60€ not refunded]
     1. subscriptions: 0€ (8.81€ total)
-        - [ ] 8.81
-    2. extras for myself: 3.99€
+        - [ ] 8.81€
+    2. extras for myself: 23.49€
     3. extras for Uni: 28.60€
        - 0€ refunded
        - 28.60€ not refunded
     4. on others behalf: 0€
         - 0€ refunded
         - 0€ not refunded
-3. balance: 2679.50€
-4. gain: 76.60€
-    - 77.20€ from normal gain
+3. balance: 2699€
+4. gain: 57.10€
+    - 57.70€ from normal gain
     - 0€ from other gain
     - -0.60€ from gifts/extra gain
-5. start next month: 2787.29€
+5. start next month: 2767.79€
