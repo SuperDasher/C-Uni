@@ -16,13 +16,12 @@ int main()
 		char *prompt = score_to_combo ? "Score needed: " : "Combo: ";
 		printf("%s", prompt);
 		scanf("%ld", &input);
-		if (input == -1)
+		if (input <= 0)
 		{
-			score_to_combo = !score_to_combo;
-			continue;
-		}
-		if (input == 0)
-		{
+			if (input == -1)
+			{
+				score_to_combo = !score_to_combo;
+			}
 			continue;
 		}
 		if (score_to_combo)
