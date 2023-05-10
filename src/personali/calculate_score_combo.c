@@ -1,23 +1,61 @@
-// create a program that calculates the resulting score you get depending from the combo knowing that the formula for it in math terms is:
-// score =  sum of i = 1 to combo(10 + floor(i * .5))
-// example: if combo is 6 (considering that floor rounds up down to the nearest integer down)
-// score = 10 + 11 + 11 + 12 + 12 + 13 = 69
-
 #include <stdio.h>
 #include <math.h>
+#include <stdbool.h>
 
-int main(void)
+unsigned long score_from_combo(unsigned combo);
+unsigned combo_required_for_score(unsigned long score);
+
+int main()
 {
-	int combo = 1;
+	printf("0 to end program\n");
+	printf("-1 to switch\n");
+	bool score_to_combo = false;
+	long input = 0;
 	do
 	{
-		int score = 0;
-		printf("Enter combo: ");
-		scanf("%d", &combo);
-		for (int i = 1; i <= combo; i++)
+		char *prompt = score_to_combo ? "Score needed: " : "Combo: ";
+		printf("%s", prompt);
+		scanf("%ld", &input);
+		if (input == -1)
 		{
-			score += 10 + floor(i * .5);
+			score_to_combo = !score_to_combo;
+			continue;
 		}
-		printf("Score: %d\n", score);
-	} while (combo != 0);
+		if (input == 0)
+		{
+			continue;
+		}
+		if (score_to_combo)
+		{
+			unsigned combo = combo_required_for_score((unsigned long)input);
+			printf("Minimum combo: %u (%lu points)\n", combo, score_from_combo(combo));
+		}
+		else
+		{
+			unsigned long score = score_from_combo((unsigned)input);
+			printf("Score: %lu\n", score);
+		}
+	} while (input != 0);
+}
+
+unsigned long score_from_combo(unsigned combo)
+{
+	unsigned long score = 0;
+	for (unsigned i = 1; i <= combo; i++)
+	{
+		score += 10 + floor(i * .5);
+	}
+	return score;
+}
+
+unsigned combo_required_for_score(unsigned long score)
+{
+	unsigned combo = 0;
+	unsigned long score_temp = 0;
+	while (score_temp < score)
+	{
+		combo++;
+		score_temp += 10 + floor(combo * .5);
+	}
+	return combo;
 }
