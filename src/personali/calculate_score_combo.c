@@ -1,18 +1,20 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include <stdbool.h>
+#include <conio.h>
 
 unsigned long score_from_combo(unsigned combo);
 unsigned combo_required_for_score(unsigned long score);
 
 int main()
 {
-	printf("0 to end program\n");
-	printf("-1 to switch\n");
 	bool score_to_combo = false;
 	long input = 0;
 	do
 	{
+		printf("0 to end program\n");
+		printf("-1 to switch\n\n");
 		char *prompt = score_to_combo ? "Score needed: " : "Combo: ";
 		printf("%s", prompt);
 		scanf("%ld", &input);
@@ -22,6 +24,8 @@ int main()
 			{
 				score_to_combo = !score_to_combo;
 			}
+			getch();
+			system("clear");
 			continue;
 		}
 		if (score_to_combo)
@@ -34,6 +38,8 @@ int main()
 			unsigned long score = score_from_combo((unsigned)input);
 			printf("Score: %lu\n", score);
 		}
+		getch();
+		system("clear");
 	} while (input != 0);
 }
 
