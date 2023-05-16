@@ -24,7 +24,6 @@ int main()
 			{
 				score_to_combo = !score_to_combo;
 			}
-			getch();
 			system("clear");
 			continue;
 		}
