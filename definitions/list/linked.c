@@ -1033,6 +1033,6 @@ void linked_list_remove_node(linked_list list, node *node_to_remove)
 	free(node_to_remove);
 }
 
-// file deepcode ignore DivisionByZero: empty_list_check() will catch it
+// file deepcode ignore CDivisionByZero: empty_list_check() will catch it
 // file deepcode ignore DerefOfMaybeNull: malloc_fail_check is used
 // file deepcode ignore CMemoryLeak: the memory is freed in linked_list_destroy

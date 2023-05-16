@@ -40,6 +40,6 @@ float list_average(linked_list list)
 		count++;
 	}
 	linked_list_iterator_destroy(it);
-	// deepcode ignore DivisionByZero: linked_list_is_empty() checks if the list is empty
+	// deepcode ignore CDivisionByZero: linked_list_is_empty() checks if the list is empty
 	return sum / count;
 }
