@@ -5,12 +5,14 @@
 
 - 20.35€ every [9th of October and April] (Kenshi tier 1 sub)
 - 89.99€ every [11th April] (Duolingo Super)
-- 8.81€ per month [14th] (Twitch Turbo) (Can change due to conversion rate):
+- 28.80€ per month:
+    1. 19.99€ per month [8th] (Aaliyah tier 3 sub)
+    2. 8.81€ per month [14th] (Twitch Turbo) (Can change due to conversion rate):
 - +90€ per month
 - max gain:
-    1. 81.19€ per month
-    2. -29.15€ on April
-    3. 60.84€ on October
+    1. 61.20€ per month
+    2. -49.14€ on April
+    3. 40.85€ on October
 
 ---
 ---
@@ -187,3 +189,24 @@
     - 0€ from other gain
     - -0.60€ from gifts/extra gain
 5. start next month: 2748.40€
+
+## June 2023
+
+1. started with 2748.40€
+2. money spent so far: 19.99€ [0€ not refunded]
+    1. subscriptions: 19.99€ (28.80€ total)
+        - [x] 19.99
+        - [ ] 8.81€
+    2. extras for myself: 0€
+    3. extras for Uni: 0€
+       - 0€ refunded
+       - 0€ not refunded
+    4. on others behalf: 0€
+        - 0€ refunded
+        - 0€ not refunded
+3. balance: 2733.81€
+4. gain: 64.60€
+    - 61.20€ from normal gain
+    - 0€ from other gain
+    - 5.40€ from gifts/extra gain
+5. start next month: 2813€
